@@ -1,0 +1,6 @@
+{
+    " download": "TS_SOCKET=/tmp/socket-ts.yt fzf-yt.sh -d -t -o ~/ytdl",
+    " play": "fzf-yt.sh; false",
+    " download status": "TS_SOCKET=/tmp/socket-ts.yt tsp|grep -v finished; read; false",
+    " refresh": "youtube_sm_parser -l '{title} - {uploader}\t{id}' > ~/.cache/yt/vids.tsv; false"
+}
