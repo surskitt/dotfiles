@@ -1,0 +1,7 @@
+templates:
+- dest: ~/.Xresources.d/xst_font.Xresources
+  src: xst_font.Xresources
+values:
+  Source Code Pro: {font: SauceCodePro Nerd Font Mono}
+  Tamsyn: {font: Misc Tamsyn}
+  monospace: {font: monospace}
