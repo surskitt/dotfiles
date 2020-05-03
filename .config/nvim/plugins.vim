@@ -72,4 +72,6 @@ Plug 'zhou13/vim-easyescape'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
+Plug 'airblade/vim-rooter'
+
 call plug#end()
