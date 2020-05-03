@@ -1,4 +1,4 @@
-" Plug
+
 call plug#begin(stdpath('data') . '/plugged')
 
 " A vim colorscheme for use with wal
@@ -73,5 +73,7 @@ Plug 'zhou13/vim-easyescape'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 Plug 'airblade/vim-rooter'
+
+Plug 'liuchengxu/vim-which-key'
 
 call plug#end()
