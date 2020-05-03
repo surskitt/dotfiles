@@ -23,3 +23,4 @@ map <leader>wn :lnext<CR>
 map <leader>wp :lprevious<CR>
 
 command! W write
+command! Q quit
