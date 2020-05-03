@@ -6,8 +6,6 @@ so ~/.config/nvim/config.vim
 
 so ~/.config/nvim/colours.vim
 
-so ~/.config/nvim/shortcuts.vim
-
 so ~/.config/nvim/autocommand.vim
 
 so ~/.config/nvim/plugins/disco.vim
@@ -23,5 +21,7 @@ so ~/.config/nvim/plugins/python_syntax.vim
 so ~/.config/nvim/plugins/vim-go.vim
 so ~/.config/nvim/plugins/coc.vim
 so ~/.config/nvim/plugins/fzf.vim
+
+so ~/.config/nvim/shortcuts.vim
 
 so ~/.config/nvim/new.vim

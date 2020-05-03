@@ -1,4 +1,5 @@
 cnoremap jj <ESC>
+imap jj <ESC>
 
 map <leader>r :source ~/.config/nvim/init.vim<CR>
 
