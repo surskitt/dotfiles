@@ -2,8 +2,6 @@ cnoremap jj <ESC>
 
 map <leader>r :source ~/.config/nvim/init.vim<CR>
 
-map <leader>f :Files<CR>
-map <leader>b :Buffers<CR>
 map <leader>t :enew<CR>
 map <leader>l :bnext<CR>
 map <leader>h :bprevious<CR>
@@ -22,3 +20,5 @@ map <leader>wc :lclose<CR>
 map <leader>wo :lopen<CR>
 map <leader>wn :lnext<CR>
 map <leader>wp :lprevious<CR>
+
+command! W write

@@ -7,7 +7,9 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 
-let g:go_metalinter_autosave = 1
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
 
 autocmd FileType go map <leader>xt <Plug>(go-test)
 autocmd FileType go map <leader>xc <Plug>(go-coverage-toggle)
