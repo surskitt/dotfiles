@@ -45,6 +45,7 @@ bspc rule -a floating_window:* state=floating
 bspc rule -a Zathura state=tiled
 
 bspc desktop internet -l monocle
+bspc desktop music -l monocle
 bspc desktop video -l monocle
 
 xrdb ~/.Xresources
