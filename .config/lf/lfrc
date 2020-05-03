@@ -1,0 +1,89 @@
+# interpreter for shell commands (needs to be POSIX compatible)
+set shell sh
+
+# set '-eu' options for shell commands
+set shellopts '-eu'
+
+# set internal field separator (IFS) to "\n" for shell commands
+set ifs "\n"
+
+# leave some space at the top and the bottom of the screen
+set scrolloff 10
+
+set icons
+set previewer pistol
+
+# use enter for shell commands
+map <enter> shell
+
+# execute current file (must be executable)
+map x $$f
+map X !$f
+
+# dedicated keys for file opener actions
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
+# define a custom 'open' command
+cmd open ${{
+    case $(file --mime-type $f -b) in
+        text/*) $EDITOR $fx;;
+        application/pdf) zathura $fx;;
+        application/octet-stream) mpv $fx;;
+        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
+map f
+
+cmd fzf_dir ${{
+    res="$(ls|fzf --reverse --header='Jump to location')"
+   if [ -f "$res" ]; then
+     cmd="select"
+   elif [ -d "$res" ]; then
+     cmd="cd"                                                       
+   fi
+lf -remote "send $id $cmd \"$res\""
+}}
+map ff :fzf_dir
+
+cmd fzf_jump ${{
+   # res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location')"
+   res="$(fd 2>/dev/null | fzf --reverse --header='Jump to location')"
+   if [ -f "$res" ]; then
+     cmd="select"
+   elif [ -d "$res" ]; then
+     cmd="cd"                                                       
+   fi
+lf -remote "send $id $cmd \"$res\""
+}}
+map fr :fzf_jump
+
+cmd sx_cd ${{
+    # thumb=$(sxiv -fto "${PWD}"/*/.folder.jpg|head -1)
+    res=$(sx_select.sh "${PWD}")
+    # dir="${thumb%/*}"
+
+    if [[ "${res}" == "" ]]; then
+        exit
+    fi
+
+    if [ -f "$res" ]; then
+      cmd="select"
+    elif [ -d "$res" ]; then
+      cmd="cd"                                                       
+    fi
+
+    lf -remote "send $id $cmd \"$res\""
+}}
+map S sx_cd
+
+map <f-2> $printf "%s\n" $fx | vidir -
+
+map s
+map sn
+map ss
+map st
+map sn :{{ set sortby natural; set info; set reverse!; }}
+map ss :{{ set sortby size; set info size; set reverse; }}
+map st :{{ set sortby time; set info time; set reverse; }}
