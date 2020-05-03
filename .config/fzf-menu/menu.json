@@ -24,7 +24,6 @@
   "缾open windows": "fzf-wmctrl.sh",
   " nerdfonts": "fzf-nerdfonts.sh",
   " emoji": "fzf-emoji.sh",
-  " files": "fzf-localmarks.sh",
   " lf bookmarks": "d=$(cut -d ':' -f 2 ~/.local/share/lf/marks|fzf +m); nohup xst -e lf $d & disown",
   " books": "fzf-calibre.sh",
   " screen layouts": "find ~/.screenlayout -type f|fzf +m --layout=reverse-list|xargs -r bash",
