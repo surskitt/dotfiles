@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+. ${HOME}/.cache/wal/colors.sh
+
+monitors=($(bspc query -M))
+case "${#monitors[@]}" in
+    1)
+       bspc monitor -d internet coding chat music video books files files2 files3 windows
+       ;;
+    2)
+       bspc monitor -d "${monitors[0]}" internet video books files
+       bspc monitor -d "${monitors[1]}" coding chat music files2 files3 windows
+       ;;
+    3)
+       bspc monitor "${monitors[0]}" -d internet files books
+       bspc monitor "${monitors[1]}" -d coding files2
+       bspc monitor "${monitors[2]}" -d chat music video files3 windows
+       ;;
+    4)
+       bspc monitor "${monitors[0]}" -d internet files books
+       bspc monitor "${monitors[1]}" -d coding files2
+       bspc monitor "${monitors[2]}" -d video files3 
+       bspc monitor "${monitors[3]}" -d chat music windows
+       ;;
+esac
+
+bspc config active_border_color ${background:-000000}
+bspc config border_width 2
+bspc config borderless_monocle False
+bspc config bottom_padding 27
+bspc config focus_follows_pointer False
+bspc config focused_border_color ${foreground:-ffffff}
+bspc config gapless_monocle False
+bspc config ignore_ewmh_focus True
+bspc config normal_border_color ${background:-000000}
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_side
+bspc config pointer_follows_monitor False
+bspc config pointer_modifier mod1
+bspc config presel_feedback_color ${foreground:-ffffff}
+bspc config window_gap 50
+
+bspc rule -a *:floating_window state=floating
+bspc rule -a floating_window:* state=floating
+bspc rule -a Zathura state=tiled
+
+bspc desktop internet -l monocle
+bspc desktop video -l monocle
+
+xrdb ~/.Xresources
+pgrep sxhkd >/dev/null || zsh --login -c sxhkd &
+pgrep xbanish >/dev/null || xbanish &
+pgrep light-locker >/dev/null || light-locker &
+~/.config/polybar/launch.sh &
+
+if [ -f ~/.local/share/background/1 ]; then
+    feh --bg-fill ~/.local/share/background/*
+else
+    feh --bg-fill -z /usr/share/backgrounds/pokemon
+fi
+
+~/.scripts/toggler.sh 2>&1 >/tmp/toggler.log &
+until [ -p /tmp/toggler_pipe ]; do sleep .1; done
+for cmd in picom; do
+    echo "monitor ${cmd}" > /tmp/toggler_pipe
+    sleep .1
+done
+
+~/.scripts/playerctl.sh daemon &
+
+xsetroot -cursor_name left_ptr
+setxkbmap -option caps:backspace
