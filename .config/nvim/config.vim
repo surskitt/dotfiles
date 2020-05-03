@@ -32,3 +32,6 @@ set hidden
 set linebreak
 set noshowmode
 set autowrite
+
+set updatetime=300
+set shortmess+=c

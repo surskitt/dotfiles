@@ -70,4 +70,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " vim-easyescape makes exiting insert mode easy and distraction free!
 Plug 'zhou13/vim-easyescape'
 
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
 call plug#end()

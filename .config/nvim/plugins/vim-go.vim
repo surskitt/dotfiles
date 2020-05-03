@@ -8,3 +8,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 
 let g:go_metalinter_autosave = 1
+
+autocmd FileType go map <leader>xt <Plug>(go-test)
+autocmd FileType go map <leader>xc <Plug>(go-coverage-toggle)
+autocmd FileType go map <leader>xi <Plug>(go-imports)
+autocmd FileType go map <leader>xa <Plug>(go-alternate)

@@ -22,8 +22,3 @@ map <leader>wc :lclose<CR>
 map <leader>wo :lopen<CR>
 map <leader>wn :lnext<CR>
 map <leader>wp :lprevious<CR>
-
-autocmd FileType go map <leader>xt <Plug>(go-test)
-autocmd FileType go map <leader>xc <Plug>(go-coverage-toggle)
-autocmd FileType go map <leader>xi <Plug>(go-imports)
-autocmd FileType go map <leader>xa <Plug>(go-alternate)
