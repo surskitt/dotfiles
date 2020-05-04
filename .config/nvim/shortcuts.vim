@@ -7,6 +7,7 @@ map <leader>t :enew<CR>
 map <leader>l :bnext<CR>
 map <leader>h :bprevious<CR>
 map <leader>d :bd<CR>
+map <leader>D :bd!<CR>
 map <leader>/ :nohlsearch<CR>
 map <leader>g :Goyo<CR>
 map <leader>s :w<CR>

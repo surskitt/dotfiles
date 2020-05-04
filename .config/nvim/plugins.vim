@@ -76,4 +76,6 @@ Plug 'airblade/vim-rooter'
 
 Plug 'liuchengxu/vim-which-key'
 
+Plug 'psf/black', { 'branch': 'stable' }
+
 call plug#end()

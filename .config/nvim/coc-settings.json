@@ -7,5 +7,9 @@
     }
   },
   "python.jediEnabled": false,
-  "coc.preferences.diagnostic.displayByAle": true
+  "coc.preferences.diagnostic.displayByAle": true,
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+    "gosnippets/UltiSnips"
+  ]
 }
