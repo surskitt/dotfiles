@@ -14,7 +14,7 @@ set icons
 set previewer pistol
 
 # use enter for shell commands
-map <enter> shell
+# map <enter> shell
 
 # execute current file (must be executable)
 map x $$f
@@ -32,6 +32,19 @@ cmd open ${{
         application/octet-stream) mpv $fx;;
         *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
+}}
+
+cmd paste %{{
+    load=$(lf -remote 'load')
+    mode=$(echo "$load" | sed -n '1p')
+    list=$(echo "$load" | sed '1d')
+    if [ $mode = 'copy' ]; then
+        cp -R $list .
+    elif [ $mode = 'move' ]; then
+        mv $list .
+    fi
+    lf -remote 'send load'
+    lf -remote 'send clear'
 }}
 
 map f
@@ -87,3 +100,9 @@ map st
 map sn :{{ set sortby natural; set info; set reverse!; }}
 map ss :{{ set sortby size; set info size; set reverse; }}
 map st :{{ set sortby time; set info time; set reverse; }}
+
+cmd preview ${{
+    sxiv -s f $(previewer.sh $f)
+}}
+
+map P :preview
