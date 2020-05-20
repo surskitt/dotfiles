@@ -32,6 +32,7 @@ set hidden
 set linebreak
 set noshowmode
 set autowrite
+set viewoptions=cursor,folds,slash,unix
 
 set updatetime=300
 set shortmess+=c
