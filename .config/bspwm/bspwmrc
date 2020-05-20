@@ -8,8 +8,8 @@ case "${#monitors[@]}" in
        bspc monitor -d internet coding chat music video books files files2 files3 windows
        ;;
     2)
-       bspc monitor -d "${monitors[0]}" internet video books files
-       bspc monitor -d "${monitors[1]}" coding chat music files2 files3 windows
+       bspc monitor "${monitors[0]}" -d internet video books files
+       bspc monitor "${monitors[1]}" -d coding chat music files2 files3 windows
        ;;
     3)
        bspc monitor "${monitors[0]}" -d internet files books
@@ -26,16 +26,16 @@ esac
 
 bspc config active_border_color ${background:-000000}
 bspc config border_width 2
-bspc config borderless_monocle False
+bspc config borderless_monocle false
 bspc config bottom_padding 27
-bspc config focus_follows_pointer False
+bspc config focus_follows_pointer false
 bspc config focused_border_color ${foreground:-ffffff}
-bspc config gapless_monocle False
-bspc config ignore_ewmh_focus True
+bspc config gapless_monocle false
+bspc config ignore_ewmh_focus true
 bspc config normal_border_color ${background:-000000}
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
-bspc config pointer_follows_monitor False
+bspc config pointer_follows_monitor false
 bspc config pointer_modifier mod1
 bspc config presel_feedback_color ${foreground:-ffffff}
 bspc config window_gap 50
