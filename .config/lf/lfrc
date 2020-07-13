@@ -101,8 +101,13 @@ map sn :{{ set sortby natural; set info; set reverse!; }}
 map ss :{{ set sortby size; set info size; set reverse; }}
 map st :{{ set sortby time; set info time; set reverse; }}
 
-cmd preview ${{
-    sxiv -s f $(previewer.sh $f)
-}}
+# cmd preview ${{
+#     sxiv -s f $(previewer.sh $f)
+# }}
 
-map P :preview
+# map P :preview
+
+cmd preview ${{
+    timeout 1.5 floater.sh -b sxiv -a -b -g 500x280-10+10 $(previewer.sh $f) &
+}}
+map - preview
