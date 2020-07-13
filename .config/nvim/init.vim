@@ -23,6 +23,7 @@ so ~/.config/nvim/plugins/coc.vim
 so ~/.config/nvim/plugins/fzf.vim
 so ~/.config/nvim/plugins/vim-which-key.vim
 so ~/.config/nvim/plugins/black.vim
+so ~/.config/nvim/plugins/autopairs.vim
 
 so ~/.config/nvim/shortcuts.vim
 
