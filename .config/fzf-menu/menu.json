@@ -3,8 +3,12 @@
   " spotify": "false && cat /tmp/spu|fzfp.sh -I curlout.sh -- --layout=reverse-list +m --with-nth={3..}|cut -d ' ' -f 2|xargs playerctl -p spotify open",
   " weechat buffers": "fzf-weechat.sh",
   " search": "fzf-ddg.sh",
+  " gifs": "read -r -p 'search: ' s; source ~/.profile.d/tenor; gif.py $s",
   " bluetooth pairing": {
     " WH-1000XM3": "bluetoothctl power on && bluetoothctl connect 38:18:4C:19:CA:32",
+    " MPOW H12": "bluetoothctl power on && bluetoothctl connect EB:06:EF:37:33:A9",
+    " picun": "bluetoothctl power on && bluetoothctl connect FC:58:FA:6A:7A:AE",
+    " taotronics": "bluetoothctl power on && bluetoothctl connect FC:58:FA:85:31:C5",
     " LG sound bar": "bluetoothctl power on && bluetoothctl connect 00:1F:47:CD:76:25",
     " disconnect": "bluetoothctl disconnect"
   },
