@@ -1,0 +1,6 @@
+#include "/home/shane/.Xresources.d/xst_font.Xresources"
+#include "/home/shane/.Xresources.d/xst_alpha.Xresources"
+#include "/home/shane/.cache/wal/colors.Xresources"
+
+Xcursor.theme: left_ptr
+Xcursor.size: 16
