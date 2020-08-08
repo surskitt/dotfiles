@@ -1,0 +1,2 @@
+export KEYTIMEOUT=25
+export ZSH_AUTOSUGGEST_USE_ASYNC=true
