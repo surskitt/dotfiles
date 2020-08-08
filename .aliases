@@ -32,3 +32,6 @@ alias pbpaste="xsel --clipboard --output"
 
 alias gotest="gotest -v ./..."
 alias gocover="go test -cover ./..."
+
+alias kc="source <(kubectl completion zsh)"
+alias kc="source <(helm completion zsh)"
