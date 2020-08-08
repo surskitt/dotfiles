@@ -3,6 +3,7 @@
 	name = shanedabes
 [alias]
     st = status -b --short
+    stu = st -unormal
     ci = commit
     br = branch
     co = checkout
