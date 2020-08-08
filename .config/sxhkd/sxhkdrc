@@ -1,0 +1,238 @@
+#
+# Application shortcuts
+#
+
+# Launch st (using tmux start script to create new sessions)
+super + Return
+    st -e tmuxstart.sh
+
+# Launch st in floating window (using tmux start script to create new sessions)
+super + shift + Return
+    floater.sh st -g 180x50 -e tmuxstart.sh _f
+
+#
+# fzf-menu
+#
+
+# Launch a floating xst window with fzf-menu
+super + w
+    floater.sh st -g 150x28 fzf-menu.sh
+
+#
+# Rofi
+#
+
+# Launch rofi application selector
+super + q
+    rofi -show drun
+
+# Launch rofi window selector
+super + Tab
+    rofi -show window
+
+#
+# Application launchers
+#
+
+# Launch a terminal with app
+super + e; {r,m,n,t,R,c,l,k,w}
+    st muxcmd.sh -c {ranger,neomutt,newsboat,stig,rtv,calcurse,lf,k9s,weechat}
+
+# Launch a floating terminal with app
+super + shift + e; {r,m,n,t,R,c,l,k,w}
+    bspc rule -a \* -o state=floating && st -g 180x50 muxcmd.sh -c {ranger,neomutt,newsboat,stig,rtv,calcurse,lf,k9s,weechat}
+
+# Open a floating background window with the currently previewed image
+super + e; p
+    cmd_control.sh -i 999 floater.sh -b sxiv -a -b -g 500x500-10+10 ~/.cache/preview_img
+
+#
+# bspwm
+#
+
+# Relaod bspwm and polybar
+super + shift + r
+    bspc wm -r; \
+    polybar-msg cmd restart
+
+# Force close current node
+super + shift + q
+    bspc node -c
+
+# Toggle floating or tiled on current node
+super + shift + space
+    bspc node -t {floating,tiled}
+
+# Exit bspwm
+super + grave; {l,x,s,h,r,S}
+    exit.sh {lock,logout,suspend,hibernate,reboot,shutdown}
+
+# Move between and move nodes
+super + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east} || bspc monitor next -f
+
+# Cycle desktops
+super + {comma,period}
+    bspc desktop -f {prev,next}
+
+# Cycle between current and previous nodes
+super + semicolon
+    bspc node -f last
+
+# Cycle between current and previous desktops
+super + a
+    bspc desktop -f last
+
+# Change desktop / Move current node to desktop
+super + {_,shift +} {1-9,0}
+    bspc {desktop -f,node -d} {internet,coding,chat,music,video,books,files,files2,files3,windows}
+
+# Change direction of preselect on current node
+super + ctrl + {h,j,k,l}
+    bspc node -p {west,south,north,east}
+
+# Change size of preselect on current node
+super + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+# Change size of preselect on current node using ratios
+super + ctrl + shift + {2-9}
+    bspc node -o {0.5,0.333,0.25,0.2,0.1666,0.142,0.125,0.111}
+
+# Move current node into preselection
+super + y
+    bspc node -n 'last.!automatic'
+
+# Cancel preselection
+super + ctrl + space
+    bspc node -p cancel
+
+# Change gap size
+super + g; {0-9}
+    bspc config window_gap {0-9}0
+
+# Change gap size (larger)
+super + g; shift + {0-9}
+    bspc config window_gap {0,2,4,6,8,10,12,14,16,18}0
+
+# Hide polybar
+super + g; p
+    {cmd=hide; gap=0, cmd=restart; gap=27}; \
+    polybar-msg cmd $cmd; sleep 0.1; bspc config bottom_padding $gap
+
+# change window layout
+super + g; {t, shift + t, shift + f, f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# toggle monocle layout mode
+super + g; m
+    bspc desktop -l next
+
+# fullscreen current node
+super + f
+    bspc node -t {tiled,fullscreen}
+
+# resize current node using selection box
+super + g; d
+    coords=0,$(slop -t 0 -b 2 -c 1,1,1,1 -f "%x,%y,%w,%h" --nokeyboard); \
+    bspc node -t floating; \
+    wmctrl -r :ACTIVE: -e ${coords}
+
+# toggle sticky on current node
+super + g; s
+    bspc node -g sticky={true,false}
+
+# cycle between nodes on current desktop
+super + {_,shift + }o
+    bspc node -f {next,prev}.local
+
+# move current desktop to next monitor
+# super + bracket{left,right}
+#     desk=$(bspc query -D -d focused); \
+#     bspc desktop -m {prev,next}; \
+#     bspc monitor -f {prev,next}; \
+#     bspc desktop -f ${desk}
+
+# move current desktop to next/previous monitor
+super + {slash,question}
+    bspc desktop focused -m {next,prev} -f
+
+# rotate current node layout
+super + ctrl + {r,R}
+    bspc node @/ -R {90,270}
+
+# mirror flip current node layout 
+super + ctrl + {f,F}
+    bspc node @/ -F {vertical,horizontal}
+
+# Rotate current monitor
+super + g; r
+    screen_rotate.sh {left,normal}
+    # xrandr --output $(bspc query -M -m .focused --names) --rotate {left,normal}; polybar-msg cmd restart
+
+# move current node to picture in picture position
+super + p; {super+p,2,3,4,5,0}
+    picinpic.sh {_,2,3,4,5,0}
+
+#
+# Media controls
+#
+
+XF86AudioMute
+    poly_volume.sh mute
+
+XF86AudioLowerVolume
+    poly_volume.sh down
+
+XF86AudioRaiseVolume
+    poly_volume.sh up
+
+XF86AudioPlay
+    playerctl.sh play-pause
+
+XF86AudioPrev
+    playerctl.sh previous
+
+XF86AudioNext
+    playerctl.sh next
+
+super + XF86AudioPlay
+    playerctl.sh switch
+
+#
+# Brightness controls
+#
+
+XF86MonBrightnessUp
+    poly_brightness.sh up
+
+XF86MonBrightnessDown
+    poly_brightness.sh down
+
+#
+# Background app toggles
+#
+
+# toggle apps using toggler pipe script
+super + t; {p}
+    echo "toggle {picom}" > /tmp/toggler_pipe
+
+# toggle apps using systemctl
+super + t; {d,b}
+    sudo systemctl_toggle.sh {docker,bluetooth}
+
+# toggle user apps using systemctl
+super + t; {D,s,r}
+    systemctl_toggle.sh -u {dropbox,spotifyd,redshift}
+
+# toggle touchpad
+super + t; m
+    touchpad_toggle.sh
+
+#
+# Notification control
+# 
+
+# Show a notification using polybar notification script
+super + n; {y,p,t,d,u,b,D}
+    {ytsp_status.sh,pacman_count.sh,tsp_status.sh,date,uptime,battery_status.sh,disk_usage.sh}|poly_notify.sh
