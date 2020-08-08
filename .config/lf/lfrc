@@ -108,6 +108,11 @@ map st :{{ set sortby time; set info time; set reverse; }}
 # map P :preview
 
 cmd preview ${{
-    timeout 1.5 floater.sh -b sxiv -a -b -g 500x280-10+10 $(previewer.sh $f) &
+    bspc rule -a \* -o state=floating focus=off
+    p="$(previewer.sh "$f")"
+    timeout 1.5 sxiv -a -b -g 500x280-10+10 "$p" &
 }}
 map - preview
+
+cmd dragon %dragon-drag-and-drop -a -x $fx
+map D dragon
