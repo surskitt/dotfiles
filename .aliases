@@ -1,0 +1,33 @@
+alias c=clear
+alias b=buku --np
+alias k=kubectl
+alias rr=ranger
+alias tf=terraform
+alias wee=weechat
+alias v=vim
+alias l=ls
+
+alias pacman="sudo -E pacman"
+alias apt-get="sudo -E apt-get"
+alias apt="sudo -E apt"
+
+alias curl="noglob curl"
+alias wget="noglob wget"
+
+alias ytdl="noglob youtube-dl.sh"
+alias ytsp="TS_SOCKET=/tmp/socket-ts.yt tsp"
+alias ytspw='while ps -fp $(ytsp -p 2>/dev/null) >/dev/null 2>&1; do ytsp -c; sleep 5;done'
+
+alias black="black -l 79"
+alias bat="bat --paging=never"
+alias glow="glow -w $(tput cols)"
+alias telnet="telnet -e p"
+alias watch="watch "
+
+alias cdtmp="cd $(mktemp -d)"
+alias ll="ls -l"
+alias pbcopy="xsel --clipboard --input"
+alias pbpaste="xsel --clipboard --output"
+
+alias gotest="gotest -v ./..."
+alias gocover="go test -cover ./..."
