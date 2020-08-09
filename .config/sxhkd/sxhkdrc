@@ -144,7 +144,7 @@ super + g; s
 
 # cycle between nodes on current desktop
 super + {_,shift + }o
-    bspc node -f {next,prev}.local
+    bspc node -f '{next,prev}.local.!hidden.window'
 
 # move current desktop to next monitor
 # super + bracket{left,right}
