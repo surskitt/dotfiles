@@ -1,0 +1,18 @@
+session_name: poku
+windows:
+- window_name: code
+  focus: 'true'
+  layout: a851,256x56,0,0{84x56,0,0,0,84x56,85,0,1,86x56,170,0[86x28,170,0,3,86x27,170,29,4]}
+  options:
+    automatic-rename: 'off'
+    synchronize-panes: 'off'
+  shell_command_before:
+    - pew workon poku
+  start_directory: /home/shane/code/python/poku
+  window_name: ''
+  panes:
+    - shell_command: vim
+      focus: true
+    - vim
+    - find . -type f -name '*.py' | entr -c pytest -v
+    -

@@ -1,0 +1,14 @@
+session_name: spu
+windows:
+- window_name: ''
+  focus: 'true'
+  layout: a851,256x56,0,0{84x56,0,0,0,84x56,85,0,1,86x56,170,0[86x28,170,0,3,86x27,170,29,4]}
+  options:
+    automatic-rename: 'off'
+    synchronize-panes: 'off'
+  start_directory: /home/shane/code/go/spu
+  panes:
+    - shell_command: vim
+      focus: true
+    - vim
+    - find . -type f | entr -c gotest -v ./...
