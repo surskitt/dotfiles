@@ -1,0 +1,4 @@
+map j navigate
+map k navigate previous
+
+set adjust-open best-fit
