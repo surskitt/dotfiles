@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+while read file; do
+    files+=("${file}")
+done
+filecount="${#files[@]}"
+
+case "${1}" in
+    "w")
+        monitors="$(xrandr --listactivemonitors|head -1|cut -d ' ' -f 2)"
+
+        if [[ "${filecount}" -eq "${monitors}" ]]; then
+            feh --bg-fill ${files[@]}
+            mkdir -p ~/.local/share/background
+            for i in $(seq ${filecount}); do
+                n=$((i-1))
+                ln -sf "${files[n]}" ~/.local/share/background/${i}
+                dunstify -i "${files[n]}" "Background ${i} set"
+            done
+        else
+            dunstify "Number of selected images does not match monitor count"
+        fi
+        ;;
+    "u")
+        curl -F"file=@${files[0]}" http://0x0.st|xsel --clipboard --input && \
+        dunstify -i "${files[0]}" "Image uploaded and saved to clipboard"
+        ;;
+esac
