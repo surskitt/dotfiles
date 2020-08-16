@@ -1,5 +1,4 @@
 if ! zgen saved; then
-    zgen load shanedabes/shagnoster shagnoster.zsh-theme
     zgen load sharat87/zsh-vim-mode
     zgen load zsh-users/zsh-autosuggestions
     zgen load zuxfoucault/colored-man-pages_mod
