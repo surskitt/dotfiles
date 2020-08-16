@@ -54,18 +54,13 @@ pgrep xbanish >/dev/null || xbanish &
 pgrep light-locker >/dev/null || light-locker &
 ~/.config/polybar/launch.sh &
 
+systemctl --user start picom
+
 if [ -f ~/.local/share/background/1 ]; then
     feh --bg-fill ~/.local/share/background/*
 else
     feh --bg-fill -z /usr/share/backgrounds/pokemon
 fi
-
-~/.scripts/toggler.sh 2>&1 >/tmp/toggler.log &
-until [ -p /tmp/toggler_pipe ]; do sleep .1; done
-for cmd in picom; do
-    echo "monitor ${cmd}" > /tmp/toggler_pipe
-    sleep .1
-done
 
 ~/.scripts/playerctl.sh daemon &
 
