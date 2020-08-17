@@ -30,3 +30,21 @@ y() {
   fi
 
 }
+
+wp() {
+    [ "${#}" -eq 0 ] && return
+
+    [[ "${1}" =~ '^[0-9]$' ]] || return
+
+    if [[ "${2}" == "" ]]; then
+        wp_dir=~/Dropbox/Pictures/lorem
+    else
+        wp_dir="${2}"
+    fi
+
+    [ -d "${wp_dir}" ] || return
+
+    sxiv -f -r -t "${wp_dir}" -o|head -1|xargs -r -I{} ln -sf {} ~/.local/share/background/${1}
+
+    feh --bg-fill ~/.local/share/background/*
+}
