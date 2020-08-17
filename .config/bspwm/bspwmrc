@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-. ${HOME}/.cache/wal/colors.sh
+. "${HOME}/.profile"
+
+. "${HOME}/.cache/wal/colors.sh"
 
 monitors=($(bspc query -M))
 case "${#monitors[@]}" in
@@ -49,7 +51,7 @@ bspc desktop music -l monocle
 bspc desktop video -l monocle
 
 xrdb ~/.Xresources
-pgrep sxhkd >/dev/null || zsh --login -c sxhkd &
+pgrep sxhkd >/dev/null || sxhkd &
 pgrep xbanish >/dev/null || xbanish &
 pgrep light-locker >/dev/null || light-locker &
 ~/.config/polybar/launch.sh &
