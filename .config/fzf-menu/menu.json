@@ -31,6 +31,7 @@
   " lf bookmarks": "d=$(cut -d ':' -f 2 ~/.local/share/lf/marks|fzf +m); nohup xst -e lf $d & disown",
   " books": "fzf-calibre.sh",
   " screen layouts": "find ~/.screenlayout -type f|fzf +m --layout=reverse-list|xargs -r bash && polybar-msg cmd restart && feh --bg-fill ~/.local/share/background/*",
+  " github starred": "false",
   " hacker news": "hn.py|fzf -m --layout=reverse-list --with-nth=2..|cut -d ' ' -f 1|xargs -I% qutebrowser 'news.ycombinator.com/item?id=%'",
   " twitch": "twitchy --non-interactive|column -t -s ';'|sort|fzf --layout=reverse-list|cut -d ' ' -f 1|xargs -r twitchy --non-interactive kickstart",
   " rss": "fzf-newsboat.py",
