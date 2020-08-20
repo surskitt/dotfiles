@@ -34,3 +34,10 @@ alias gocover="go test -cover ./..."
 
 alias kc="source <(kubectl completion zsh)"
 alias kc="source <(helm completion zsh)"
+
+alias kgp="kubectl get po"
+alias kvp="kgp -o yaml"
+alias kgd="kubectl get deploy"
+alias kvd="kgd -o yaml"
+alias kgs="kubectl get secret"
+alias kvs="kgs -o yaml"
