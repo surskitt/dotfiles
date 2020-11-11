@@ -48,3 +48,27 @@ wp() {
 
     feh --bg-fill ~/.local/share/background/*
 }
+
+up() {
+    curl -s -F"file=@${1}" https://0x0.st|tee /dev/tty|pbcopy
+}
+
+rcp() {
+    src="${1}"
+    dest="${2}"
+
+    # if [[ "${dest}" == "" ]]; then
+        # dest="${src}"
+    # fi
+
+    rsync -av --info=progress2 "${src}" "${dest}"
+}
+
+rcpn() {
+    rcp "${1}" /mnt/nfs/media/tv/
+    notify-send "${1} -> ${2} done"
+}
+
+tp() {
+    tmuxp ls|fzf --layout=reverse-list|xargs -r tmuxp load -y
+}
