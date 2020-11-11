@@ -34,17 +34,15 @@ cmd open ${{
     esac
 }}
 
-cmd paste %{{
+cmd paste &{{
     load=$(lf -remote 'load')
     mode=$(echo "$load" | sed -n '1p')
     list=$(echo "$load" | sed '1d')
     if [ $mode = 'copy' ]; then
-        cp -R $list .
+        tsp lf_cp.sh $list .
     elif [ $mode = 'move' ]; then
-        mv $list .
+        tsp lf_mv.sh $list .
     fi
-    lf -remote 'send load'
-    lf -remote 'send clear'
 }}
 
 map f
@@ -54,11 +52,22 @@ cmd fzf_dir ${{
    if [ -f "$res" ]; then
      cmd="select"
    elif [ -d "$res" ]; then
-     cmd="cd"                                                       
+     cmd="cd"
    fi
 lf -remote "send $id $cmd \"$res\""
 }}
 map ff :fzf_dir
+
+cmd fzf_rdir ${{
+   res="$(fd -t d|fzf --reverse --header='Jump to location')"
+   if [ -f "$res" ]; then
+     cmd="select"
+   elif [ -d "$res" ]; then
+     cmd="cd"
+   fi
+lf -remote "send $id $cmd \"$res\""
+}}
+map fd :fzf_rdir
 
 cmd fzf_jump ${{
    # res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location')"
@@ -66,7 +75,7 @@ cmd fzf_jump ${{
    if [ -f "$res" ]; then
      cmd="select"
    elif [ -d "$res" ]; then
-     cmd="cd"                                                       
+     cmd="cd"
    fi
 lf -remote "send $id $cmd \"$res\""
 }}
@@ -84,7 +93,7 @@ cmd sx_cd ${{
     if [ -f "$res" ]; then
       cmd="select"
     elif [ -d "$res" ]; then
-      cmd="cd"                                                       
+      cmd="cd"
     fi
 
     lf -remote "send $id $cmd \"$res\""
