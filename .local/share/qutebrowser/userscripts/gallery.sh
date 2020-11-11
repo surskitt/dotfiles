@@ -13,7 +13,7 @@ gallery_dl() {
     #    convert "$b" "$a" +append "$a"
     #    rm "$b"
     # done
-    feh -Y -r -F "${tempdir}"
+    feh -Z -Y -r -F "${tempdir}"
 }
 
 # gallery_dl "$1"
