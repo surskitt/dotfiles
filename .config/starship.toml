@@ -93,6 +93,10 @@ symbol = " "
 format = "[$symbol$version]($style) "
 style = "cyan bg:black"
 
+[hostname]
+style = "green bg:black"
+format = "[ $hostname]($style) "
+
 [jobs]
 symbol = ""
 style = "blue bg:black"
@@ -115,3 +119,7 @@ format = "[$symbol$virtualenv]($style) "
 symbol = " "
 format = "[$symbol$workspace]($style) " 
 style = "purple bg:black"
+
+[username]
+style_user = "yellow bg:black"
+format = "[ $user]($style) "
