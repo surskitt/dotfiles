@@ -24,11 +24,11 @@ super + w
 
 # Launch rofi application selector
 super + q
-    rofi -show drun
+    rofi -show drun -monitor -4
 
 # Launch rofi window selector
 super + Tab
-    rofi -show window
+    rofi -show window -monitor -4
 
 #
 # Application launchers
@@ -176,7 +176,7 @@ super + p; {super+p,2,3,4,5,0}
 #
 
 XF86AudioMute
-    poly_volume.sh mute
+    pamixer -t
 
 XF86AudioLowerVolume
     pamixer -d 5
@@ -215,8 +215,8 @@ super + t; {d,b}
     sudo systemctl_toggle.sh {docker,bluetooth}
 
 # toggle user apps using systemctl
-super + t; {D,s,r,p}
-    systemctl_toggle.sh -u {dropbox,spotifyd,redshift,picom}
+super + t; {D,s,r,p,l}
+    systemctl_toggle.sh -u {dropbox,spotifyd,redshift,picom,lightlockerinhibit}
 
 # toggle touchpad
 super + t; m
