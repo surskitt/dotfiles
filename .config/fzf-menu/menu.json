@@ -5,7 +5,7 @@
   " search": "fzf-ddg.sh",
   " gifs": "read -r -p 'search: ' s; source ~/.profile.d/tenor; gif.py $s",
   " bluetooth pairing": {
-    " WH-1000XM3": "bluetoothctl power on && bluetoothctl connect 38:18:4C:19:CA:32",
+    " WH-1000XM4": "bluetoothctl power on && bluetoothctl connect 94:DB:56:52:BD:6C",
     " MPOW H12": "bluetoothctl power on && bluetoothctl connect EB:06:EF:37:33:A9",
     " picun": "bluetoothctl power on && bluetoothctl connect FC:58:FA:6A:7A:AE",
     " taotronics": "bluetoothctl power on && bluetoothctl connect FC:58:FA:85:31:C5",
@@ -13,6 +13,9 @@
     " disconnect": "bluetoothctl disconnect"
   },
   " passwords": "fzf-pass.sh; bspc node -g hidden; sleep 45",
+  " home": {
+      " not": "hass_switch.py switch.14503513c82b965f1dd3"
+  },
   " bookmarks": {
       " all": "BROWSER=qutebrowser fzf-buku.sh",
       " tags": "BROWSER=qutebrowser fzf-buku.sh -t",
@@ -28,11 +31,14 @@
   "缾open windows": "fzf-wmctrl.sh",
   " nerdfonts": "fzf-nerdfonts.sh",
   " emoji": "fzf-emoji.sh",
-  " lf bookmarks": "d=$(cut -d ':' -f 2 ~/.local/share/lf/marks|fzf +m); nohup xst -e lf $d & disown",
+  " lf bookmarks": "d=$(cut -d ':' -f 2 ~/.local/share/lf/marks|sort -u|fzf +m); nohup st -e lf $d >/dev/null 2>&1 & sleep .2 && disown",
   " books": "fzf-calibre.sh",
-  " screen layouts": "find ~/.screenlayout -type f|fzf +m --layout=reverse-list|xargs -r bash",
+  " screen layouts": "find ~/.screenlayout -type f|fzf +m --layout=reverse-list|xargs -r bash && polybar-msg cmd restart && feh --bg-fill ~/.local/share/background/*",
+  " select desktops": "echo {1..3}|xargs -n 1 echo|fzf -m --layout=reverse-list|xargs bspc_monitors.sh; true",
+  " github repos": "fzf-github-repos.sh",
+  " github stars": "fzf-github-stars.sh",
   " hacker news": "hn.py|fzf -m --layout=reverse-list --with-nth=2..|cut -d ' ' -f 1|xargs -I% qutebrowser 'news.ycombinator.com/item?id=%'",
   " twitch": "twitchy --non-interactive|column -t -s ';'|sort|fzf --layout=reverse-list|cut -d ' ' -f 1|xargs -r twitchy --non-interactive kickstart",
   " rss": "fzf-newsboat.py",
-  " tmux sessions": "t=$(ls ~/.tmuxp/*.yaml|xargs -L 1 basename|cut -d '.' -f 1|fzf); nohup xst muxcmd.sh -t $t & disown"
+  " tmux sessions": "t=$(ls ~/.tmuxp/*.yaml|xargs -L 1 basename|cut -d '.' -f 1|fzf); nohup st muxcmd.sh -t $t >/dev/null 2>&1 & sleep .2 && disown"
 }

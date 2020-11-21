@@ -1,20 +1,25 @@
 #!/usr/bin/env bash
 
-. ${HOME}/.cache/wal/colors.sh
+. "${HOME}/.profile"
+
+. "${HOME}/.cache/wal/colors.sh"
+
+bspc monitor -d internet coding chat music video books files files2 files3 windows
 
 monitors=($(bspc query -M))
 case "${#monitors[@]}" in
     1)
-       bspc monitor -d internet coding chat music video books files files2 files3 windows
        ;;
     2)
-       bspc monitor "${monitors[0]}" -d internet video books files
-       bspc monitor "${monitors[1]}" -d coding chat music files2 files3 windows
+       bspc_monitors.sh 1 2
+       bspc desktop -f coding
+       bspc desktop -f internet
        ;;
     3)
-       bspc monitor "${monitors[0]}" -d internet files books
-       bspc monitor "${monitors[1]}" -d coding files2
-       bspc monitor "${monitors[2]}" -d chat music video files3 windows
+       bspc_monitors.sh 1 2 3
+       bspc desktop -f chat
+       bspc desktop -f internet
+       bspc desktop -f coding
        ;;
     4)
        bspc monitor "${monitors[0]}" -d internet files books
@@ -47,25 +52,23 @@ bspc rule -a Zathura state=tiled
 bspc desktop internet -l monocle
 bspc desktop music -l monocle
 bspc desktop video -l monocle
+bspc desktop files -l monocle
+bspc desktop files2 -l monocle
+bspc desktop files3 -l monocle
 
 xrdb ~/.Xresources
-pgrep sxhkd >/dev/null || zsh --login -c sxhkd &
+pgrep sxhkd >/dev/null || sxhkd &
 pgrep xbanish >/dev/null || xbanish &
 pgrep light-locker >/dev/null || light-locker &
 ~/.config/polybar/launch.sh &
+
+systemctl --user start picom
 
 if [ -f ~/.local/share/background/1 ]; then
     feh --bg-fill ~/.local/share/background/*
 else
     feh --bg-fill -z /usr/share/backgrounds/pokemon
 fi
-
-~/.scripts/toggler.sh 2>&1 >/tmp/toggler.log &
-until [ -p /tmp/toggler_pipe ]; do sleep .1; done
-for cmd in picom; do
-    echo "monitor ${cmd}" > /tmp/toggler_pipe
-    sleep .1
-done
 
 ~/.scripts/playerctl.sh daemon &
 

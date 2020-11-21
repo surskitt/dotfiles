@@ -24,11 +24,11 @@ super + w
 
 # Launch rofi application selector
 super + q
-    rofi -show drun
+    rofi -show drun -monitor -4
 
 # Launch rofi window selector
 super + Tab
-    rofi -show window
+    rofi -show window -monitor -4
 
 #
 # Application launchers
@@ -126,21 +126,18 @@ super + g; {t, shift + t, shift + f, f}
 
 # toggle monocle layout mode
 super + g; m
-    bspc desktop -l next
+   bspc desktop -l next
 
 # fullscreen current node
 super + f
     bspc node -t {tiled,fullscreen}
 
-# resize current node using selection box
-super + g; d
-    coords=0,$(slop -t 0 -b 2 -c 1,1,1,1 -f "%x,%y,%w,%h" --nokeyboard); \
-    bspc node -t floating; \
-    wmctrl -r :ACTIVE: -e ${coords}
-
 # toggle sticky on current node
 super + g; s
     bspc node -g sticky={true,false}
+
+super + g; d
+   bspc_show_desktop.sh
 
 # cycle between nodes on current desktop
 super + {_,shift + }o
@@ -179,13 +176,13 @@ super + p; {super+p,2,3,4,5,0}
 #
 
 XF86AudioMute
-    poly_volume.sh mute
+    pamixer -t
 
 XF86AudioLowerVolume
-    poly_volume.sh down
+    pamixer -d 5
 
 XF86AudioRaiseVolume
-    poly_volume.sh up
+    pamixer -i 5
 
 XF86AudioPlay
     playerctl.sh play-pause
@@ -213,17 +210,13 @@ XF86MonBrightnessDown
 # Background app toggles
 #
 
-# toggle apps using toggler pipe script
-super + t; {p}
-    echo "toggle {picom}" > /tmp/toggler_pipe
-
 # toggle apps using systemctl
 super + t; {d,b}
     sudo systemctl_toggle.sh {docker,bluetooth}
 
 # toggle user apps using systemctl
-super + t; {D,s,r}
-    systemctl_toggle.sh -u {dropbox,spotifyd,redshift}
+super + t; {D,s,r,p,l}
+    systemctl_toggle.sh -u {dropbox,spotifyd,redshift,picom,lightlockerinhibit}
 
 # toggle touchpad
 super + t; m

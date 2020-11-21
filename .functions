@@ -1,6 +1,6 @@
 g() {
   if [ "$#" -eq 0 ]; then
-    git status
+    git st
   else
     git $*
   fi
@@ -29,4 +29,46 @@ y() {
     yadm $*
   fi
 
+}
+
+wp() {
+    [ "${#}" -eq 0 ] && return
+
+    [[ "${1}" =~ '^[0-9]$' ]] || return
+
+    if [[ "${2}" == "" ]]; then
+        wp_dir=~/Dropbox/Pictures/lorem
+    else
+        wp_dir="${2}"
+    fi
+
+    [ -d "${wp_dir}" ] || return
+
+    sxiv -f -r -t "${wp_dir}" -o|head -1|xargs -r -I{} ln -sf {} ~/.local/share/background/${1}
+
+    feh --bg-fill ~/.local/share/background/*
+}
+
+up() {
+    curl -s -F"file=@${1}" https://0x0.st|tee /dev/tty|pbcopy
+}
+
+rcp() {
+    src="${1}"
+    dest="${2}"
+
+    # if [[ "${dest}" == "" ]]; then
+        # dest="${src}"
+    # fi
+
+    rsync -av --info=progress2 "${src}" "${dest}"
+}
+
+rcpn() {
+    rcp "${1}" /mnt/nfs/media/tv/
+    notify-send "${1} -> ${2} done"
+}
+
+tp() {
+    tmuxp ls|fzf --layout=reverse-list|xargs -r tmuxp load -y
 }

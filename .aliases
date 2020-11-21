@@ -6,6 +6,7 @@ alias tf=terraform
 alias wee=weechat
 alias v=vim
 alias l=ls
+alias cdd='cd $_'
 
 alias pacman="sudo -E pacman"
 alias apt-get="sudo -E apt-get"
@@ -34,3 +35,25 @@ alias gocover="go test -cover ./..."
 
 alias kc="source <(kubectl completion zsh)"
 alias kc="source <(helm completion zsh)"
+
+alias kgp="kubectl get po"
+alias kvp="kgp -o yaml"
+alias kdp="kubectl describe po"
+alias kep="kubectl edit po"
+
+alias kgd="kubectl get deploy"
+alias kvd="kgd -o yaml"
+alias kdd="kubectl describe deploy"
+alias ked="kubectl edit deploy"
+
+alias kgs="kubectl get secret"
+alias kvs="kgs -o yaml"
+alias kds="kubectl describe secret"
+alias kes="kubectl edit secret"
+
+alias kgh="kubectl get hr"
+alias kvh="kgh -o yaml"
+alias kdh="kubectl describe hr"
+alias keh="kubectl edit hr"
+
+alias kl="kubectl logs"

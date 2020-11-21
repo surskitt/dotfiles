@@ -18,3 +18,6 @@ source ~/.zshrc.d/bindings.zshrc
 bindkey -M viins jj vi-cmd-mode
 
 autoload -U +X bashcompinit && bashcompinit
+
+eval "$(starship init zsh)"
+export RPROMPT=""

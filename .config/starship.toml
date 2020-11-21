@@ -1,0 +1,125 @@
+# format = "[$all](bg:black) "
+format = """\
+[
+ \
+$username\
+$hostname\
+$kubernetes\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$env_var\
+$crystal\
+$cmd_duration\
+$custom\
+$line_break\
+$jobs\
+$battery\
+$time\
+$character\
+$directory\
+]\
+(bg:black) 
+"""
+
+[character]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
+[directory]
+truncation_length = 10
+# truncate_to_repo = false
+fish_style_pwd_dir_length = 1
+style = "blue bg:black"
+format = "[ $path]($style)[$lock_symbol]($lock_style) "
+# symbol = " "
+
+# [directory.substitutions]
+# "~" = ""
+# "~/code" = ""
+
+[gcloud]
+disabled = true
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+style = "red bg:black"
+
+[git_commit]
+style = "red bg:black"
+
+[git_state]
+style = "red bg:black"
+
+[git_status]
+style = "red bg:black"
+
+[golang]
+disabled = true
+symbol = " "
+format = "[$symbol$version]($style) "
+style = "cyan bg:black"
+
+[hostname]
+style = "green bg:black"
+format = "[ $hostname]($style) "
+
+[jobs]
+symbol = ""
+style = "blue bg:black"
+
+[kubernetes]
+# disabled = false
+style = "cyan bg:black"
+symbol = " "
+format = "[$symbol$context/$namespace]($style) "
+
+[line_break]
+disabled = true
+
+[python]
+symbol = " "
+style = "yellow bg:black"
+format = "[$symbol$virtualenv]($style) "
+
+[terraform]
+symbol = " "
+format = "[$symbol$workspace]($style) " 
+style = "purple bg:black"
+
+[username]
+style_user = "yellow bg:black"
+format = "[ $user]($style) "
