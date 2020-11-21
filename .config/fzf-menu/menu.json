@@ -13,6 +13,9 @@
     " disconnect": "bluetoothctl disconnect"
   },
   " passwords": "fzf-pass.sh; bspc node -g hidden; sleep 45",
+  " home": {
+      " not": "hass_switch.py switch.14503513c82b965f1dd3"
+  },
   " bookmarks": {
       " all": "BROWSER=qutebrowser fzf-buku.sh",
       " tags": "BROWSER=qutebrowser fzf-buku.sh -t",
