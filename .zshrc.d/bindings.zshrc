@@ -12,3 +12,4 @@ bindkey -M vicmd -r ':'
 # remap fzf cd from alt+c to alt+d
 bindkey -r '\ec'
 bindkey '\ef' fzf-cd-widget
+bindkey -s '\ew' 'fzf-menu.sh\n'
