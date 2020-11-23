@@ -1,6 +1,6 @@
 # format = "[$all](bg:black) "
 format = """\
-[
+[ \
  \
 $username\
 $hostname\
@@ -68,7 +68,7 @@ format = "[ $path]($style)[$lock_symbol]($lock_style) "
 # symbol = " "
 
 # [directory.substitutions]
-# "~" = ""
+# "~$" = ""
 # "~/code" = ""
 
 [gcloud]
