@@ -57,3 +57,5 @@ alias kdh="kubectl describe hr"
 alias keh="kubectl edit hr"
 
 alias kl="kubectl logs"
+
+alias w="watch "

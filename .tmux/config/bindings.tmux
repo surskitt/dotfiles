@@ -25,6 +25,7 @@ bind = split-window -h
 bind @ setw synchronize-panes
 unbind C-a
 bind C-a last-window
+bind C-p last-pane
 bind r source-file ~/.tmux.conf \; display "Reloaded config file"
 unbind [
 bind Escape copy-mode
