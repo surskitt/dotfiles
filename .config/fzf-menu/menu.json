@@ -1,6 +1,10 @@
 {
   " youtube subscriptions": "fzf-menu.sh ~/.config/fzf-menu/youtube.json",
   " spotify": "false && cat /tmp/spu|fzfp.sh -I curlout.sh -- --layout=reverse-list +m --with-nth={3..}|cut -d ' ' -f 2|xargs playerctl -p spotify open",
+  " mpd": {
+      " add to queue": "fzf-mpc.sh",
+      " ncmpcpp": "ncmpcpp"
+  },
   " weechat buffers": "fzf-weechat.sh",
   " search": "fzf-ddg.sh",
   " gifs": "read -r -p 'search: ' s; source ~/.profile.d/tenor; gif.py $s",
