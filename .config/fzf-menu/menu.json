@@ -19,7 +19,8 @@
   " passwords": "fzf-pass.sh; bspc node -g hidden; sleep 45",
   " home": {
       " not": "hass_switch.py switch.14503513c82b965f1dd3",
-      " fridge": "hass_switch.py switch.14503513c82b965f16f9 ; sleep 2; hass_switch.py switch.14503513c82b965f16f9"
+      " fridge": "hass_switch.py switch.14503513c82b965f16f9 ; sleep 2; hass_switch.py switch.14503513c82b965f16f9",
+      " tv": "hass_switch.py media_player.tv"
   },
   " bookmarks": {
       " all": "BROWSER=qutebrowser fzf-buku.sh",

@@ -21,11 +21,12 @@ def main():
         print("Error: pass the name of the switch to toggle")
 
     entity_id = sys.argv[1]
+    domain = entity_id.split(".")[0]
 
     headers = {"Authorization": "Bearer {}".format(api_key)}
     data = {"entity_id": entity_id}
 
-    request_url = "{}/api/services/switch/toggle".format(url)
+    request_url = "{}/api/services/{}/toggle".format(url, domain)
 
     r = requests.post(request_url, headers=headers, json=data)
 
