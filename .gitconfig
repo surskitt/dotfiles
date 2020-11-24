@@ -18,3 +18,5 @@
     pa = push --all
     pt = push --tags
     pta = !git push --all && git push --tags
+[pull]
+	rebase = false
