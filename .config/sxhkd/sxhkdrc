@@ -35,12 +35,15 @@ super + Tab
 #
 
 # Launch a terminal with app
-super + e; {r,m,n,t,R,c,l,k,w}
-    st muxcmd.sh -c {ranger,neomutt,newsboat,stig,rtv,calcurse,lf,k9s,weechat}
+super + e; {m,N,t,r,l,w}
+    st muxcmd.sh -c {neomutt,newsboat,stig,rtv,lf,weechat}
+
+super +e; {n}
+    bspc rule -a \* -o state=floating && st -g 180x50 muxcmd.sh -c {ncmpcpp}
 
 # Launch a floating terminal with app
-super + shift + e; {r,m,N,t,R,c,l,k,w,n}
-    bspc rule -a \* -o state=floating && st -g 180x50 muxcmd.sh -c {ranger,neomutt,newsboat,stig,rtv,calcurse,lf,k9s,weechat,ncmpcpp}
+super + shift + e; {m,N,t,r,l,w,n}
+    bspc rule -a \* -o state=floating && st -g 180x50 muxcmd.sh -c {neomutt,newsboat,stig,rtv,lf,weechat,ncmpcpp}
 
 # Open a floating background window with the currently previewed image
 super + e; p
