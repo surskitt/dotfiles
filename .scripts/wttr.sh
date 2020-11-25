@@ -149,6 +149,9 @@ get_icon() {
         Drizzle\ and\ rain)
            echo 
            ;;
+        Haze,\ light\ drizzle\ and\ rain)
+           echo 
+           ;;
         *)
            echo "?"
            ;;
