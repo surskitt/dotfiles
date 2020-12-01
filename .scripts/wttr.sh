@@ -152,6 +152,12 @@ get_icon() {
         Haze,\ light\ drizzle\ and\ rain)
            echo 
            ;;
+        Haze)
+           echo 
+           ;;
+        Shallow\ fog,\ mist,\ fog)
+           echo 
+           ;;
         *)
            echo "?"
            ;;
