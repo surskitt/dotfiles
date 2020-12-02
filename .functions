@@ -72,3 +72,7 @@ rcpn() {
 tp() {
     tmuxp ls|fzf --layout=reverse-list|xargs -r tmuxp load -y
 }
+
+pc() {
+    python -c "print(${1})"
+}
