@@ -18,7 +18,8 @@
   },
   " passwords": "fzf-pass.sh; bspc node -g hidden; sleep 45",
   " home": {
-      " not": "hass_switch.py switch.14503513c82b965f1dd3"
+      " not": "hass_switch.py switch.14503513c82b965f1dd3",
+      " office light": "hass_switch.py switch.smart_wall_switch_mss510x_main_channel"
   },
   " bookmarks": {
       " all": "BROWSER=qutebrowser fzf-buku.sh",
