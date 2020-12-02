@@ -5,24 +5,27 @@ read -r d t ap < <(date +"%d/%m/%Y %I:%M %P")
 now="${d} ${t} ${ap}"
 eod="${d} 11:59 pm"
 
-events() {
-    khal list -f '{start-time} {end-time} {title}' "${now}" "${eod}"
-}
+readarray -t events < <(khal list -f '{start-time} {end-time} {title}' "${now}" "${eod}" | grep '^[012]')
 
 case "${1}" in
     notify)
         notify-send "📅 Calendar" "$(
-            events | grep '^[012]' | while read -r l; do
-              read -r s sap e eap t <<< "${l}"
+            if [[ "${#events[*]}" -eq 0 ]]; then
+                echo "No events today"
+            else
+                for e in "${events[@]}"; do
+                    read -r s sap e eap d <<< "${e}"
 
-              echo 
-              echo "${s} ${sap} -> ${e} ${eap}"
-              echo "${t}"
-            done
+                    start="$(date -d "${s} ${sap}" +"%H:%M")"
+                    end="$(date -d "${e} ${eap}" +"%H:%M")"
+
+                    echo "${start}-${end}: ${d}"
+                done
+            fi
         )"
         ;;
     *)
         echo -n " "
-        events | grep -c '^[012]'
+        echo "${#events[*]}"
         ;;
 esac
