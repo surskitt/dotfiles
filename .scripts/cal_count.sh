@@ -5,7 +5,7 @@ read -r d t ap < <(date +"%d/%m/%Y %I:%M %P")
 now="${d} ${t} ${ap}"
 eod="${d} 11:59 pm"
 
-readarray -t events < <(khal list -f '{start-time} {end-time} {title}' "${now}" "${eod}" | grep -v '^Today')
+readarray -t events < <(khal list -f '{start-time} {end-time} {title}' "${now}" "${eod}" | egrep -v '^Today|No events')
 
 case "${1}" in
     notify)
