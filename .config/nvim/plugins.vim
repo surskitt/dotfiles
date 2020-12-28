@@ -9,7 +9,7 @@ Plug 'taohexxx/lightline-buffer' " A buffer plugin for lightline.vim
 Plug 'ryanoasis/vim-devicons' " Adds file type glyphs/icons to popular Vim plugins
 Plug 'maximbaz/lightline-ale' " ALE indicator for the lightline vim plugin
 " Plug 'Raimondi/delimitMate' " Provides insert mode auto-completion for quotes, parens, brackets
-Plug 'jiangmiao/auto-pairs' " Vim plugin, insert or delete brackets, parens, quotes in pair
+" Plug 'jiangmiao/auto-pairs' " Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 Plug 'plasticboy/vim-markdown' " Markdown Vim Mode
 Plug 'pearofducks/ansible-vim' " A vim plugin for syntax highlighting Ansible's common filetypes
@@ -23,7 +23,7 @@ Plug 'junegunn/goyo.vim' " Distraction free writing in vim
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " Go development plugin for Vim
 Plug 'zhou13/vim-easyescape' " vim-easyescape makes exiting insert mode easy and distraction free!
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " Intellisense engine for Vim8 & Neovim, full language server protocol support as VSCode
-Plug 'airblade/vim-rooter' " Changes Vim working directory to project root (identified by presence of known directory or file).
+" Plug 'airblade/vim-rooter' " Changes Vim working directory to project root (identified by presence of known directory or file).
 Plug 'liuchengxu/vim-which-key' " Vim plugin that shows keybindings in popup
 Plug 'psf/black', { 'branch': 'stable' } " The uncompromising Python code formatter
 Plug 'zhimsel/vim-stay' " Make Vim persist editing state without fuss
