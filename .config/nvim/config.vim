@@ -17,6 +17,7 @@ set expandtab
 set smarttab
 set showcmd
 set relativenumber
+set number
 set showmatch
 set hlsearch
 set ignorecase
