@@ -2,160 +2,37 @@
 
 get_icon() {
    case "${*}" in
-       Clear)
+       *[Cc]lear*)
            echo 
            ;;
-       Sunny)
+       *[Ss]unny*)
            echo 
            ;;
-       Partly\ cloudy)
+       *[Cc]loudy*)
            echo 杖
            ;;
-       Cloudy)
-           echo 
-           ;;
-       Overcast)
+       *[Oo]vercast*)
            echo 
            ;;
-       Mist)
+       *[Rr]ain*)
            echo 
            ;;
-       Patchy\ rain\ possible)
-           echo 
+       *[Mm]ist*)
+           echo 
            ;;
-       Patchy\ snow\ possible)
+       *[Ss]now*)
            echo 
            ;;
-       Patchy\ sleet\ possible)
-           echo 
-           ;;
-       Patchy\ freezing\ drizzle\ possible)
-           echo 
-           ;;
-       Thundery\ outbreaks\ possible)
+       *[Tt]hunder*)
            echo 
            ;;
-       Blowing\ snow)
-           echo 
-           ;;
-       Blizzard)
-           echo 
-           ;;
-       Fog)
+       *[Ff]og*)
            echo 
            ;;
-       Freezing\ fog)
+       *[Dd]rizzle*)
            echo 
            ;;
-       Patchy\ light\ drizzle)
-           echo 
-           ;;
-       Light\ drizzle)
-           echo 
-           ;;
-       Freezing\ drizzle)
-           echo 
-           ;;
-       Heavy\ freezing\ drizzle)
-           echo 
-           ;;
-       Patchy\ light\ rain)
-           echo 
-           ;;
-       Light\ rain)
-           echo 
-           ;;
-       Moderate\ rain\ at\ times)
-           echo 
-           ;;
-       Moderate\ rain)
-           echo 
-           ;;
-       Heavy\ rain\ at\ times)
-           echo 
-           ;;
-       Heavy\ rain)
-           echo 
-           ;;
-       Light\ freezing\ rain)
-           echo 
-           ;;
-       Moderate\ or\ heavy\ freezing\ rain)
-           echo 
-           ;;
-       Light\ sleet)
-           echo 
-           ;;
-       Moderate\ or\ heavy\ sleet)
-           echo 
-           ;;
-       Patchy\ light\ snow)
-           echo 流
-           ;;
-       Light\ snow)
-           echo 流
-           ;;
-       Patchy\ moderate\ snow)
-           echo 流
-           ;;
-       Moderate\ snow)
-           echo 流
-           ;;
-       Patchy\ heavy\ snow)
-           echo 
-           ;;
-       Heavy\ snow)
-           echo 
-           ;;
-       Ice\ pellets)
-           echo 
-           ;;
-       Rain\ shower)
-           echo 
-           ;;
-       Light\ rain\ shower)
-           echo 
-           ;;
-       Moderate\ or\ heavy\ rain\ shower)
-           echo 
-           ;;
-       Torrential\ rain\ shower)
-           echo 
-           ;;
-       Light\ sleet\ showers)
-           echo 
-           ;;
-       Moderate\ or\ heavy\ sleet\ showers)
-           echo 
-           ;;
-       Light\ snow\ showers)
-           echo 
-           ;;
-       Moderate\ or\ heavy\ snow\ showers)
-           echo 
-           ;;
-       Patchy\ light\ rain\ with\ thunder)
-           echo 
-           ;;
-       Moderate\ or\ heavy\ rain\ with\ thunder)
-           echo 
-           ;;
-       Patchy\ light\ snow\ with\ thunder)
-           echo 
-           ;;
-       Moderate\ or\ heavy\ snow\ with\ thunder)
-           echo 
-           ;;
-        Drizzle\ and\ rain)
-           echo 
-           ;;
-        Haze,\ light\ drizzle\ and\ rain)
-           echo 
-           ;;
-        Haze)
-           echo 
-           ;;
-        Shallow\ fog,\ mist,\ fog)
+       *[Hh]aze*)
            echo 
            ;;
         *)
