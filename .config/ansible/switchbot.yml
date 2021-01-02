@@ -1,0 +1,40 @@
+---
+- hosts: pochard.lan
+
+  tasks:
+    - name: Install switchbot-mqtt
+      pip:
+        name: switchbot-mqtt
+        executable: pip3
+      become: true
+
+    - name: Create systemd user directory
+      file:
+        path: ~/.config/systemd/user
+        state: directory
+
+    - name: Create systemd service file
+      copy:
+        content: |
+          [Unit]
+          Description="Switchbot MQTT"
+          After=network.target
+
+          [Service]
+          ExecStart=/usr/local/bin/switchbot-mqtt --mqtt-host 192.168.2.5
+          Restart=always
+          RestartSec=10
+          User=root
+
+          [Install]
+          WantedBy=multi-user.target
+        dest: /etc/systemd/system/switchbot-mqtt.service
+      become: true
+
+    - name: Start systemd service
+      systemd:
+        name: switchbot-mqtt
+        state: restarted
+        enabled: true
+        daemon_reload: true
+      become: true
