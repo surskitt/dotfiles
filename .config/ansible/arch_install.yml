@@ -34,7 +34,7 @@
       - linux-firmware
       - reflector
       - vim
-      - dhclient
+      - dhcpcd
       - python
       - openssh
       - amd-ucode
@@ -118,8 +118,8 @@
     - name: Generate fstab file
       shell: "genfstab -U {{ arch_root }} > {{ arch_root }}/etc/fstab"
 
-    - name: Enable dhclient service in arch chroot
-      command: "arch-chroot /mnt systemctl enable dhclient@enp34s0.service"
+    - name: Enable dhcpcd service in arch chroot
+      command: "arch-chroot /mnt systemctl enable dhcpcd"
 
     - name: Set hostname
       copy:
