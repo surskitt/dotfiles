@@ -17,4 +17,4 @@ if [ -z "${t}" ]; then
 fi
 
 disown.sh streamlink --twitch-low-latency --player mpv "https://twitch.tv/${t}" best
-disown.sh floater.sh st -g 60x40+20-50 tiny_twitch.sh twigglesoft
+disown.sh floater.sh st -g 60x40+20-50 tiny_twitch.sh "${t}"
