@@ -8,12 +8,12 @@
           - homeAssistant
           - bluetoothLowEnergy
       homeAssistant:
-        mqttUrl: 'mqtt://192.168.2.5:1883'
+        mqttUrl: 'mqtt://192.168.2.4:1883'
       bluetoothLowEnergy:
         whitelist:
           - '0e0883021ce04050bd8781c24ca9dc8a-1-2'
-        maxDistance: 5
-        updateFrequency: 2
+        maxDistance: 7
+        updateFrequency: 10
         tagOverrides:
           0e0883021ce04050bd8781c24ca9dc8a-1-2:
             name: wren
@@ -21,7 +21,10 @@
         behaviors:
           ble-0e0883021ce04050bd8781c24ca9dc8a-1-2-tracker:
             rollingAverage:
-              window: 3
+              window: 60
+            debounce:
+              wait: 1
+              maxWait: 3
       # bluetoothClassic:
       #   timeoutCycles: 4
       #   minRssi: -10
@@ -29,6 +32,14 @@
       #     - '60:1d:91:50:85:11'
 
   pre_tasks:
+    - name: Reboot host
+      reboot:
+        reboot_timeout: 60
+      become: true
+      tags:
+        - never
+        - reboot
+
     - name: Stop home assistant service
       systemd:
         name: room-assistant
