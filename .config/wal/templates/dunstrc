@@ -62,5 +62,5 @@
 [urgency_critical]
     background = "{color1}"
     foreground = "{foreground}"
-    frame_color = "{foreground}"
+    # frame_color = "{foreground}"
     timeout = 60
