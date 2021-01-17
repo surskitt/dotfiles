@@ -9,7 +9,6 @@ Plug 'taohexxx/lightline-buffer' " A buffer plugin for lightline.vim
 Plug 'ryanoasis/vim-devicons' " Adds file type glyphs/icons to popular Vim plugins
 Plug 'maximbaz/lightline-ale' " ALE indicator for the lightline vim plugin
 " Plug 'Raimondi/delimitMate' " Provides insert mode auto-completion for quotes, parens, brackets
-Plug 'jiangmiao/auto-pairs' " Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 Plug 'plasticboy/vim-markdown' " Markdown Vim Mode
 Plug 'pearofducks/ansible-vim' " A vim plugin for syntax highlighting Ansible's common filetypes
