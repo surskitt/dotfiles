@@ -2,7 +2,8 @@
 
 while getopts 'u' flag; do
     case "${flag}" in
-        u) USER_ARG="--user "
+        u) 
+            USER_ARG="--user "
             ;;
         *)
             ;;

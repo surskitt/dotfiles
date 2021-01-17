@@ -1,0 +1,189 @@
+---
+- hosts: all
+  user: root
+  vars:
+    arch_root: /mnt
+    country: United Kingdom
+    base_user: shane
+    hostname: rouen
+
+    drive:
+      device: /dev/sda
+      table: gpt
+      partitions:
+        - name: root
+          label: arch_root
+          filesystem: ext4
+          start: 512MB
+          end: 100%
+          mountpoint: /
+
+        - name: efi
+          label: boot
+          filesystem: vfat
+          start: 0%
+          end: 512MB
+          flags:
+            - boot
+          mountpoint: /boot
+
+    bootstrap_packages:
+      - base
+      - base-devel
+      - linux
+      - linux-firmware
+      - reflector
+      - vim
+      - dhcpcd
+      - python
+      - openssh
+      - amd-ucode
+      - inetutils
+
+  tasks:
+    - name: Find if system is already mounted
+      set_fact:
+        system_mounted: true
+      loop: "{{ ansible_mounts }}"
+      when: "{{ item.mount == '/mnt' }}"
+      loop_control:
+        label: "{{ item.mount }}"
+
+    - name: Enable ntp clock synching
+      command: timedatectl set-ntp true
+
+    - name: Read disk partitions
+      parted:
+        device: "{{ drive.device }}"
+        unit: MiB
+      register: disk_info
+      when: not system_mounted|default(false)
+
+    - name: Delete existing drive partitions
+      parted:
+        device: "{{ drive.device }}"
+        number: "{{ item.num }}"
+        state: absent
+      loop: "{{ disk_info.partitions }}"
+      when: not system_mounted|default(false)
+
+    - name: Create partitions
+      parted:
+        name: "{{ item.1.name }}"
+        label: "{{ drive.table }}"
+        device: "{{ drive.device }}"
+        number: "{{ item.0 + 1 }}"
+        part_start: "{{ item.1.start }}"
+        part_end: "{{ item.1.end }}"
+        part_type: "{{ item.1.type|default(omit) }}"
+        flags: "{{ item.1.flags|default(omit) }}"
+        state: present
+      with_indexed_items:
+        - "{{ drive.partitions }}"
+      when: not system_mounted|default(false)
+
+    - name: Create filesystems
+      filesystem:
+        dev: "{{ drive.device }}{{ item.0 + 1}}"
+        fstype: "{{ item.1.filesystem }}"
+        force: true
+      with_indexed_items:
+        - "{{ drive.partitions }}"
+      when: not system_mounted|default(false)
+
+    - name: Label root partition
+      command: "e2label {{ drive.device }}1 arch_root"
+
+    - name: Mount partitions
+      mount:
+        path: "{{ arch_root }}{{ item.mountpoint }}"
+        src: "PARTLABEL={{ item.name }}"
+        fstype: "{{ item.filesystem }}"
+        state: mounted
+      loop: "{{ drive.partitions }}"
+      when: item.mountpoint is defined
+      when: not system_mounted|default(false)
+
+    - name: Install reflector to sync pacman mirror list
+      pacman:
+        name: reflector
+        update_cache: true
+    
+    - name: Update pacman mirrors
+      command: "reflector --sort score -p https --country '{{ country }}' --save /etc/pacman.d/mirrorlist"
+    
+    - name: Bootstrap base Arch Linux
+      command: "pacstrap {{ arch_root }} {{ bootstrap_packages | join(' ') }}"
+
+    - name: Generate fstab file
+      shell: "genfstab -U {{ arch_root }} > {{ arch_root }}/etc/fstab"
+
+    - name: Enable dhcpcd service in arch chroot
+      command: "arch-chroot /mnt systemctl enable dhcpcd"
+
+    - name: Set hostname
+      copy:
+        content: |
+          {{ hostname }}
+        dest: /mnt/etc/hostname
+
+    - name: Configure /etc/hosts
+      copy:
+        content: |
+          127.0.0.1   localhost
+          ::1         localhost
+          127.0.1.1   {{ hostname }}.localdomain {{ hostname }}
+        dest: /mnt/etc/hosts
+
+    - name: Create sudo group
+      command: "arch-chroot /mnt groupadd -f sudo"
+
+    - name: Check if user exists
+      command: "arch-chroot /mnt id {{ base_user }}"
+      ignore_errors: true
+      register: user_exists
+
+    - name: Create user
+      command: "arch-chroot /mnt useradd -m -G sudo -s /bin/bash {{ base_user }}"
+      when: user_exists.rc != 0
+
+    - name: Create user ssh directory
+      file:
+        path: /mnt/home/{{ base_user }}/.ssh
+        state: directory
+        owner: "1000"
+        group: "1001"
+
+    - name: Add ssh public key to user
+      copy:
+        content: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+        dest: /mnt/home/{{ base_user }}/.ssh/authorized_keys
+
+    - name: Allow users in sudo group to sudo
+      copy:
+        content: |
+          %sudo ALL=(ALL) NOPASSWD: ALL
+        dest: /mnt/etc/sudoers.d/sudo
+
+    - name: Enable sshd service
+      command: "arch-chroot /mnt systemctl enable sshd.service"
+
+    - name: Install systemd-boot
+      command: "arch-chroot /mnt bootctl install"
+
+    - name: Setup boot loader.conf
+      copy:
+        content: |
+          default arch.conf
+          timeout 3
+        dest: /mnt/boot/loader/loader.conf
+
+    - name: Setup arch loader entry
+      copy:
+        content: |
+          title Arch Linux
+          linux /vmlinuz-linux
+          initrd /amd-ucode.img
+          initrd /initramfs-linux.img
+          options root="LABEL=arch_root" rootfstype=ext4 rw
+        dest: /mnt/boot/loader/entries/arch.conf

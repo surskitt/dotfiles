@@ -20,7 +20,8 @@
   " home": {
       " not": "hass_switch.py switch.14503513c82b965f1dd3",
       " fridge": "hass_switch.py switch.14503513c82b965f16f9 ; sleep 2; hass_switch.py switch.14503513c82b965f16f9",
-      " tv": "hass_switch.py media_player.tv"
+      " tv": "hass_switch.py media_player.tv",
+      " office light": "hass_switch.py switch.office_light_switch"
   },
   " bookmarks": {
       " all": "BROWSER=qutebrowser fzf-buku.sh",
@@ -44,7 +45,7 @@
   " github repos": "fzf-github-repos.sh",
   " github stars": "fzf-github-stars.sh",
   " hacker news": "hn.py|fzf -m --layout=reverse-list --with-nth=2..|cut -d ' ' -f 1|xargs -I% qutebrowser 'news.ycombinator.com/item?id=%'",
-  " twitch": "twitchy --non-interactive|column -t -s ';'|sort|fzf --layout=reverse-list|cut -d ' ' -f 1|xargs -r twitchy --non-interactive kickstart",
+  " twitch": "fzf-twitch.sh",
   " rss": "fzf-newsboat.py",
   " tmux sessions": "t=$(ls ~/.tmuxp/*.yaml|xargs -L 1 basename|cut -d '.' -f 1|fzf); nohup st muxcmd.sh -t $t >/dev/null 2>&1 & sleep .2 && disown"
 }

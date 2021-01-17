@@ -1,0 +1,54 @@
+---
+- hosts: room_assistant
+  vars:
+    room_assistant_version: 2.12.0
+    room_assistant_global_config:
+      global:
+        integrations:
+          - homeAssistant
+          - bluetoothLowEnergy
+      homeAssistant:
+        mqttUrl: 'mqtt://192.168.2.4:1883'
+      bluetoothLowEnergy:
+        whitelist:
+          - '0e0883021ce04050bd8781c24ca9dc8a-1-2'
+        maxDistance: 7
+        updateFrequency: 10
+        tagOverrides:
+          0e0883021ce04050bd8781c24ca9dc8a-1-2:
+            name: wren
+      entities:
+        behaviors:
+          ble-0e0883021ce04050bd8781c24ca9dc8a-1-2-tracker:
+            rollingAverage:
+              window: 60
+            debounce:
+              wait: 1
+              maxWait: 3
+      # bluetoothClassic:
+      #   timeoutCycles: 4
+      #   minRssi: -10
+      #   addresses:
+      #     - '60:1d:91:50:85:11'
+
+  pre_tasks:
+    - name: Reboot host
+      reboot:
+        reboot_timeout: 60
+      become: true
+      tags:
+        - never
+        - reboot
+
+    - name: Stop home assistant service
+      systemd:
+        name: room-assistant
+        state: stopped
+      become: true
+      ignore_errors: true
+      tags:
+        - configure
+
+  roles:
+    - nodejs
+    - room-assistant
