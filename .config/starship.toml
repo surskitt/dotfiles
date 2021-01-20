@@ -67,6 +67,15 @@ style = "blue bg:black"
 format = "[ $path]($style)[$lock_symbol]($lock_style) "
 # symbol = " "
 
+[battery]
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+
+[[battery.display]]
+threshold = 10
+style = "yellow bg:black"
+
 # [directory.substitutions]
 # "~$" = ""
 # "~/code" = ""
