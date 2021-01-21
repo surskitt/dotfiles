@@ -1,6 +1,5 @@
 # format = "[$all](bg:black) "
-format = """
-
+format = """\
 [ \
 $username\
 $hostname\
@@ -50,8 +49,10 @@ $time\
 $character\
 $directory\
 ]\
-(bg:black) 
+(bg:black) \
 """
+
+add_newline = false
 
 [character]
 disabled = true
