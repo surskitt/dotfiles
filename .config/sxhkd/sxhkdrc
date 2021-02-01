@@ -188,16 +188,16 @@ XF86AudioRaiseVolume
     pamixer -i 5
 
 XF86AudioPlay
-    playerctl.sh play-pause
+    playerctl -p ShairportSync play-pause
 
 XF86AudioPrev
-    playerctl.sh previous
+    playerctl -p ShairportSync previous
 
 XF86AudioNext
-    playerctl.sh next
+    playerctl -p ShairportSync next
 
 super + XF86AudioPlay
-    playerctl.sh switch
+    playerctl -p ShairportSync switch
 
 #
 # Brightness controls
