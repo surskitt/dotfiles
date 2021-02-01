@@ -3,7 +3,11 @@
   " spotify": "false && cat /tmp/spu|fzfp.sh -I curlout.sh -- --layout=reverse-list +m --with-nth={3..}|cut -d ' ' -f 2|xargs playerctl -p spotify open",
   " mpd": {
       " add to queue": "fzf-mpc.sh",
-      " ncmpcpp": "ncmpcpp"
+      " ncmpcpp": "ncmpcpp -h localhost"
+  },
+  " daapd": {
+      " add to queue": "fzf-mpc.sh -H rouen.lan",
+      " ncmpcpp": "ncmpcpp -h rouen.lan"
   },
   " weechat buffers": "fzf-weechat.sh",
   " search": "fzf-ddg.sh",
