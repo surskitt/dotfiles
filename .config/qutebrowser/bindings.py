@@ -19,3 +19,7 @@ config.bind("<return>", "follow-selected")
 config.bind("<Alt-j>", "tab-move +")
 config.bind("<Alt-k>", "tab-move -")
 config.bind(",j", "config-cycle content.javascript.enabled false true")
+config.bind(
+    ",D",
+    "config-cycle content.user_stylesheets stylesheets/nord-dark.css ''",
+)
