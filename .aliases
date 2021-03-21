@@ -33,6 +33,9 @@ alias pbpaste="xsel --clipboard --output"
 alias gotest="gotest -v ./..."
 alias gocover="go test -cover ./..."
 
+alias kn="kubectl neat | bat -l yaml"
+alias knp="kubectl neat | bat -l yaml --paging=always"
+
 alias kc="source <(kubectl completion zsh)"
 alias kc="source <(helm completion zsh)"
 
