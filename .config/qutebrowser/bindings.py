@@ -23,3 +23,4 @@ config.bind(
     ",D",
     "config-cycle content.user_stylesheets stylesheets/nord-dark.css ''",
 )
+config.bind(",9", "open 9xbud.com/{url}")
