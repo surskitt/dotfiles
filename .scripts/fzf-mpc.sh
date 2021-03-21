@@ -7,11 +7,15 @@ usage() {
 export TAB="	"
 
 MPD_HOST=localhost
+COMMAND=add
 
-while getopts 'H:h' opt; do
+while getopts 'H:ih' opt; do
     case "${opt}" in
         H)
             MPD_HOST="${OPTARG}"
+            ;;
+        i)
+            COMMAND=insert
             ;;
         h)
             usage
@@ -32,5 +36,5 @@ mpc -h "${MPD_HOST}" listall -f "[%albumartist%|%artist%] - %album%${TAB}%mdate%
     fzf +s --layout=reverse-list -m -d "${TAB}" --with-nth 1 | \
     cut -d "${TAB}" -f 3 | \
     while read -r s; do
-        mpc -h "${MPD_HOST}" add "${s}"
+        mpc -h "${MPD_HOST}" "${COMMAND}" "${s}"
     done
