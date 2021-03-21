@@ -188,16 +188,13 @@ XF86AudioRaiseVolume
     pamixer -i 5
 
 XF86AudioPlay
-    playerctl -p ShairportSync play-pause
+    mpc -h rouen.lan toggle
 
 XF86AudioPrev
-    playerctl -p ShairportSync previous
+    mpc -h rouen.lan prev
 
 XF86AudioNext
-    playerctl -p ShairportSync next
-
-super + XF86AudioPlay
-    playerctl -p ShairportSync switch
+    mpc -h rouen.lan next
 
 #
 # Brightness controls
