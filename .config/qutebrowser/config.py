@@ -5,6 +5,8 @@
 
 import os
 
+config.load_autoconfig(False)
+
 config.source("colors.py")
 config.source("completion.py")
 config.source("content.py")
@@ -36,6 +38,19 @@ c.editor.command = [
     "normal {line}G{column0}l",
 ]
 c.messages.timeout = 5000
+
+c.fileselect.handler = "external"
+picker_command = [
+    "floater.sh",
+    "st",
+    "-g",
+    "180x50",
+    "-e",
+    "lfpick.sh",
+    "{}",
+]
+c.fileselect.single_file.command = picker_command
+c.fileselect.multiple_files.command = picker_command
 
 from qutebrowser.api import interceptor
 
