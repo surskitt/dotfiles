@@ -6,6 +6,7 @@ if ! zgen saved; then
     zgen load zdharma/fast-syntax-highlighting
     # zgen load hlissner/zsh-autopair
     zgen load ninrod/pass-zsh-completion
+    zgen load 'wfxr/forgit'
 
     zgen save
     zcompile "${HOME}/.zgen/init.zsh"
