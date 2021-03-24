@@ -23,7 +23,10 @@ def parse_args(args):
     parser.add_argument("--sgroup", "-G")
     parser.add_argument("--smember", "-M")
     parser.add_argument(
-        "--rootdir", "-d", default="~/video/fancams", help="Fancam root dir",
+        "--rootdir",
+        "-d",
+        default="~/video/fancams",
+        help="Fancam root dir",
     )
     parser.add_argument(
         "--searchdir", "-S", default="~/downloads", help="Search root dir"
@@ -56,7 +59,7 @@ def fmt_glob(i, j):
 
 def find_vids(searchdir, member, group):
     perms = itertools.product(
-        *[(i, i.lower(), i.upper()) for i in (member, group)]
+        *[(i, i.lower(), i.upper(), i.capitalize()) for i in (member, group)]
     )
     g = [i for s, t in perms for i in [fmt_glob(s, t), fmt_glob(t, s)]]
 
@@ -125,9 +128,7 @@ def main():
             print("No files found for {} ({}) - {} ({})".format(sg, g, sm, m))
             continue
 
-        new_vid_root = os.path.join(
-            args.rootdir, g.capitalize(), m.capitalize()
-        )
+        new_vid_root = os.path.join(args.rootdir, g.lower(), m.lower())
         pathlib.Path(new_vid_root).mkdir(parents=True, exist_ok=True)
 
         print("Moving {} files to {}".format(len(r), new_vid_root))
