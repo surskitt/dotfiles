@@ -33,7 +33,7 @@ mpc -h "${MPD_HOST}" listall -f "[%albumartist%|%artist%] - %album%${TAB}%mdate%
     sort -u | \
     sort -t "${TAB}" -k 2.7n -k 2.8n -k 2.1n -k 2.2n -k 2.4n -k 2.5n | \
     tac | \
-    fzf +s --layout=reverse-list -m -d "${TAB}" --with-nth 1 | \
+    fzf --layout=reverse-list -m -d "${TAB}" --with-nth 1 | \
     cut -d "${TAB}" -f 3 | \
     while read -r s; do
         mpc -h "${MPD_HOST}" "${COMMAND}" "${s}"
