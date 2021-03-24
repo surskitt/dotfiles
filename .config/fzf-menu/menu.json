@@ -6,8 +6,8 @@
       " ncmpcpp": "ncmpcpp -h localhost"
   },
   " daapd": {
-      " add to queue": "fzf-mpc.sh -H rouen.lan",
-      " ncmpcpp": "ncmpcpp -h rouen.lan"
+      " add to queue": "fzf-mpc.sh -H mallard.lan",
+      " ncmpcpp": "ncmpcpp -h mallard.lan"
   },
   " weechat buffers": "fzf-weechat.sh",
   " search": "fzf-ddg.sh",

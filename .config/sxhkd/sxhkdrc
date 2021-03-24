@@ -188,13 +188,13 @@ XF86AudioRaiseVolume
     pamixer -i 5
 
 XF86AudioPlay
-    mpc -h rouen.lan toggle
+    mpc -h mallard.lan toggle
 
 XF86AudioPrev
-    mpc -h rouen.lan prev
+    mpc -h mallard.lan prev
 
 XF86AudioNext
-    mpc -h rouen.lan next
+    mpc -h mallard.lan next
 
 #
 # Brightness controls
