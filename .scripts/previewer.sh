@@ -37,8 +37,6 @@ if [ ${#} -lt 1 ]; then
     exit 1
 fi
 
-mime=$(file -L -b --mime-type "${1}")
-
 # cached="$(kv.sh get ${1} ~/.thumbnails/kv.tsv 2>/dev/null)"
 
 # if [[ "${cached}" != "" ]]; then
@@ -48,29 +46,35 @@ mime=$(file -L -b --mime-type "${1}")
 
 MISC_ICON="/usr/share/icons/Surfn-Arc/places/128/desktop.png"
 
-case "${mime}" in
-    image/*)
-        out="${1}"
-        ;;
-    video/*)
-        out=$(vthumb.sh -v "${1}" 2>/dev/null)
-        ;;
-    inode/directory)
-        # if ls "${1}/".folder 2>/dev/null; then
-        if [ -f "${1}/.folder" ]; then
-            out="${1}/.folder"
-        else
-            out="${MISC_ICON}"
-        fi
-        ;;
-    application/zip)
-        out=$(zthumb.sh -v "${1}")
-        ;;
-    application/x-rar)
-        out=$(rthumb.sh -v "${1}")
-        ;;
+case "${1##*.}" in
+    vclip) out="$(vclip.sh "${1}" thumb)" ;;
     *)
-        out="${MISC_ICON}"
+        mime=$(file -L -b --mime-type "${1}")
+        case "${mime}" in
+            image/*)
+                out="${1}"
+                ;;
+            video/*)
+                out=$(vthumb.sh -v "${1}" 2>/dev/null)
+                ;;
+            inode/directory)
+                # if ls "${1}/".folder 2>/dev/null; then
+                if [ -f "${1}/.folder" ]; then
+                    out="${1}/.folder"
+                else
+                    out="${MISC_ICON}"
+                fi
+                ;;
+            application/zip)
+                out=$(zthumb.sh -v "${1}")
+                ;;
+            application/x-rar)
+                out=$(rthumb.sh -v "${1}")
+                ;;
+            *)
+                out="${MISC_ICON}"
+                ;;
+        esac
         ;;
 esac
 
