@@ -6,11 +6,5 @@
 
 config_version: 2
 settings:
-  fileselect.handler:
-    global: external
-  fileselect.single_file.command:
-    global:
-    - st
-    - -e
-    - lfpick.sh
-    - '{}'
+  content.javascript.enabled:
+    global: true
