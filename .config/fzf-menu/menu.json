@@ -24,7 +24,8 @@
   " home": {
       " fridge": "hass_switch.py switch.14503513c82b965f16f9 ; sleep 2; hass_switch.py switch.14503513c82b965f16f9",
       " tv": "hass_switch.py media_player.tv",
-      " office light": "hass_switch.py switch.office_light_switch"
+      " office light": "hass_switch.py switch.office_light_switch",
+      " office temperature": "read -p 'temperature: ' temperature; hass_set_temp.py office ${temperature}"
   },
   " bookmarks": {
       " all": "BROWSER=qutebrowser fzf-buku.sh",
