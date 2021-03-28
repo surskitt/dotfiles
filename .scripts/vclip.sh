@@ -31,6 +31,18 @@ case "${CMD}" in
         sum="$(echo -n "${CLIP_FILE}"|sha1sum|cut -d ' ' -f -1)"
         THUMB_FILE="${OUTPUT_DIR}/${sum}.png"
 
+        if [[ "${START}" != *:* ]]; then
+            TOTAL_SECONDS="${START%%.*}"
+            HOURS="$(( TOTAL_SECONDS / 3600 ))"
+            MINUTES="$(( (TOTAL_SECONDS % 3600) / 60 ))"
+            SECONDS="$(( (TOTAL_SECONDS % 3600) % 60 ))"
+
+            MINUTESP="$(printf "%02d\n" ${MINUTES})"
+            SECONDSP="$(printf "%02d\n" ${SECONDS})"
+
+            START="${HOURS}:${MINUTESP}:${SECONDSP}"
+        fi
+
         ffmpegthumbnailer -i "${VID}" -o "${THUMB_FILE}" -s 0 -t "${START}"
         echo "${THUMB_FILE}"
         ;;
