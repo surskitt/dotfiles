@@ -1,5 +1,5 @@
 config.bind("b", "set-cmd-text -s :buffer")
-config.bind(",p", "spawn --userscript qutepocket")
+config.bind(",p", "spawn -v pockyt put -f '{link}' -i '{url}'")
 config.bind(",P", "spawn --userscript password_fill")
 config.bind(",y", "spawn --userscript youtube-dl.sh {url}")
 config.bind(",Y", "hint links spawn --userscript youtube-dl.sh {hint-url}")
