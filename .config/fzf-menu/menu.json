@@ -10,8 +10,11 @@
       " ncmpcpp": "ncmpcpp -h mallard.lan"
   },
   " weechat buffers": "fzf-weechat.sh",
-  " search": "fzf-ddg.sh",
-  " gifs": "read -r -p 'search: ' s; source ~/.profile.d/tenor; gif.py $s",
+  " search": {
+      " duckduckgo": "fzf-ddg.sh",
+      " nzb": "read -r -p 'nzb search: ' s; nzb_search.sh ${s}",
+      " gifs": "read -r -p 'search: ' s; source ~/.profile.d/tenor; gif.py $s"
+  },
   " bluetooth pairing": {
     " WH-1000XM4": "bluetoothctl power on && bluetoothctl connect 94:DB:56:52:BD:6C",
     " MPOW H12": "bluetoothctl power on && bluetoothctl connect EB:06:EF:37:33:A9",
@@ -25,7 +28,9 @@
       " fridge": "hass_switch.py switch.14503513c82b965f16f9 ; sleep 2; hass_switch.py switch.14503513c82b965f16f9",
       " tv": "hass_switch.py media_player.tv",
       " office light": "hass_switch.py switch.office_light_switch",
-      " office temperature": "read -p 'temperature: ' temperature; hass_set_temp.py office ${temperature}"
+      " office temperature": "read -p 'temperature: ' temperature; hass_set_temp.py office ${temperature}",
+      " office diffuser": "hass_switch.py switch.office_diffuser",
+      " office curtain": "read -p 'office curtain position: ' position; hass_cover.py cover.office_curtain position ${position}"
   },
   " bookmarks": {
       " all": "BROWSER=qutebrowser fzf-buku.sh",
