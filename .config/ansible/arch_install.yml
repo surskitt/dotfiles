@@ -5,7 +5,7 @@
     arch_root: /mnt
     country: United Kingdom
     base_user: shane
-    hostname: rouen
+    hostname: mallard
 
     drive:
       device: /dev/sda
@@ -16,6 +16,7 @@
           filesystem: ext4
           start: 512MB
           end: 100%
+          # end: 20GB
           mountpoint: /
 
         - name: efi
