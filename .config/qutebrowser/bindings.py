@@ -1,4 +1,4 @@
-config.bind("b", "set-cmd-text -s :buffer")
+config.bind("b", "set-cmd-text -s :tab-select")
 config.bind(",p", "spawn -v pockyt put -f '{link}' -i '{url}'")
 config.bind(",P", "spawn --userscript password_fill")
 config.bind(",y", "spawn --userscript youtube-dl.sh {url}")

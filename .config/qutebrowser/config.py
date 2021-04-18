@@ -39,31 +39,31 @@ c.editor.command = [
 ]
 c.messages.timeout = 5000
 
-c.fileselect.handler = "external"
-picker_command = [
-    "floater.sh",
-    "st",
-    "-g",
-    "180x50",
-    "-e",
-    "lfpick.sh",
-    "{}",
-]
-c.fileselect.single_file.command = picker_command
-c.fileselect.multiple_files.command = picker_command
+#  c.fileselect.handler = "external"
+#  picker_command = [
+#      "floater.sh",
+#      "st",
+#      "-g",
+#      "180x50",
+#      "-e",
+#      "lfpick.sh",
+#      "{}",
+#  ]
+#  c.fileselect.single_file.command = picker_command
+#  c.fileselect.multiple_files.command = picker_command
 
-from qutebrowser.api import interceptor
+#  from qutebrowser.api import interceptor
 
-# Youtube adblock
-def filter_yt(info: interceptor.Request):
-    """Block the given request if necessary."""
-    url = info.request_url
-    if (
-        url.host() == "www.youtube.com"
-        and url.path() == "/get_video_info"
-        and "&adformat=" in url.query()
-    ):
-        info.block()
+#  # Youtube adblock
+#  def filter_yt(info: interceptor.Request):
+#      """Block the given request if necessary."""
+#      url = info.request_url
+#      if (
+#          url.host() == "www.youtube.com"
+#          and url.path() == "/get_video_info"
+#          and "&adformat=" in url.query()
+#      ):
+#          info.block()
 
 
-interceptor.register(filter_yt)
+#  interceptor.register(filter_yt)

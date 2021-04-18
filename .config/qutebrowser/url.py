@@ -6,4 +6,5 @@ c.url.searchengines = {
     "eb": "https://www.ebay.co.uk/sch/i.html?_nkw={}",
     "i": "https://duckduckgo.com/?q={}&iax=images&ia=images",
     "y": "https://www.youtube.com/results?search_query={}",
+    "gh": "https://github.com/search?q={}",
 }
