@@ -3,7 +3,7 @@
 TAB="	"
 
 if [ "${#}" -eq 0 ]; then
-    dir="${PWD}"
+    dir="."
 else
     dir="${1}"
 fi
@@ -37,7 +37,7 @@ else
     fl=$(echo "${f}"|while read -r fn; do
         p=$(previewer.sh "${fn}")
 
-        echo "${p}${TAB}${fn}"
+        echo "${p}${TAB}${fn##*/}"
     done|sort -t "${TAB}" -k 2)
 
     echo "${fl}" > "${THUMB_FILE}"

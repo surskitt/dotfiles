@@ -20,9 +20,17 @@ for e in VID START END; do
     fi
 done
 
+# if [[ -n "${CROP}" ]]; then
+#     CROP_ARG=("--vf='crop=${CROP}'")
+# fi
+
 case "${CMD}" in
     play)
-        mpv --start="${START}" --ab-loop-a="${START}" --ab-loop-b="${END}" "${VID}"
+        if [[ -n "${CROP}" ]]; then
+            mpv --start="${START}" --ab-loop-a="${START}" --ab-loop-b="${END}" --vf="crop=${CROP}" "${VID}"
+        else
+            mpv --start="${START}" --ab-loop-a="${START}" --ab-loop-b="${END}" "${VID}"
+        fi
         ;;
     thumb)
         OUTPUT_DIR="$(dirname "${CLIP_FILE}")/.thumbs"
