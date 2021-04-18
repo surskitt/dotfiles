@@ -27,7 +27,7 @@ map O $mimeopen --ask $f
 # define a custom 'open' command
 cmd open ${{
     case "${f##*.}" in
-        vclip) vclip.sh "${f}";;
+        vclip) setsid vclip.sh "${f}" > /dev/null 2> /dev/null &;;
         *)
             case $(file --mime-type $f -b) in
                 text/*) $EDITOR $fx;;
@@ -89,7 +89,8 @@ map fr :fzf_jump
 
 cmd sx_cd ${{
     # thumb=$(sxiv -fto "${PWD}"/*/.folder.jpg|head -1)
-    res=$(sx_select.sh "${PWD}")
+    # res=$(sx_select.sh "${PWD}")
+    res=$(sx_select.sh)
     # dir="${thumb%/*}"
 
     if [[ "${res}" == "" ]]; then
