@@ -5,9 +5,12 @@ if [[ "${#}" -lt 3 ]]; then
     exit 1
 fi
 
-VID="${1}"
+VDIR="${1%/*}"
+VID="${1##*/}"
 START="${2}"
 END="${3}"
+
+mkdir "${VDIR}/clips"
 
 if [[ "${START}" == "no" || "${END}" == "no" ]]; then
     echo "Error: start and end points not set" >&2
@@ -17,10 +20,10 @@ fi
 STARTP="$(printf "%05d\n" "${START}")"
 ENDP="$(printf "%05d\n" "${END}")"
 
-FN="${VID}_${STARTP}_${ENDP}.vclip"
+FN="${VDIR}/clips/${VID}_${STARTP}_${ENDP}.vclip"
 
 cat << EOF > "${FN}"
-VID="${VID}"
+VID="../${VID}"
 START="${START}"
 END="${END}"
 EOF
