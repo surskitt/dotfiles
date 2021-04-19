@@ -24,3 +24,4 @@ config.bind(
     "config-cycle content.user_stylesheets stylesheets/nord-dark.css ''",
 )
 config.bind(",9", "open 9xbud.com/{url}")
+config.bind(",d", "spawn --userscript pyload.py '{title}' '{url}'")
