@@ -62,3 +62,9 @@ alias keh="kubectl edit hr"
 alias kl="kubectl logs"
 
 alias w="watch "
+
+alias t="todo"
+alias tt="todo new -l MzM"
+alias ttl="tt --priority low"
+alias ttm="tt --priority medium"
+alias tth="tt --priority high"
