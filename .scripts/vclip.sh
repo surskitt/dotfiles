@@ -27,9 +27,9 @@ done
 case "${CMD}" in
     play)
         if [[ -n "${CROP}" ]]; then
-            mpv --start="${START}" --ab-loop-a="${START}" --ab-loop-b="${END}" --vf="crop=${CROP}" "${VID}"
+            mpv --no-resume-playback --start="${START}" --ab-loop-a="${START}" --ab-loop-b="${END}" --vf="crop=${CROP}" "${VID}"
         else
-            mpv --start="${START}" --ab-loop-a="${START}" --ab-loop-b="${END}" "${VID}"
+            mpv --no-resume-playback --start="${START}" --ab-loop-a="${START}" --ab-loop-b="${END}" "${VID}"
         fi
         ;;
     thumb)
@@ -52,6 +52,12 @@ case "${CMD}" in
         fi
 
         ffmpegthumbnailer -i "${VID}" -o "${THUMB_FILE}" -s 0 -t "${START}"
+
+        if [[ -n "${CROP}" ]]; then
+            IFS=: read -r w h x y <<< "${CROP}"
+            mogrify -crop "${w}x${h}+${x}+${y}" "${THUMB_FILE}"
+        fi
+
         echo "${THUMB_FILE}"
         ;;
     *)
