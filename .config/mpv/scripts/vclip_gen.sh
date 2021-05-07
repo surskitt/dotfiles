@@ -10,6 +10,14 @@ VID="${1##*/}"
 START="${2}"
 END="${3}"
 
+if [[ "${4}" != "(empty)" ]]; then
+    crop_vf="${4}"
+
+    eval "$(grep -Po '\w=\d+' <<< "${crop_vf}")"
+
+    CROP="${w}:${h}:${x}:${y}"
+fi
+
 mkdir "${VDIR}/clips"
 
 if [[ "${START}" == "no" || "${END}" == "no" ]]; then
@@ -20,10 +28,21 @@ fi
 STARTP="$(printf "%05d\n" "${START}")"
 ENDP="$(printf "%05d\n" "${END}")"
 
-FN="${VDIR}/clips/${VID}_${STARTP}_${ENDP}.vclip"
+if [[ "${crop_vf}" != "" ]]; then
+    FN="${VDIR}/clips/${VID}_${STARTP}_${ENDP}_${CROP}.vclip"
 
-cat << EOF > "${FN}"
-VID="../${VID}"
-START="${START}"
-END="${END}"
-EOF
+    cat <<- EOF > "${FN}"
+	VID="../${VID}"
+	START="${START}"
+	END="${END}"
+	CROP="${CROP}"
+	EOF
+else
+    FN="${VDIR}/clips/${VID}_${STARTP}_${ENDP}.vclip"
+
+    cat <<- EOF > "${FN}"
+	VID="../${VID}"
+	START="${START}"
+	END="${END}"
+	EOF
+fi
