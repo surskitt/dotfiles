@@ -5,8 +5,10 @@ alias rr=ranger
 alias tf=terraform
 alias wee=weechat
 alias v=vim
-alias l=ls
 alias cdd='cd $_'
+
+alias ls=lsd
+alias l=lsd
 
 alias pacman="sudo -E pacman"
 alias apt-get="sudo -E apt-get"
