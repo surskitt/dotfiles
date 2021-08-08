@@ -34,8 +34,8 @@ if [[ "$output_extension" == "gif" ]]; then
     ffmpeg -v warning -ss $start_time -t $duration -i "$1" -i $palette -lavfi "$filters [x]; [x][1:v] paletteuse" -y "$2"
 else
     if [[ -d "$2" ]]; then # $2 is a directory
-        ffmpeg -v warning -ss $start_time -i "$1" -t $duration -vf "$filters" -b:v 10000k -maxrate 10000k -bufsize 10000k -y "$2/$input_filename $start_time.$input_extension"
+        ffmpeg -v warning -ss $start_time -i "$1" -t $duration -vf "$filters" -b:v 50000k -maxrate 50000k -bufsize 50000k -y "$2/$input_filename $start_time.$input_extension"
     else
-        ffmpeg -v warning -ss $start_time -i "$1" -t $duration -vf "$filters" -b:v 10000k -maxrate 10000k -bufsize 10000k -y "$2"
+        ffmpeg -v warning -ss $start_time -i "$1" -t $duration -vf "$filters" -b:v 50000k -maxrate 50000k -bufsize 50000k -y "$2"
     fi
 fi
