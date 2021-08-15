@@ -11,7 +11,7 @@ get_active() {
 session_count() {
     local workspace="${1}"
 
-    read -r name count <<< "$(tmux ls -F '#S #{session_attached}'|grep "${workspace}")"
+    read -r name count <<< "$(tmux ls -F '#S #{session_attached}'|grep -m 1 "${workspace}")"
     echo "${count:-0}"
 }
 
