@@ -1,0 +1,34 @@
+---
+- hosts: all
+  vars:
+    chrony_conf: |
+      server 0.uk.pool.ntp.org iburst
+      server 1.uk.pool.ntp.org iburst
+      server 2.uk.pool.ntp.org iburst
+      server 3.uk.pool.ntp.org iburst
+
+      driftfile /var/lib/chrony/drift
+
+      rtconutc
+      rtcsync
+
+  tasks:
+    - name: Install chrony
+      pacman:
+        name: chrony
+        update_cache: true
+      become: true
+
+    - name: Write chrony.conf
+      copy:
+        content: "{{ chrony_conf }}"
+        dest: /etc/chrony.conf
+      become: true
+
+    - name: Start chrony
+      systemd:
+        name: chronyd
+        state: restarted
+        enabled: true
+        daemon_reload: true
+      become: true

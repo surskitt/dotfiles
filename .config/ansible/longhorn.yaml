@@ -1,0 +1,17 @@
+---
+- hosts: all
+
+  tasks:
+    - name: Install open-iscsi
+      pacman:
+        name: open-iscsi
+        update_cache: true
+      become: true
+
+    - name: Start iscsid
+      systemd:
+        name: iscsid
+        state: restarted
+        enabled: true
+        daemon_reload: true
+      become: true

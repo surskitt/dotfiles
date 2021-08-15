@@ -1,0 +1,84 @@
+---
+- hosts: all
+  vars:
+    mountpoints:
+      - path: /mnt/hd1
+        src: LABEL=storage
+      - path: /mnt/hd2
+        src: LABEL=storage2
+
+    exports:
+      - dir: /mnt/hd1/backups
+        bindmount: /srv/nfs/backups
+      - dir: /mnt/hd1/media
+        bindmount: /srv/nfs/media
+      - dir: /mnt/hd2/downloads
+        bindmount: /srv/nfs/downloads
+      - dir: /mnt/hd2/p
+        bindmount: /srv/nfs/p
+      - dir: /mnt/hd2/video
+        bindmount: /srv/nfs/video
+
+  tasks:
+    - name: Create mountpoints
+      file:
+        path: "{{ item.path }}"
+        state: directory
+      loop: "{{ mountpoints }}"
+      become: true
+
+    - name: Mount drives
+      mount:
+        path: "{{ item.path }}"
+        src: "{{ item.src }}"
+        state: mounted
+        fstype: ext4
+      loop: "{{ mountpoints }}"
+      become: true
+
+    - name: Create bind mount directories
+      file:
+        path: "{{ item.bindmount }}"
+        state: directory
+      loop: "{{ exports }}"
+      become: true
+
+    - name: Create bind mounts
+      mount:
+        path: "{{ item.bindmount }}"
+        src: "{{ item.dir }}"
+        opts: bind
+        state: mounted
+        fstype: none
+      loop: "{{ exports }}"
+      become: true
+
+    - name: Create ssd dir
+      file:
+        path: /srv/nfs/ssd
+        state: directory
+      become: true
+
+    - name: Add nfs exports to /etc/exports
+      copy:
+        content: |
+          {% for export in exports %}
+          {{ export.bindmount }} *(rw,sync,no_subtree_check)
+          {% endfor %}
+          /srv/nfs/ssd *(rw,sync,no_subtree_check)
+        dest: /etc/exports
+      become: true
+
+    - name: Install nfs-utils package
+      pacman:
+        name: nfs-utils
+        update_cache: true
+      become: true
+
+    - name: Start nfs-server service
+      systemd:
+        name: nfs-server
+        state: restarted
+        enabled: true
+        daemon_reload: true
+      become: true

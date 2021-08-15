@@ -1,0 +1,95 @@
+---
+- hosts: all
+  user: pi
+  vars:
+    ansible_password: raspberry
+  tags:
+    - pi
+
+  tasks:
+    - name: Create shane user
+      user:
+        name: shane
+        groups:
+          - sudo
+        append: true
+      become: true
+
+    - name: Create ssh dir
+      file:
+        path: /home/shane/.ssh
+        state: directory
+        owner: shane
+        group: shane
+      become: true
+
+    - name: Add ssh public key to user
+      copy:
+        content: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+        dest: /home/shane/.ssh/authorized_keys
+        owner: shane
+        group: shane
+      become: true
+
+    - name: Allow shane to sudo
+      copy:
+        content: "shane ALL=(ALL) NOPASSWD: ALL"
+        dest: /etc/sudoers.d/010_shane-nopasswd
+      become: true
+
+    - name: Change hostname in /etc/hosts
+      replace:
+        path: /etc/hosts
+        regexp: raspberrypi
+        replace: "{{ inventory_hostname.split('.')[0] }}"
+      become: true
+
+    - name: Set hostname
+      hostname:
+        name: "{{ inventory_hostname.split('.')[0] }}"
+      become: true
+
+    - name: Set hostname permanently
+      copy:
+        content: "{{ inventory_hostname.split('.')[0] }}"
+        dest: /etc/hostname
+      become: true
+
+- hosts: all
+  user: shane
+  tags:
+    - shane
+
+  tasks:
+    - name: Get pi user pids
+      command:
+        cmd: pgrep -fu pi
+      register: pi_pids
+
+    - name: Kill pi user processes
+      command:
+        cmd: "kill {{ item }}"
+      loop: "{{ pi_pids.stdout_lines }}"
+      ignore_errors: true
+      become: true
+
+    - name: Wait for pids to die
+      wait_for:
+        path: "/proc/{{ item }}/status"
+        state: absent
+      loop: "{{ pi_pids.stdout_lines }}"
+      ignore_errors: true
+
+    - name: remove pi user
+      user:
+        name: pi
+        state: absent
+        remove: true
+      become: true
+
+    - name: Shutdown
+      community.general.shutdown:
+        delay: 0
+      become: true
+      tags:
+        - shutdown
