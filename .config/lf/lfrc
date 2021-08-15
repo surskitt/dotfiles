@@ -51,6 +51,28 @@ cmd paste &{{
     fi
 }}
 
+cmd link %{{
+    # set -- $(cat ~/.local/share/lf/files)
+    # mode="$1"
+    load=$(lf -remote 'load')
+    mode=$(echo "$load" | sed -n '1p')
+    list=$(echo "$load" | sed '1d')
+    # shift
+    if [ "${#list}" -lt 1 ]; then
+        lf -remote "send $id echo no files to link"
+        exit 0
+    fi
+    case "$mode" in
+        # symbolically copy mode is indicating a soft link
+        copy) ln -sr -t . -- "${list}";;
+        # while a move mode is indicating a hard link
+        move) ln -t . -- "$@";;
+    esac
+    # rm ~/.local/share/lf/files
+    lf -remote "send clear"
+}}
+map P :link
+
 map f
 
 cmd fzf_dir ${{
