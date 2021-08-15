@@ -20,3 +20,5 @@
     pta = !git push --all && git push --tags
 [pull]
 	rebase = false
+[diff]
+	tool = vimdiff
