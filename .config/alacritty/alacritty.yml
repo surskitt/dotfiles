@@ -1,0 +1,90 @@
+---
+env:
+  WINIT_X11_SCALE_FACTOR: "1"
+
+window:
+  title: Alacritty
+
+  dynamic_title: true
+
+scrolling:
+  history: 0
+
+# Sauce Code Pro Nerd Font Mono:pixelsize=12:Regular:antialias=true:autohint=true
+font:
+  normal:
+    family: monospace
+    style: Regular
+
+  bold:
+    family: Sauce Code Pro Nerd Font Mono
+    style: Bold
+
+  italic:
+    family: Sauce Code Pro Nerd Font Mono
+    style: Italic
+
+  bold_italic:
+    family: Sauce Code Pro Nerd Font Mono
+    style: Bold Italic
+
+  size: 9
+
+# draw_bold_text_with_bright_colors: false
+
+colors:
+  primary:
+    background: '#2E3440'
+    foreground: '#D8DEE9'
+
+  normal:
+    black: '#3B4252'
+    red: '#BF616A'
+    green: '#A3BE8C'
+    yellow: '#EBCB8B'
+    blue: '#81A1C1'
+    magenta: '#B48EAD'
+    cyan: '#88C0D0'
+    white: '#E5E9F0'
+
+  bright:
+    black: '#4C566A'
+    red: '#BF616A'
+    green: '#A3BE8C'
+    yellow: '#EBCB8B'
+    blue: '#81A1C1'
+    magenta: '#B48EAD'
+    cyan: '#8FBCBB'
+    white: '#ECEFF4'
+
+background_opacity: 0.9
+
+cursor:
+  style: Block
+
+  vi_mode_style: None
+
+  unfocused_hollow: true
+
+  thickness: 0.15
+
+live_config_reload: true
+
+mouse:
+  hide_when_typing: false
+
+  url:
+    launcher:
+      program: xdg-open
+      args: []
+
+# mouse_bindings:
+#  - { mouse: Middle, action: PasteSelection }
+
+key_bindings:
+  - key: V
+    mods: Alt
+    action: Paste
+  - key: C
+    mods: Alt
+    action: Copy
