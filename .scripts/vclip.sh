@@ -8,6 +8,10 @@ if [ ! -f "${CLIP_FILE}" ]; then
     exit 1
 fi
 
+if [[ "$(file -b --mime-type "${CLIP_FILE}")" == "inode/symlink" ]]; then
+    CLIP_FILE="$(readlink "${CLIP_FILE}")"
+fi
+
 # shellcheck disable=SC1090
 source "${CLIP_FILE}"
 # shellcheck disable=SC2164
