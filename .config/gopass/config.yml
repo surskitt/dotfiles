@@ -1,0 +1,11 @@
+autoclip: true
+autoimport: true
+cliptimeout: 45
+exportkeys: false
+nocolor: false
+nopager: false
+notifications: true
+parsing: true
+path: /home/shane/.password-store
+safecontent: false
+mounts: {}
