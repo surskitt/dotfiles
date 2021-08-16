@@ -1,0 +1,43 @@
+[Added Associations]
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
+application/vnd.comicbook+zip=org.pwmt.zathura.desktop;
+application/vnd.comicbook-rar=org.pwmt.zathura.desktop;
+image=feh.desktop;
+image/gif=userapp-mpv-JH0G7Z.desktop;
+image/jpeg=userapp-feh-BRR66Z.desktop;qutebrowser.desktop;sxiv-rifle.desktop;feh.desktop;
+image/png=userapp-feh-THW96Z.desktop;
+text/html=qutebrowser.desktop;org.qutebrowser.qutebrowser.desktop;
+video/mp4=mpv.desktop;
+video/webm=mpv.desktop;
+video/x-matroska=mpv.desktop;
+x-scheme-handler/http=qutebrowser.desktop;org.qutebrowser.qutebrowser.desktop;
+x-scheme-handler/https=qutebrowser.desktop;org.qutebrowser.qutebrowser.desktop;
+text/x-uri=org.qutebrowser.qutebrowser.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-L5TM10.desktop;userapp-Evolution-XTGU10.desktop;
+message/rfc822=userapp-Thunderbird-L5TM10.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-W9WO10.desktop;
+
+[Default Applications]
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
+application/x-extension-htm=qutebrowser.desktop;
+application/x-extension-html=qutebrowser.desktop;
+application/x-extension-shtml=qutebrowser.desktop;
+application/x-extension-xht=qutebrowser.desktop;
+application/x-extension-xhtml=qutebrowser.desktop;
+application/x-ica=wfica.desktop;
+application/xhtml+xml=qutebrowser.desktop;
+image=feh.desktop;
+image/gif=userapp-mpv-JH0G7Z.desktop;
+image/jpeg=feh.desktop
+image/jpg=feh.desktop;
+image/png=userapp-feh-THW96Z.desktop;
+text/html=org.qutebrowser.qutebrowser.desktop
+x-scheme-handler/chrome=qutebrowser.desktop;
+x-scheme-handler/ftp=qutebrowser.desktop;
+x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop
+x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop
+text/x-uri=org.qutebrowser.qutebrowser.desktop
+x-scheme-handler/mailspring=mailspring.desktop
+x-scheme-handler/mailto=userapp-Evolution-XTGU10.desktop
+message/rfc822=userapp-Thunderbird-L5TM10.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-W9WO10.desktop
