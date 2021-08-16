@@ -1,0 +1,18 @@
+{
+    "sensor": [
+        {
+            "name": "wigeon headphones connected",
+            "topic": "mqtt_executor/sensors/wigeon_bluetooth_headphones",
+            "retained": false,
+            "icon": "mdi:headphones",
+            "interval": "10s",
+            "command": {
+                "name": "/bin/sh",
+                "arguments": [
+                    "-c",
+                    "bluetoothctl info 94:DB:56:52:BD:6C | grep -q 'Connected: yes' && echo Connected || echo Disconnected"
+                ]
+            }
+        }
+    ]
+}
