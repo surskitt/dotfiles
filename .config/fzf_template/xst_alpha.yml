@@ -1,0 +1,516 @@
+values:
+  "0":
+    alpha: 0
+  "1":
+    alpha: 1
+  "2":
+    alpha: 2
+  "3":
+    alpha: 3
+  "4":
+    alpha: 4
+  "5":
+    alpha: 5
+  "6":
+    alpha: 6
+  "7":
+    alpha: 7
+  "8":
+    alpha: 8
+  "9":
+    alpha: 9
+  "10":
+    alpha: 10
+  "11":
+    alpha: 11
+  "12":
+    alpha: 12
+  "13":
+    alpha: 13
+  "14":
+    alpha: 14
+  "15":
+    alpha: 15
+  "16":
+    alpha: 16
+  "17":
+    alpha: 17
+  "18":
+    alpha: 18
+  "19":
+    alpha: 19
+  "20":
+    alpha: 20
+  "21":
+    alpha: 21
+  "22":
+    alpha: 22
+  "23":
+    alpha: 23
+  "24":
+    alpha: 24
+  "25":
+    alpha: 25
+  "26":
+    alpha: 26
+  "27":
+    alpha: 27
+  "28":
+    alpha: 28
+  "29":
+    alpha: 29
+  "30":
+    alpha: 30
+  "31":
+    alpha: 31
+  "32":
+    alpha: 32
+  "33":
+    alpha: 33
+  "34":
+    alpha: 34
+  "35":
+    alpha: 35
+  "36":
+    alpha: 36
+  "37":
+    alpha: 37
+  "38":
+    alpha: 38
+  "39":
+    alpha: 39
+  "40":
+    alpha: 40
+  "41":
+    alpha: 41
+  "42":
+    alpha: 42
+  "43":
+    alpha: 43
+  "44":
+    alpha: 44
+  "45":
+    alpha: 45
+  "46":
+    alpha: 46
+  "47":
+    alpha: 47
+  "48":
+    alpha: 48
+  "49":
+    alpha: 49
+  "50":
+    alpha: 50
+  "51":
+    alpha: 51
+  "52":
+    alpha: 52
+  "53":
+    alpha: 53
+  "54":
+    alpha: 54
+  "55":
+    alpha: 55
+  "56":
+    alpha: 56
+  "57":
+    alpha: 57
+  "58":
+    alpha: 58
+  "59":
+    alpha: 59
+  "60":
+    alpha: 60
+  "61":
+    alpha: 61
+  "62":
+    alpha: 62
+  "63":
+    alpha: 63
+  "64":
+    alpha: 64
+  "65":
+    alpha: 65
+  "66":
+    alpha: 66
+  "67":
+    alpha: 67
+  "68":
+    alpha: 68
+  "69":
+    alpha: 69
+  "70":
+    alpha: 70
+  "71":
+    alpha: 71
+  "72":
+    alpha: 72
+  "73":
+    alpha: 73
+  "74":
+    alpha: 74
+  "75":
+    alpha: 75
+  "76":
+    alpha: 76
+  "77":
+    alpha: 77
+  "78":
+    alpha: 78
+  "79":
+    alpha: 79
+  "80":
+    alpha: 80
+  "81":
+    alpha: 81
+  "82":
+    alpha: 82
+  "83":
+    alpha: 83
+  "84":
+    alpha: 84
+  "85":
+    alpha: 85
+  "86":
+    alpha: 86
+  "87":
+    alpha: 87
+  "88":
+    alpha: 88
+  "89":
+    alpha: 89
+  "90":
+    alpha: 90
+  "91":
+    alpha: 91
+  "92":
+    alpha: 92
+  "93":
+    alpha: 93
+  "94":
+    alpha: 94
+  "95":
+    alpha: 95
+  "96":
+    alpha: 96
+  "97":
+    alpha: 97
+  "98":
+    alpha: 98
+  "99":
+    alpha: 99
+  "100":
+    alpha: 100
+  "101":
+    alpha: 101
+  "102":
+    alpha: 102
+  "103":
+    alpha: 103
+  "104":
+    alpha: 104
+  "105":
+    alpha: 105
+  "106":
+    alpha: 106
+  "107":
+    alpha: 107
+  "108":
+    alpha: 108
+  "109":
+    alpha: 109
+  "110":
+    alpha: 110
+  "111":
+    alpha: 111
+  "112":
+    alpha: 112
+  "113":
+    alpha: 113
+  "114":
+    alpha: 114
+  "115":
+    alpha: 115
+  "116":
+    alpha: 116
+  "117":
+    alpha: 117
+  "118":
+    alpha: 118
+  "119":
+    alpha: 119
+  "120":
+    alpha: 120
+  "121":
+    alpha: 121
+  "122":
+    alpha: 122
+  "123":
+    alpha: 123
+  "124":
+    alpha: 124
+  "125":
+    alpha: 125
+  "126":
+    alpha: 126
+  "127":
+    alpha: 127
+  "128":
+    alpha: 128
+  "129":
+    alpha: 129
+  "130":
+    alpha: 130
+  "131":
+    alpha: 131
+  "132":
+    alpha: 132
+  "133":
+    alpha: 133
+  "134":
+    alpha: 134
+  "135":
+    alpha: 135
+  "136":
+    alpha: 136
+  "137":
+    alpha: 137
+  "138":
+    alpha: 138
+  "139":
+    alpha: 139
+  "140":
+    alpha: 140
+  "141":
+    alpha: 141
+  "142":
+    alpha: 142
+  "143":
+    alpha: 143
+  "144":
+    alpha: 144
+  "145":
+    alpha: 145
+  "146":
+    alpha: 146
+  "147":
+    alpha: 147
+  "148":
+    alpha: 148
+  "149":
+    alpha: 149
+  "150":
+    alpha: 150
+  "151":
+    alpha: 151
+  "152":
+    alpha: 152
+  "153":
+    alpha: 153
+  "154":
+    alpha: 154
+  "155":
+    alpha: 155
+  "156":
+    alpha: 156
+  "157":
+    alpha: 157
+  "158":
+    alpha: 158
+  "159":
+    alpha: 159
+  "160":
+    alpha: 160
+  "161":
+    alpha: 161
+  "162":
+    alpha: 162
+  "163":
+    alpha: 163
+  "164":
+    alpha: 164
+  "165":
+    alpha: 165
+  "166":
+    alpha: 166
+  "167":
+    alpha: 167
+  "168":
+    alpha: 168
+  "169":
+    alpha: 169
+  "170":
+    alpha: 170
+  "171":
+    alpha: 171
+  "172":
+    alpha: 172
+  "173":
+    alpha: 173
+  "174":
+    alpha: 174
+  "175":
+    alpha: 175
+  "176":
+    alpha: 176
+  "177":
+    alpha: 177
+  "178":
+    alpha: 178
+  "179":
+    alpha: 179
+  "180":
+    alpha: 180
+  "181":
+    alpha: 181
+  "182":
+    alpha: 182
+  "183":
+    alpha: 183
+  "184":
+    alpha: 184
+  "185":
+    alpha: 185
+  "186":
+    alpha: 186
+  "187":
+    alpha: 187
+  "188":
+    alpha: 188
+  "189":
+    alpha: 189
+  "190":
+    alpha: 190
+  "191":
+    alpha: 191
+  "192":
+    alpha: 192
+  "193":
+    alpha: 193
+  "194":
+    alpha: 194
+  "195":
+    alpha: 195
+  "196":
+    alpha: 196
+  "197":
+    alpha: 197
+  "198":
+    alpha: 198
+  "199":
+    alpha: 199
+  "200":
+    alpha: 200
+  "201":
+    alpha: 201
+  "202":
+    alpha: 202
+  "203":
+    alpha: 203
+  "204":
+    alpha: 204
+  "205":
+    alpha: 205
+  "206":
+    alpha: 206
+  "207":
+    alpha: 207
+  "208":
+    alpha: 208
+  "209":
+    alpha: 209
+  "210":
+    alpha: 210
+  "211":
+    alpha: 211
+  "212":
+    alpha: 212
+  "213":
+    alpha: 213
+  "214":
+    alpha: 214
+  "215":
+    alpha: 215
+  "216":
+    alpha: 216
+  "217":
+    alpha: 217
+  "218":
+    alpha: 218
+  "219":
+    alpha: 219
+  "220":
+    alpha: 220
+  "221":
+    alpha: 221
+  "222":
+    alpha: 222
+  "223":
+    alpha: 223
+  "224":
+    alpha: 224
+  "225":
+    alpha: 225
+  "226":
+    alpha: 226
+  "227":
+    alpha: 227
+  "228":
+    alpha: 228
+  "229":
+    alpha: 229
+  "230":
+    alpha: 230
+  "231":
+    alpha: 231
+  "232":
+    alpha: 232
+  "233":
+    alpha: 233
+  "234":
+    alpha: 234
+  "235":
+    alpha: 235
+  "236":
+    alpha: 236
+  "237":
+    alpha: 237
+  "238":
+    alpha: 238
+  "239":
+    alpha: 239
+  "240":
+    alpha: 240
+  "241":
+    alpha: 241
+  "242":
+    alpha: 242
+  "243":
+    alpha: 243
+  "244":
+    alpha: 244
+  "245":
+    alpha: 245
+  "246":
+    alpha: 246
+  "247":
+    alpha: 247
+  "248":
+    alpha: 248
+  "249":
+    alpha: 249
+  "250":
+    alpha: 250
+  "251":
+    alpha: 251
+  "252":
+    alpha: 252
+  "253":
+    alpha: 253
+  "254":
+    alpha: 254
+  "255":
+    alpha: 255
+templates:
+  - src: xst_alpha.Xresources
+    dest: ~/.Xresources.d/xst_alpha.Xresources
