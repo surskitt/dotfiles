@@ -32,7 +32,7 @@ echo "${current}" > "${dir}/.thumbs/last.txt"
 if [[ -f "${THUMB_FILE}" && $no_refresh == true ]]; then
     fl=$(sort -t "${TAB}" -k 2 "${THUMB_FILE}")
 else
-    f=$(ls -1 -d "${dir}"/*/ 2>/dev/null ; find "${dir}" -maxdepth 1 -type f -o -type l -not -path '*/\.*')
+    f=$(ls -1 -d "${dir}"/*/ 2>/dev/null ; find "${dir}" -maxdepth 1 \( -type f -o -type l \) -not -path '*/\.*')
 
     fl=$(echo "${f}"|while read -r fn; do
         p=$(previewer.sh "${fn}")
