@@ -6,8 +6,10 @@
       " ncmpcpp": "ncmpcpp -h localhost"
   },
   " daapd": {
-      " add to queue": "fzf-mpc.sh -H mallard.lan",
-      " ncmpcpp": "ncmpcpp -h mallard.lan"
+      " add to queue": "fzf-daapd.sh",
+      " ncmpcpp": "ncmpcpp -h mallard.lan",
+      " update": "curl -X PUT http://mallard.lan:3689/api/update",
+      " rescan": "curl -X PUT http://mallard.lan:3689/api/rescan"
   },
   " weechat buffers": "fzf-weechat.sh",
   " search": {
