@@ -24,7 +24,8 @@ super + w
 
 # Launch rofi application selector
 super + q
-    rofi -show drun -monitor -4
+    dmenu.sh
+    # rofi -show drun -monitor -4
 
 # Launch rofi window selector
 super + Tab
