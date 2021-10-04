@@ -1,93 +1,90 @@
 #!/usr/bin/env bash
 
-if [[ "${#}" -lt 1  || "${#}" -gt 3 ]]; then
+ONE_MON_DESKTOPS=$(cat <<'EOF'
+internet 0
+coding 0
+chat 0
+music 0
+video 0
+books 0
+files 0
+files2 0
+files3 0
+windows 0
+EOF
+)
+
+TWO_MON_DESKTOPS=$(cat <<'EOF'
+internet 0
+coding 1
+chat 1
+music 1
+video 1
+books 0
+files 0
+files2 1
+files3 0
+windows 1
+EOF
+)
+
+THREE_MON_DESKTOPS=$(cat <<'EOF'
+internet 0
+coding 1
+chat 2
+music 2
+video 2
+books 2
+files 0
+files2 1
+files3 2
+windows 2
+EOF
+)
+
+MON_DESKTOPS_ARRAY=(
+    "${ONE_MON_DESKTOPS}"
+    "${TWO_MON_DESKTOPS}"
+    "${THREE_MON_DESKTOPS}"
+)
+
+if [[ "${#}" -lt 1 || "${#}" -gt 3 ]]; then
     echo "Error: Provide between 1 and 3 arguments" >&2
     exit 1
 fi
 
+MONITOR_COUNT="$(bspc query -M | wc -l)"
+
 for i in "${@}"; do
-    if [[ "${i}" -lt 1 || "${i}" -gt 3 ]]; then
-        echo "Error: only pass arguments between 1 and 3" >&2
+    if [[ "${i}" -lt 0 || "${i}" -gt 2 ]]; then
+        echo "Error: only pass arguments between 0 and 2" >&2
+        exit 1
+    fi
+
+    if [[ "${i}" -ge "${MONITOR_COUNT}" ]]; then
+        echo "Index ${i} is greater than current monitor count" >&2
         exit 1
     fi
 done
 
-if [[ "$(bspc query -M|wc -l)" -lt "${#}" ]]; then
-    echo "Error: number of arguments is less than the number of monitors" >&2
-    exit 1
-fi
+MON_DESKTOPS_INDEX="$(( "${#}" - 1 ))"
+MON_DESKTOPS="${MON_DESKTOPS_ARRAY[${MON_DESKTOPS_INDEX}]}"
 
-clear_empties() {
-    for i in {1..3}; do
-        bspc query -D -d "empty_${i}" >/dev/null 2>&1 && bspc desktop "empty_${i}" -r
-    done
-}
+mapfile -t MONITORS < <(bspc query -M --names)
+mapfile -t SELECTED_MONITORS < <(for i in "${@}" ; do echo "${MONITORS[${i}]}"; done)
 
-one_mon() {
-    bspc monitor "${2}" -a "empty_2"
-    bspc monitor "${3}" -a "empty_3"
-
-    for i in  internet coding chat music video books files files2 files3 windows; do
-       bspc desktop "${i}" -m "${1}"
-    done
-
-    clear_empties
-}
-
-two_mon() {
-    bspc monitor "${3}" -a "empty_3"
-
-    for i in internet video books files; do
-        bspc desktop "${i}" -m "${1}"
-    done
-
-    for i in coding chat music files2 files3 windows; do
-        bspc desktop "${i}" -m "${2}"
-    done
-
-    clear_empties
-}
-
-three_mon() {
-    for i in internet files books; do
-        bspc desktop "${i}" -m "${1}"
-    done
-
-    for i in coding files2; do
-        bspc desktop "${i}" -m "${2}"
-    done
-
-    for i in chat music video files3 windows; do
-        bspc desktop "${i}" -m "${3}"
-    done
-
-    clear_empties
-}
-
-nodes="$(bspc query -D --names|while read -r d; do bspc query -N -d ${d}|while read -r n; do echo "${d} ${n}"; done; done)"
-
-mapfile -t monitors <<< "$(bspc query -M --names)"
-monitors=(0 "${monitors[@]}")
-
-othermons=()
-for i in {1..3}; do
-    if [[ "${*}" != *${i}* ]]; then
-        othermons+=("${i}")
+while read -r d m; do
+    if bspc query -D --names | grep -q "${d}" ; then
+        bspc desktop "${d}" -m "${SELECTED_MONITORS[${m}]}"
+    else
+        bspc monitor "${SELECTED_MONITORS[${m}]}" -a "${d}"
     fi
-done
+done <<< "${MON_DESKTOPS}"
 
-case "${#}" in
-    1)
-        one_mon "${monitors[${1}]}" "${monitors[${othermons[0]}]}" "${monitors[${othermons[1]}]}"
-        ;;
-    2)
-        two_mon "${monitors[${1}]}" "${monitors[${2}]}" "${monitors[${othermons[0]}]}"
-        ;;
-    3)
-        three_mon "${monitors[${1}]}" "${monitors[${2}]}" "${monitors[${3}]}"
-        ;;
-esac
+# remove default desktops
+while bspc desktop Desktop -r 2>/dev/null ; do : ; done
 
-while read -r d n; do
-    bspc node "${n}" -d "${d}"
-done <<< "${nodes}"
+# focus main desktops
+bspc desktop -f chat
+bspc desktop -f internet
+bspc desktop -f coding
