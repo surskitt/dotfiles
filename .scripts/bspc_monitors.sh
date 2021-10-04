@@ -48,36 +48,18 @@ MON_DESKTOPS_ARRAY=(
     "${THREE_MON_DESKTOPS}"
 )
 
-if [[ "${#}" -lt 1 || "${#}" -gt 3 ]]; then
-    echo "Error: Provide between 1 and 3 arguments" >&2
-    exit 1
-fi
-
 MONITOR_COUNT="$(bspc query -M | wc -l)"
 
-for i in "${@}"; do
-    if [[ "${i}" -lt 0 || "${i}" -gt 2 ]]; then
-        echo "Error: only pass arguments between 0 and 2" >&2
-        exit 1
-    fi
-
-    if [[ "${i}" -ge "${MONITOR_COUNT}" ]]; then
-        echo "Index ${i} is greater than current monitor count" >&2
-        exit 1
-    fi
-done
-
-MON_DESKTOPS_INDEX="$(( "${#}" - 1 ))"
+MON_DESKTOPS_INDEX="$(( "${MONITOR_COUNT}" - 1 ))"
 MON_DESKTOPS="${MON_DESKTOPS_ARRAY[${MON_DESKTOPS_INDEX}]}"
 
 mapfile -t MONITORS < <(bspc query -M --names)
-mapfile -t SELECTED_MONITORS < <(for i in "${@}" ; do echo "${MONITORS[${i}]}"; done)
 
 while read -r d m; do
     if bspc query -D --names | grep -q "${d}" ; then
-        bspc desktop "${d}" -m "${SELECTED_MONITORS[${m}]}"
+        bspc desktop "${d}" -m "${MONITORS[${m}]}"
     else
-        bspc monitor "${SELECTED_MONITORS[${m}]}" -a "${d}"
+        bspc monitor "${MONITORS[${m}]}" -a "${d}"
     fi
 done <<< "${MON_DESKTOPS}"
 
