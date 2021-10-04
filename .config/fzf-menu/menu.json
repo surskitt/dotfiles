@@ -41,6 +41,7 @@
           " 1 litre": "hass_in_inc.py water_drinking_daily 1000"
       }
   },
+  " systemd": "sysz",
   " bookmarks": {
       " all": "BROWSER=qutebrowser fzf-buku.sh",
       " tags": "BROWSER=qutebrowser fzf-buku.sh -t",
