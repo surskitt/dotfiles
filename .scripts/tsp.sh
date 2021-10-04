@@ -20,6 +20,10 @@ else
     for t in "$@"; do
         IFS=, read -r name sock_name <<< "${t}"
 
-        echo "${name} $(get_tsp_count "${sock_name}")"
+        if [[ -n ${name} ]]; then
+            name="${name} "
+        fi
+
+        echo "${name}$(get_tsp_count "${sock_name}")"
     done|sed 'N;s/\n/  /'
 fi
