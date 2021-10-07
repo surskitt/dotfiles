@@ -7,6 +7,7 @@
   },
   " daapd": {
       " add to queue": "fzf-daapd.sh",
+      " add random": "fzf-daapd-random.sh",
       " ncmpcpp": "ncmpcpp -h mallard.lan",
       " covers": "sxiv-daapd.sh",
       " cover search": "read -r -p 'cover search: ' s ; sxiv-daapd.sh search ${s}",
@@ -63,6 +64,7 @@
   " select desktops": "echo {1..3}|xargs -n 1 echo|fzf -m --layout=reverse-list|xargs bspc_monitors.sh; true",
   " github repos": "fzf-github-repos.sh",
   " github stars": "fzf-github-stars.sh",
+  " youtube playlists": "v=$(fzf --layout=reverse-list --with-nth=3.. < ~/.local/share/yt_playlists|cut -d ' ' -f 1) ; nohup mpv ${v} >/dev/null 2>&1 & sleep .2 && disown",
   " hacker news": "hn.py|fzf -m --layout=reverse-list --with-nth=2..|cut -d ' ' -f 1|xargs -I% qutebrowser 'news.ycombinator.com/item?id=%'",
   " twitch": "fzf-twitch.sh",
   " rss": "fzf-newsboat.py",
