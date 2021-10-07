@@ -12,7 +12,7 @@ _tsp() {
 
 ytdl() {
         # --format 'bestvideo[height<=1080]+bestaudio/best[height<=1080]' \
-    _tsp youtube-dl \
+    _tsp yt-dlp \
         --ignore-config \
         --no-color \
         --no-playlist \
@@ -26,21 +26,24 @@ ytdl() {
         --embed-subs \
         --add-metadata \
         --output "${fn}" \
+        --downloader aria2c \
         --download-archive "${outdir}/downloads.txt" \
+        --cookies ~/.local/share/youtube-dl/cookies.txt \
         "${@}"
 }
 
 playlist_name() {
-    youtube-dl \
+    yt-dlp \
         --playlist-items 1 \
          -s \
         --get-filename \
+        --cookies ~/.local/share/youtube-dl/cookies.txt \
         -o '%(playlist_title)s - %(playlist_id)s' \
         ${@}
 }
 
 for f in ${@}; do
-    pl=$(playlist_name ${f})
+    echo "${pl}"
 
     if [ "${pl}" == "NA - NA" ]; then
         outdir="$HOME/ytdl"
