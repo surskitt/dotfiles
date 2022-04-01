@@ -23,6 +23,7 @@
   },
   " bluetooth pairing": {
     " WH-1000XM4": "bluetoothctl power on && bluetoothctl connect 94:DB:56:52:BD:6C",
+    " Fiil T1 Lite": "bluetoothctl power on && bluetoothctl connect B0:F1:A3:5D:C7:DB",
     " MPOW H12": "bluetoothctl power on && bluetoothctl connect EB:06:EF:37:33:A9",
     " picun": "bluetoothctl power on && bluetoothctl connect FC:58:FA:6A:7A:AE",
     " taotronics": "bluetoothctl power on && bluetoothctl connect FC:58:FA:85:31:C5",
@@ -31,6 +32,7 @@
   },
   " passwords": "fzf-pass.sh; bspc node -g hidden; sleep 45",
   " home": {
+      " talk": "hass_talk.sh",
       " fridge": "hass_switch.py switch.14503513c82b965f16f9 ; sleep 2; hass_switch.py switch.14503513c82b965f16f9",
       " tv": "hass_switch.py media_player.tv",
       " office light": "hass_switch.py switch.office_light_switch",
