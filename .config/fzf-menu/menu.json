@@ -33,17 +33,9 @@
   " passwords": "fzf-pass.sh; bspc node -g hidden; sleep 45",
   " home": {
       " talk": "hass_talk.sh",
-      " fridge": "hass_switch.py switch.14503513c82b965f16f9 ; sleep 2; hass_switch.py switch.14503513c82b965f16f9",
-      " tv": "hass_switch.py media_player.tv",
       " office light": "hass_switch.py switch.office_light_switch",
       " office temperature": "read -p 'temperature: ' temperature; hass_set_temp.py office ${temperature}",
-      " office diffuser": "hass_switch.py switch.office_diffuser",
-      " office curtain": "read -p 'office curtain position: ' position; hass_cover.py cover.office_curtain position ${position}",
-      " water": {
-          " 1/2 pint": "hass_in_inc.py water_drinking_daily 280",
-          " 1 pint": "hass_in_inc.py water_drinking_daily 560",
-          " 1 litre": "hass_in_inc.py water_drinking_daily 1000"
-      }
+      " office diffuser": "hass_switch.py switch.office_diffuser"
   },
   " systemd": "sysz",
   " bookmarks": {
