@@ -13,3 +13,7 @@ bindkey -M vicmd -r ':'
 bindkey -r '\ec'
 bindkey '\ef' fzf-cd-widget
 bindkey -s '\ew' 'fzf-menu.sh\n'
+
+bindkey -M emacs -r '\ec'
+bindkey -M vicmd -r '\ec'
+bindkey -M viins -r '\ec'
