@@ -14,9 +14,9 @@ if [[ -z "${NZBGET_PASSWORD}" ]]; then
     echo "Error: NZBGET_PASSWORD is not set" >&2
 fi
 
-SEARCH="${*}"
+SEARCH="${@}"
 
-JSON="$(curl -s -L "https://api.drunkenslug.com/api?t=search&apikey=${NZB_API}&q=${SEARCH}&o=json")"
+JSON="$(curl -s -L "https://api.drunkenslug.com/api?t=search&apikey=${NZB_API}&q=${SEARCH/ /%20}&o=json")"
 
 jq -r  'keys|.[]' <<< "${JSON}" | grep -q item || { echo "${SEARCH}: search not found" >&2 ; exit 1; }
 
