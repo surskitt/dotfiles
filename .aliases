@@ -23,7 +23,6 @@ alias ytsp="TS_SOCKET=/tmp/socket-ts.yt tsp"
 alias tspw='while ps -fp $(tsp -p 2>/dev/null) >/dev/null 2>&1; do tsp -c; sleep 5;done'
 alias ytspw='while ps -fp $(ytsp -p 2>/dev/null) >/dev/null 2>&1; do ytsp -c; sleep 5;done'
 
-alias black="black -l 79"
 alias bat="bat --paging=never"
 alias glow="glow -w $(tput cols)"
 alias telnet="telnet -e p"
@@ -72,3 +71,5 @@ alias tt="todo new -l MzM"
 alias ttl="tt --priority low"
 alias ttm="tt --priority medium"
 alias tth="tt --priority high"
+
+alias skyscraper=Skyscraper
