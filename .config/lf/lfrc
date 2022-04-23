@@ -40,17 +40,6 @@ cmd open ${{
 
 }}
 
-cmd paste &{{
-    load=$(lf -remote 'load')
-    mode=$(echo "$load" | sed -n '1p')
-    list=$(echo "$load" | sed '1d')
-    if [ $mode = 'copy' ]; then
-        tsp lf_cp.sh $list .
-    elif [ $mode = 'move' ]; then
-        tsp lf_mv.sh $list .
-    fi
-}}
-
 cmd link %{{
     # set -- $(cat ~/.local/share/lf/files)
     # mode="$1"
@@ -128,6 +117,13 @@ cmd sx_cd ${{
     lf -remote "send $id $cmd \"$res\""
 }}
 map S sx_cd
+
+cmd select_random ${{
+    res=$(ls -d ./*/|shuf -n 1)
+
+    lf -remote "send $id select \"$res\""
+}}
+map R select_random
 
 map <f-2> $printf "%s\n" $fx | vidir -
 
