@@ -842,12 +842,26 @@ ul.comparison-list {
 .pagehead.repohead {
   background-color: #2e3440 !important;
 }
+.repository-content  {
+  background-color: #2e3440 !important;
+  border-color: #88c0d0 !important;
+}
 .repository-content .RecentBranches {
   background-color: #2e3440 !important;
   border-color: #88c0d0 !important;
 }
+.d-flex .top-0 {
+  background-color: #2e3440 !important;
+}
+.color-bg-default {
+  background-color: #2e3440 !important;
+}
 .repohead-details-container a {
   color: #d8dee9 !important;
+}
+#repository-container-header {
+  color: #d8dee9 !important;
+  background-color: #2e3440 !important;
 }
 .select-menu-modal {
   border-color: #d8dee9 !important;
@@ -1709,4 +1723,21 @@ a.comment-user.owner {
 .answer-votes {
   background-color: #eef1f6 !important;
   color: #2e3440 !important;
+}
+#masthead {
+  background-color: #353c49 !important;
+  color: #2e3440 !important;
+}
+#guide-wrapper {
+  background-color: #353c49 !important;
+  /* color: #2e3440 !important; */
+  color: #eef1f6 !important;
+}
+.ytd-guide-renderer {
+  background-color: #353c49 !important;
+  color: #eef1f6 !important;
+}
+.ytd-app {
+  background-color: #353c49 !important;
+  color: #eef1f6 !important;
 }
