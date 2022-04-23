@@ -43,6 +43,7 @@ playlist_name() {
 }
 
 for f in ${@}; do
+    pl="$(playlist_name "${f}")"
     echo "${pl}"
 
     if [ "${pl}" == "NA - NA" ]; then
