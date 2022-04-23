@@ -18,6 +18,9 @@ super + shift + Return
 super + w
     floater.sh st -g 150x28 fzf-menu.sh
 
+super + t
+    floater.sh st -g 150x28 hass_talk.sh
+
 #
 # Rofi
 #
