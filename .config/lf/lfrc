@@ -62,6 +62,11 @@ cmd link %{{
 }}
 map P :link
 
+cmd drop %{{
+  echo "${fx}" > /tmp/lfd
+}}
+map _ :drop
+
 map f
 
 cmd fzf_dir ${{
