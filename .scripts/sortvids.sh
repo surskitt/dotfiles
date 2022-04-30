@@ -39,7 +39,7 @@ trap "rm -f $pipe" EXIT
 # mpvbinds="ctrl-z:execute(vared -c a; echo $a),ctrl-x:execute(echo 'show-text \${filename}' > ${pipe}),ctrl-c:execute(echo 'seek 30' > ${pipe})"
 mpvbinds="ctrl-z:execute(read -e < /dev/tty),ctrl-x:execute(echo 'show-text \${filename}' > ${pipe}),ctrl-c:execute(echo 'seek 30' > ${pipe}),ctrl-v:execute(echo 'keypress ctrl+del' > ${pipe})"
 
-mpv -fs --input-file=${pipe} --player-operation-mode=pseudo-gui &
+mpv -fs --input-ipc-server=${pipe} --player-operation-mode=pseudo-gui &
 
 # find "${src}/" \( -iname '*.mp4' -o -iname '*.flv' -o -iname '*.avi' \) 
 find "${src}/" \( -iname '*.mp4' -o -iname '*.flv' -o -iname '*.avi' -o -iname '*.wmv' -o -iname '*.mkv' -o -iname '*.mov' -o -iname '*.m4v' -o -iname '*.mpg' -o -iname '*.webm' \) | grep -v '(' | sort | while read vid; do
