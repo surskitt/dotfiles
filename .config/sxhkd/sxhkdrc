@@ -18,7 +18,7 @@ super + shift + Return
 super + w
     floater.sh st -g 150x28 fzf-menu.sh
 
-super + t
+super + T
     floater.sh st -g 150x28 hass_talk.sh
 
 #
@@ -205,10 +205,17 @@ XF86AudioNext
 #
 
 XF86MonBrightnessUp
-    poly_brightness.sh up
+    sudo light -A 1
 
 XF86MonBrightnessDown
-    poly_brightness.sh down
+    sudo light -U 1
+
+#
+shift + XF86MonBrightnessUp
+    sudo light -A 5
+
+shift + XF86MonBrightnessDown
+    sudo light -U 5
 
 #
 # Background app toggles
