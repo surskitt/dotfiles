@@ -80,3 +80,19 @@ pc() {
 mountall() {
     tr -s ' ' < /etc/fstab|cut -d ' ' -f 2|grep '^/'|sudo xargs -n 1 mount
 }
+
+kwpo() {
+    if [[ "${#}" == 1 ]]; then
+        watch kubectl get po -l app.kubernetes.io/name="${1}"
+    else
+        watch kubectl -n "${1}" get po -l app.kubernetes.io/name="${2}"
+    fi
+}
+
+klo() {
+    if [[ "${#}" == 1 ]]; then
+        kubectl logs -l app.kubernetes.io/name="${1}" -f
+    else
+        kubectl -n "${1}" logs -l app.kubernetes.io/name="${2}" -f
+    fi
+}
