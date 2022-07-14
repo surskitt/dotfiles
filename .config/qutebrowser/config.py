@@ -39,6 +39,12 @@ c.editor.command = [
 ]
 c.messages.timeout = 5000
 
+c.content.blocking.adblock.lists = [
+    "https://easylist.to/easylist/easylist.txt",
+    "https://easylist.to/easylist/easyprivacy.txt",
+    "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt"
+]
+
 #  c.fileselect.handler = "external"
 #  picker_command = [
 #      "floater.sh",
