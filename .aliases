@@ -73,3 +73,5 @@ alias ttm="tt --priority medium"
 alias tth="tt --priority high"
 
 alias skyscraper=Skyscraper
+
+alias gr='cd $(git rev-parse --show-toplevel)'
