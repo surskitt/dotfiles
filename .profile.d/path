@@ -1,1 +1,1 @@
-export PATH="$PATH:$HOME/.scripts:$HOME/.local/bin:$GOPATH/bin"
+export PATH="$PATH:$HOME/.scripts:$HOME/.local/bin:$GOPATH/bin:${HOME}/.krew/bin"
