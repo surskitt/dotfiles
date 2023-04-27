@@ -2,6 +2,10 @@
 # Application shortcuts
 #
 
+# disable middle click pasting
+button2
+    echo -n | xclip -in
+
 # Launch st (using tmux start script to create new sessions)
 super + Return
     st -e tmuxstart.sh
@@ -226,8 +230,8 @@ super + t; {d,b}
     sudo systemctl_toggle.sh {docker,bluetooth}
 
 # toggle user apps using systemctl
-super + t; {D,s,r,p,l}
-    systemctl_toggle.sh -u {dropbox,spotifyd,redshift,picom,lightlockerinhibit}
+super + t; {S,s,r,p,l}
+    systemctl_toggle.sh -u {syncthing,shairport-sync,redshift,picom,lightlockerinhibit}
 
 # toggle touchpad
 super + t; m
