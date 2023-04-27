@@ -25,3 +25,4 @@ config.bind(
 )
 config.bind(",9", "open 9xbud.com/{url}")
 config.bind(",d", "spawn --userscript pyload.py '{title}' '{url}'")
+config.bind(",i", "open https://y.com.sb{url:path}?{url:query}")
