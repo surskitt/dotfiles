@@ -2,6 +2,7 @@ alias c=clear
 alias b=buku --np
 alias k=kubectl
 alias rr=ranger
+alias s=senpai-irc
 alias tf=terraform
 alias wee=weechat
 alias v=vim
