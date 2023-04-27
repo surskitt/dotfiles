@@ -22,7 +22,6 @@ ytdl() {
         --retries 10 \
         --no-mtime \
         --sub-lang en,en_US \
-        --write-sub \
         --embed-subs \
         --add-metadata \
         --output "${fn}" \
