@@ -64,6 +64,36 @@ case "${CMD}" in
 
         echo "${THUMB_FILE}"
         ;;
+    mp4|gif)
+        OUTPUT_FILE="${CLIP_FILE}.${2}"
+        filters="scale=iw*sar:ih:flags=lanczos"
+
+        if [[ -n "${CROP}" ]]; then
+            filters="${filters},crop=${CROP}"
+        fi
+
+        if [[ "${#}" -ge 3 ]]; then
+            h="${3}"
+            ch="${CROP%%:*}"
+
+            if [[ "${h}" -lt "${ch}" ]]; then
+                filters="${filters},scale=${3}:-1"
+            fi
+        fi
+
+        if [[ -n "${SUBS}" ]]; then
+            filters="${filters},subtitles=${VID}"
+        fi
+
+        # if [[ -n "${NOAUDIO}" ]]; then
+        #     NOSOUND="-an"
+        # fi
+
+        # palette="/tmp/palette.png"
+        # ffmpeg -v warning -ss "${START}" -to "${END}" -i "${VID}" -vf "$filters,palettegen" -y $palette
+
+        ffmpeg -v warning -ss "${START}" -to "${END}" -i "${VID}" -copyts -vf "${filters}" -ss "${START}" -y "${OUTPUT_FILE}"
+        ;;
     *)
         echo "${CMD} is not a valid command" >&2
         exit 1
