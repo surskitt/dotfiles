@@ -32,7 +32,12 @@ local fourth = function()
     autocrop(4)
 end
 
+local twothird = function()
+    autocrop(1.5)
+end
+
 mp.add_key_binding("Ctrl+1", "autocrop_reset", reset)
 mp.add_key_binding("Ctrl+2", "autocrop_half", half)
 mp.add_key_binding("Ctrl+3", "autocrop_third", third)
 mp.add_key_binding("Ctrl+4", "autocrop_fourth", fourth)
+mp.add_key_binding("Ctrl+5", "autocrop_twothird", twothird)
