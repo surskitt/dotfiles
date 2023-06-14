@@ -94,6 +94,23 @@ case "${CMD}" in
 
         ffmpeg -v warning -ss "${START}" -to "${END}" -i "${VID}" -copyts -vf "${filters}" -ss "${START}" -y "${OUTPUT_FILE}"
         ;;
+    link)
+        if [[ "${#}" -lt 3 ]]; then
+            echo "Usage: ${0} CLIP_FILE link NEW_VID_SOURCE" >&2
+            exit 1
+        fi
+
+        NEW_SOURCE="${3}"
+        CLIP_PATH="$(dirname "${CLIP_FILE}")"
+        SOURCE_PATH="$(realpath --relative-to "${CLIP_PATH}" "${NEW_SOURCE}")"
+
+        if [[ -z "${SOURCE_PATH}" ]]; then
+            echo "Error: new soure path does not exist" >&2
+            exit 1
+        fi
+
+        sed -i "s|VID=.*|VID=\"${SOURCE_PATH}\"|" "${CLIP_FILE}"
+        ;;
     *)
         echo "${CMD} is not a valid command" >&2
         exit 1
