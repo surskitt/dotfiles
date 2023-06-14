@@ -8,9 +8,15 @@ refresh() {
 
     json="$(curl -s http://mallard.lan:3689/api/library/albums)"
 
-    json_lines="$(jq -r '.items[]|"\(.artist) - \(.name)	\(.uri)	\(.time_added)	\(.artwork_url)"' <<< "${json}")"
+    json_lines="$(jq -r '.items[]|"\(.artist) - \(.name)	\(.uri)	\(.time_added)	\(.artwork_url)	\(.media_kind)"' <<< "${json}")"
 
-    while IFS="	" read name uri date url; do
+    while IFS="	" read name uri date url media_kind; do
+        if [[ "${media_kind}" != "music" ]]; then
+            continue
+        fi
+
+        name="${name//\//_}"
+
         if [[ -f ~/.cache/sxiv-daapd/uri/"${uri}" ]]; then
             continue
         fi
