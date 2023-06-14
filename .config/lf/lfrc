@@ -11,7 +11,6 @@ set ifs "\n"
 set scrolloff 10
 
 set icons
-set previewer pistol
 
 # use enter for shell commands
 # map <enter> shell
@@ -23,6 +22,8 @@ map X !$f
 # dedicated keys for file opener actions
 map o &mimeopen $f
 map O $mimeopen --ask $f
+
+map \\ $nemo .
 
 # define a custom 'open' command
 cmd open ${{
@@ -37,27 +38,25 @@ cmd open ${{
             esac
             ;;
     esac
-
 }}
 
+# y (select for copy) and P to paste soft-link
+# d (select for cut) and P to paste hard-link
 cmd link %{{
-    # set -- $(cat ~/.local/share/lf/files)
-    # mode="$1"
-    load=$(lf -remote 'load')
-    mode=$(echo "$load" | sed -n '1p')
-    list=$(echo "$load" | sed '1d')
-    # shift
-    if [ "${#list}" -lt 1 ]; then
+    set -- $(cat ~/.local/share/lf/files)
+    mode="$1"
+    shift
+    if [ "$#" -lt 1 ]; then
         lf -remote "send $id echo no files to link"
         exit 0
     fi
     case "$mode" in
         # symbolically copy mode is indicating a soft link
-        copy) ln -sr -t . -- "${list}";;
+        copy) ln -sr -t . -- "$@";;
         # while a move mode is indicating a hard link
         move) ln -t . -- "$@";;
     esac
-    # rm ~/.local/share/lf/files
+    rm ~/.local/share/lf/files
     lf -remote "send clear"
 }}
 map P :link
@@ -130,8 +129,6 @@ cmd select_random ${{
 }}
 map R select_random
 
-map <f-2> $printf "%s\n" $fx | vidir -
-
 map s
 map sn
 map ss
@@ -157,3 +154,9 @@ map - preview
 # map D dragon
 
 map D :delete
+
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit -s $id
+cmd on-quit $ctpv -e $id
