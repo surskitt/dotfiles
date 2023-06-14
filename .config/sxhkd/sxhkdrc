@@ -43,8 +43,8 @@ super + Tab
 #
 
 # Launch a terminal with app
-super + e; {m,N,t,r,l,w}
-    st muxcmd.sh -c {neomutt,newsboat,stig,rtv,lf,weechat}
+super + e; {m,N,t,r,l,s}
+    st muxcmd.sh -c {neomutt,newsboat,stig,rtv,lf,senpai-irc}
 
 super +e; {n}
     bspc rule -a \* -o state=floating && st -g 180x50 muxcmd.sh -c {ncmpcpp}
@@ -56,6 +56,9 @@ super + shift + e; {m,N,t,r,l,w,n}
 # Open a floating background window with the currently previewed image
 super + e; p
     cmd_control.sh -i 999 floater.sh -b sxiv -a -b -g 500x500-10+10 ~/.cache/preview_img
+
+super +s; y
+    ff-youtube-dl.sh
 
 #
 # bspwm
