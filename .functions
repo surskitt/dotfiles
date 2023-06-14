@@ -96,3 +96,15 @@ klo() {
         kubectl -n "${1}" logs -l app.kubernetes.io/name="${2}" -f
     fi
 }
+
+fmv() {
+    if [[ "${#}" -lt 2 ]]; then
+        return
+    fi
+
+    if [[ ! -d "${2}" ]]; then
+        return
+    fi
+
+    mv "${1}" "$(find "${2}" -type d | fzf +m)"
+}
