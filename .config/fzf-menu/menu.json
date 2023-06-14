@@ -55,7 +55,7 @@
   " emoji": "fzf-emoji.sh",
   " lf bookmarks": "d=$(cut -d ':' -f 2 ~/.local/share/lf/marks|sort -u|fzf +m); nohup st -e lf $d >/dev/null 2>&1 & sleep .2 && disown",
   " books": "fzf-calibre.sh",
-  " screen layouts": "find ~/.screenlayout -type f|fzf +m --layout=reverse-list|xargs -r bash && polybar-msg cmd restart && feh --bg-fill ~/.local/share/background/*",
+  " screen layouts": "find ~/.screenlayout -type f | sort | fzf +m --layout=reverse-list | xargs basename | xargs randr_handler.sh",
   " select desktops": "echo {1..3}|xargs -n 1 echo|fzf -m --layout=reverse-list|xargs bspc_monitors.sh; true",
   " github repos": "fzf-github-repos.sh",
   " github stars": "fzf-github-stars.sh",
