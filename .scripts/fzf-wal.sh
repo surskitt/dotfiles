@@ -6,7 +6,7 @@ type fzf >/dev/null || {
 }
 
 wal_dirs=(
-    /usr/lib/python3.7/site-packages/pywal/colorschemes
+    /usr/lib/python3.11/site-packages/pywal/colorschemes
     ~/.config/wal/colorschemes
 )
 
