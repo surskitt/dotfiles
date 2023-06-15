@@ -2,10 +2,6 @@
 # Application shortcuts
 #
 
-# disable middle click pasting
-button2
-    echo -n | xclip -in
-
 # Launch st (using tmux start script to create new sessions)
 super + Return
     st -e tmuxstart.sh
