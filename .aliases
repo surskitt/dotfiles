@@ -5,7 +5,7 @@ alias rr=ranger
 alias s=senpai-irc
 alias tf=terraform
 alias wee=weechat
-alias v=vim
+alias v=nvim
 alias cdd='cd $_'
 
 alias ls=lsd
