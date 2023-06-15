@@ -20,9 +20,13 @@ fi
 
 mkdir "${VDIR}/clips"
 
-if [[ "${START}" == "no" || "${END}" == "no" ]]; then
-    echo "Error: start and end points not set" >&2
-    exit 1
+# if [[ "${START}" == "no" || "${END}" == "no" ]]; then
+#     echo "Error: start and end points not set" >&2
+#     exit 1
+# fi
+
+if [[ "${START}" == "no" ]]; then
+    START="0.000000"
 fi
 
 STARTP="$(printf "%05d\n" "${START}")"

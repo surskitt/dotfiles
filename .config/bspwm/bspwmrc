@@ -58,7 +58,10 @@ pgrep xbanish >/dev/null || xbanish &
 pgrep light-locker >/dev/null || light-locker &
 ~/.config/polybar/launch.sh &
 
+systemctl --user import-environment DISPLAY XAUTHORITY
 systemctl --user start picom
+
+systemctl --user start sunshine
 
 if [ -f ~/.local/share/background/1 ]; then
     feh --bg-fill ~/.local/share/background/*

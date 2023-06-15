@@ -22,3 +22,5 @@
 	rebase = false
 [diff]
 	tool = vimdiff
+[protocol "file"]
+	allow = always
