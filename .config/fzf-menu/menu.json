@@ -44,8 +44,9 @@
       " pull from pocket": "poku; read; false"
   },
   " config": {
-    " xst": {
-      " font": "fzf_template -i xst_font.yml && xrdb ~/.Xresources && pkill -USR1 xst"
+    " st": {
+      " font": "fzf_template -i xst_font.yml && xrdb ~/.Xresources && pkill -USR1 xst",
+      " toggle transparency": "st-toggle-transparency.sh"
     }
   },
   " images": "fd . ~/Dropbox/Pictures -t d|fzf +m --layout=reverse-list|xargs -d '\n' -r sxiv -ftra",
