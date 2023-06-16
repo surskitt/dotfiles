@@ -1,4 +1,13 @@
+// todo
+// add a b shortcut to open bookmarks in omnibar
+// add a B shortcut to open bookmarks in new tab in omnibar
+// make youtube shortcuts work
+// add 9xbud shortcut (9xbud.com/https://www.youtube.com/watch?v=KMU0tzLwhbE)
+
 // settings.omnibarPosition = 'bottom';
+settings.defaultSearchEngine = 'l';
+settings.focusFirstCandidate = false;
+settings.focusAfterClosed = 'left';
 settings.tabsThreshold = 0;
 
 // open url in current tab
@@ -16,8 +25,8 @@ api.map('L', 'D');
 api.map('b', 'T');
 
 // Scroll Page Down/Up
-api.mapkey("<Ctrl-d>", "Scroll down", () => { Normal.scroll("pageDown"); });
-api.mapkey("<Ctrl-u>", "Scroll up", () => { Normal.scroll("pageUp"); });
+api.map('w', 'e');
+api.map('s', 'd');
 
 // Tab Next/Prev
 api.map('J', 'R');
@@ -32,6 +41,30 @@ api.map('d', 'x');
 
 // undo close tab
 api.map('u', 'X');
+
+api.map('+', 'zi');
+api.map('-', 'zo');
+api.map('=', 'zr');
+
+// api.mapkey('on', '#3Open newtab', function () {
+//     tabOpenLink("www.google.com");
+// });
+
+api.removeSearchAlias('b', 's');
+api.removeSearchAlias('h', 's');
+api.removeSearchAlias('r', 's');
+api.removeSearchAlias('w', 's');
+
+api.addSearchAlias('a', 'amazon', 'https://www.amazon.com/s?k=', 's');
+api.addSearchAlias('aw', 'arch wiki', 'https://wiki.archlinux.org/index.php?title=Special:Search&search=', 's');
+api.addSearchAlias('dl',  'ddg lucky', 'https://duckduckgo.com/?q=\\', 's');
+api.addSearchAlias('eb', 'ebay', 'https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=', 's'); 
+api.addSearchAlias('gh', 'github', 'https://github.com/search?q=', 's');
+api.addSearchAlias('i', 'google images', 'https://www.google.com/search?tbm=isch&q=d', 's');
+api.addSearchAlias('l', 'Im feeling lucky', 'https://www.google.com/search?btnI=1&q=', 's');
+api.addSearchAlias('m', 'google maps', 'https://www.google.com/maps?q=', 's');
+api.addSearchAlias('r', 'reddit', 'https://www.reddit.com/search/?q=', 's');
+api.addSearchAlias('wk', 'wikipedia', 'https://en.wikipedia.org/wiki/Special:Search/', 's');
 
 // Nord hints
 api.Hints.style('border: solid 2px #4C566A; color:#A3BE8C; background: initial; background-color: #3B4252; font-size: 11pt;');
