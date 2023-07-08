@@ -21,6 +21,8 @@ api.map('F', 'C');
 api.map('H', 'S');
 api.map('L', 'D');
 
+api.map('B', 'b');
+
 // choosse a buffer/tab
 api.map('b', 'T');
 
@@ -46,6 +48,9 @@ api.map('+', 'zi');
 api.map('-', 'zo');
 api.map('=', 'zr');
 
+api.cmap('<Ctrl-j>', '<Ctrl-n>');
+api.cmap('<Ctrl-k>', '<Ctrl-p>');
+
 // api.mapkey('on', '#3Open newtab', function () {
 //     tabOpenLink("www.google.com");
 // });
@@ -55,7 +60,7 @@ api.removeSearchAlias('h', 's');
 api.removeSearchAlias('r', 's');
 api.removeSearchAlias('w', 's');
 
-api.addSearchAlias('a', 'amazon', 'https://www.amazon.com/s?k=', 's');
+api.addSearchAlias('a', 'amazon', 'https://www.amazon.co.uk/s?k=', 's');
 api.addSearchAlias('aw', 'arch wiki', 'https://wiki.archlinux.org/index.php?title=Special:Search&search=', 's');
 api.addSearchAlias('dl',  'ddg lucky', 'https://duckduckgo.com/?q=\\', 's');
 api.addSearchAlias('eb', 'ebay', 'https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=', 's'); 
