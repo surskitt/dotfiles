@@ -38,11 +38,7 @@
       " office diffuser": "hass_switch.py switch.office_diffuser"
   },
   " systemd": "sysz",
-  " bookmarks": {
-      " all": "BROWSER=qutebrowser fzf-buku.sh",
-      " tags": "BROWSER=qutebrowser fzf-buku.sh -t",
-      " pull from pocket": "poku; read; false"
-  },
+  " bookmarks": "fzf-bookmarks.sh",
   " config": {
     " st": {
       " font": "fzf_template -i xst_font.yml && xrdb ~/.Xresources && pkill -USR1 xst",
