@@ -21,6 +21,9 @@ super + w
 super + T
     floater.sh st -g 150x28 hass_talk.sh
 
+super + b
+    floater.sh st -g 150x28 fzf-bookmarks.sh
+
 #
 # Rofi
 #
