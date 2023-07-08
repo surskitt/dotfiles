@@ -2,6 +2,10 @@
 
 . "${HOME}/.profile"
 
+# start ssh-agent
+ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+
 . "${HOME}/.cache/wal/colors.sh"
 
 monitors=($(bspc query -M))
