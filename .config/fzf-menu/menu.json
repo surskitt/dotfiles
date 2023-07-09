@@ -13,7 +13,8 @@
       " cover search": "read -r -p 'cover search: ' s ; sxiv-daapd.sh search ${s}",
       " update": "curl -X PUT http://mallard.lan:3689/api/update",
       " rescan": "curl -X PUT http://mallard.lan:3689/api/rescan",
-      " outputs": "fzf-daapd-outputs.sh"
+      " outputs": "fzf-daapd-outputs.sh",
+      " restart shairport-sync": "systemctl --user restart shairport-sync"
   },
   " weechat buffers": "fzf-weechat.sh",
   " search": {
