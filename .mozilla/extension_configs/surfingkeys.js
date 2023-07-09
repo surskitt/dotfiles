@@ -1,8 +1,8 @@
 // todo
-// add a b shortcut to open bookmarks in omnibar
-// add a B shortcut to open bookmarks in new tab in omnibar
 // make youtube shortcuts work
 // add 9xbud shortcut (9xbud.com/https://www.youtube.com/watch?v=KMU0tzLwhbE)
+// add cubari shortcut
+// add :wq shortcut
 
 // settings.omnibarPosition = 'bottom';
 settings.defaultSearchEngine = 'l';
