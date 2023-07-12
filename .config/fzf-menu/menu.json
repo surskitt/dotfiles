@@ -30,6 +30,7 @@
     " LG sound bar": "bluetoothctl power on && bluetoothctl connect 00:1F:47:CD:76:25",
     " disconnect": "bluetoothctl disconnect"
   },
+  " wifi": "fzf-wifi.sh",
   " passwords": "fzf-pass.sh; bspc node -g hidden; sleep 45",
   " home": {
       " talk": "hass_talk.sh",
