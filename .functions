@@ -78,7 +78,7 @@ pc() {
 }
 
 mountall() {
-    tr -s ' ' < /etc/fstab|cut -d ' ' -f 2|grep '^/'|sudo xargs -n 1 mount
+    tr -s ' ' < /etc/fstab|cut -d ' ' -f 2|grep '^/mnt/nfs'|sudo xargs -n 1 mount
 }
 
 kwpo() {
