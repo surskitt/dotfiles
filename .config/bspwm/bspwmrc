@@ -65,7 +65,10 @@ pgrep light-locker >/dev/null || light-locker &
 systemctl --user import-environment DISPLAY XAUTHORITY
 systemctl --user start picom
 
-systemctl --user start sunshine
+if [[ "${HOSTNAME}" == "wigeon" ]]; then
+    systemctl --user start sunshine
+    systemctl --user start ha-mqtt-iot
+fi
 
 if [ -f ~/.local/share/background/1 ]; then
     feh --bg-fill ~/.local/share/background/*

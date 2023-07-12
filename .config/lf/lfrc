@@ -29,6 +29,7 @@ map \\ $nemo .
 cmd open ${{
     case "${f##*.}" in
         vclip) setsid vclip.sh "${f}" > /dev/null 2> /dev/null &;;
+        cbz) setsid mcomix "${f}" >/dev/null 2>/dev/null &;;
         *)
             case $(file --mime-type $f -b) in
                 text/*) $EDITOR $fx;;

@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+DAAPD_HOST="192.168.2.5"
+
 ACTION="${1}"
 ARGS="${@:2}"
 
 refresh() {
     mkdir -p ~/.cache/sxiv-daapd/{uri,name}
 
-    json="$(curl -s http://mallard.lan:3689/api/library/albums)"
+    json="$(curl -s http://${DAAPD_HOST}:3689/api/library/albums)"
 
     json_lines="$(jq -r '.items[]|"\(.artist) - \(.name)	\(.uri)	\(.time_added)	\(.artwork_url)	\(.media_kind)"' <<< "${json}")"
 
@@ -21,7 +23,7 @@ refresh() {
             continue
         fi
 
-        curl -s "http://mallard.lan:3689/${url}" -o ~/.cache/sxiv-daapd/uri/"${uri}"
+        curl -s "http://${DAAPD_HOST}:3689/${url}" -o ~/.cache/sxiv-daapd/uri/"${uri}"
         ln -s ~/.cache/sxiv-daapd/uri/"${uri}" ~/.cache/sxiv-daapd/name/"${name}"
         touch -d "${date}" ~/.cache/sxiv-daapd/uri/"${uri}"
         touch -h -d "${date}" ~/.cache/sxiv-daapd/name/"${name}"
@@ -45,7 +47,7 @@ selector() {
 
     args="$(tr '\n' ',' <<< "${selected}" ; echo)"
 
-    curl -s -X POST "http://mallard.lan:3689/api/queue/items/add?uris=${args}"
+    curl -s -X POST "http://${DAAPD_HOST}:3689/api/queue/items/add?uris=${args}"
 }
 
 if [[ "${ACTION}" == refresh ]]; then
