@@ -22,3 +22,4 @@ set -s copy-command 'xsel -i'
 
 set -g @copy_mode_yank 'Enter'
 set -g @paste_key 'p'
+set -g @yank_selection_mouse 'clipboard'
