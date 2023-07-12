@@ -51,6 +51,10 @@ api.map('=', 'zr');
 api.cmap('<Ctrl-j>', '<Ctrl-n>');
 api.cmap('<Ctrl-k>', '<Ctrl-p>');
 
+api.mapkey('ym', "#7Copy current page's url in markdown format", () => {
+    api.Clipboard.write( '[' + document.title + '](' + window.location.href + ')');
+});
+
 // api.mapkey('on', '#3Open newtab', function () {
 //     tabOpenLink("www.google.com");
 // });
