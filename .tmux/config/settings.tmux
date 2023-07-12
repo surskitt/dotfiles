@@ -16,3 +16,9 @@ setw -g pane-base-index 1
 setw -g mode-keys vi
 setw -g alternate-screen on
 setw -g monitor-activity off
+
+# set -g default-command "reattach-to-user-namespace -l $SHELL"
+set -s copy-command 'xsel -i'
+
+set -g @copy_mode_yank 'Enter'
+set -g @paste_key 'p'
