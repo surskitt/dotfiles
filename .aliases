@@ -9,6 +9,7 @@ alias tf=terraform
 alias wee=weechat
 alias v=nvim
 alias cdd='cd $_'
+alias cdg='cd $(git rev-parse --show-toplevel)'
 
 alias ls=lsd
 alias l=lsd
