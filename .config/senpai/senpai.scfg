@@ -1,0 +1,9 @@
+address chat.sr.ht
+nickname sharktamer
+password-cmd gopass chat.sr.ht
+
+pane-widths {
+    nicknames 8
+    channels 0
+    members -16
+}
