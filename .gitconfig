@@ -3,6 +3,7 @@
 	name = shanedabes
 [alias]
     st = status -b --short
+    stf = ls-files -dmo
     stu = st -unormal
     ci = commit
     br = branch
