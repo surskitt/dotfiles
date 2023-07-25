@@ -40,5 +40,5 @@ if [ -z "${selected}" ]; then
 fi
 
 while IFS="	" read -r _ u; do
-    qutebrowser "${u}"
+    xdg-open "${u}"
 done <<< "${selected}"
