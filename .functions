@@ -81,6 +81,14 @@ mountall() {
     tr -s ' ' < /etc/fstab|cut -d ' ' -f 2|grep '^/mnt/nfs'|sudo xargs -n 1 mount
 }
 
+umountall() {
+    for i in /mnt/nfs/*; do sudo umount "${i}"; done
+}
+
+lumountall() {
+    for i in /mnt/nfs/*; do sudo umount -l "${i}"; done
+}
+
 kwpo() {
     if [[ "${#}" == 1 ]]; then
         watch kubectl get po -l app.kubernetes.io/name="${1}"
