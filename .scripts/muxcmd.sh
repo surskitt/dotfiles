@@ -4,8 +4,11 @@ usage() {
     echo "Usage: ${0} (-c cmd | -t tmuxp_project)"
 }
 
-while getopts 'c:t:h' opt; do
+while getopts 'n:c:t:h' opt; do
     case "${opt}" in
+        n)
+            NAME="${OPTARG}"
+            ;;
         c)
             CMD="${OPTARG}"
             ;;
@@ -18,6 +21,10 @@ while getopts 'c:t:h' opt; do
     esac
 done
 shift $(( OPTIND - 1 ))
+
+if [[ -z "${NAME}" ]]; then
+    NAME="${CMD}"
+fi
 
 if [[ -z "${CMD}" ]] && [[ -z "${TMUXP_PROJECT}" ]]; then
     echo "ERROR: One of '-c' or '-t' must be passed" >&2
@@ -32,7 +39,7 @@ if [[ -n "${CMD}" ]] && [[ -n "${TMUXP_PROJECT}" ]]; then
 fi
 
 if [[ -n $CMD ]]; then
-    tmux new-session -s "${CMD}" -n ' ' "${CMD}" || tmux attach -t "${CMD}"
+    tmux new-session -s "${NAME}" -n ' ' "${CMD}" || tmux attach -t "${NAME}"
 fi
 
 if [[ -n $TMUXP_PROJECT ]]; then
