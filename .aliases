@@ -13,6 +13,8 @@ alias v=nvim
 alias cdd='cd $_'
 alias cdg='cd $(git rev-parse --show-toplevel)'
 
+alias sops='summon -f ~/.config/summon/sops.yaml sops'
+
 alias ls=lsd
 alias l=lsd
 
