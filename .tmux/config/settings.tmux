@@ -1,13 +1,15 @@
-set -g default-terminal screen-256color
+set -g default-terminal tmux-256color
 set -g base-index 1
 set -g renumber-windows on
 set -g allow-rename off
 set -g mouse on
-set -g terminal-overrides ,xterm-256color:Tc
 set -g visual-activity off
 set -g bell-action none
 set -g visual-bell off
 set -g set-titles on
+
+set -g terminal-overrides ,st-256color:Tc
+set-option -sa terminal-features ',st-256color:RGB'
 
 set -s escape-time 0
 
