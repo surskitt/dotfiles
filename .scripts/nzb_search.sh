@@ -2,17 +2,19 @@
 
 TAB="	"
 
-if [[ -z "${NZB_API}" ]]; then
-    echo "Error: NZB_API is not set" >&2
-fi
+# if [[ -z "${NZB_API}" ]]; then
+#     echo "Error: NZB_API is not set" >&2
+# fi
 
-if [[ -z "${NZBGET_USERNAME}" ]]; then
-    echo "Error: NZBGET_USERNAME is not set" >&2
-fi
+# if [[ -z "${NZBGET_USERNAME}" ]]; then
+#     echo "Error: NZBGET_USERNAME is not set" >&2
+# fi
 
-if [[ -z "${NZBGET_PASSWORD}" ]]; then
-    echo "Error: NZBGET_PASSWORD is not set" >&2
-fi
+# if [[ -z "${NZBGET_PASSWORD}" ]]; then
+#     echo "Error: NZBGET_PASSWORD is not set" >&2
+# fi
+
+NZB_API="$(gopass drunkenslug_api_key)"
 
 SEARCH="${@}"
 
