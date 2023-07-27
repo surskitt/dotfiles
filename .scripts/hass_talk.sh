@@ -6,17 +6,11 @@ if [[ -z "${TEXT}" ]] ; then
     read -p "Home assistant: " TEXT
 fi
 
-# AUTH="$(
-# cat << EOF
-# {
-#     "Authorization": "Bearer ${HASS_API_KEY}",
-#     "content-type": "application/json"
-# }
-# EOF
-# )"
+HASS_URL="hass.$(gopass mallard_domain)"
+HASS_API_KEY="$(gopass hass_api_key)"
 
-curl -X POST \
+curl -L -X POST \
     -H "Authorization: Bearer ${HASS_API_KEY}" \
     -H "Content-Type: application/json" \
     -d "{\"text\": \"${TEXT}\"}" \
-    "${HASS_URL}/api/services/conversation/process"
+    "https://${HASS_URL}/api/services/conversation/process"
