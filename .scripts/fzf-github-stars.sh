@@ -5,7 +5,7 @@ nl="
 empty="[${nl}${nl}]"
 
 USER=shanedabes
-PASS="${GH_STAR_LISTER_PAT}"
+PASS="$(gopass github/star_listener_pat)"
 
 if [ -z "${PASS}" ]; then
     echo "Error: GH_STAR_LISTER_PAT not set" >&2
