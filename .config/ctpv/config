@@ -1,5 +1,13 @@
 set shell "/usr/bin/bash"
 
+preview vclipgif .vclip {{
+    vclipthumb() {
+        ctpv_get_thumb.sh "${f}" "${cache_f}"
+    }
+
+    convert_and_show_image vclipthumb
+}}
+
 preview vclip .vclip {{
     vclip() {
       cp "$(vclip.sh "${f}" thumb)" "$cache_f"
@@ -7,6 +15,8 @@ preview vclip .vclip {{
 
     convert_and_show_image vclip
 }}
+
+priority vclipgif
 
 preview mp4thumb video/* {{
     mp4thumb() {
