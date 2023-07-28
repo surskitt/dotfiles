@@ -1,3 +1,5 @@
+# vim: set filetype=sh :
+
 g() {
   if [ "$#" -eq 0 ]; then
     git st
@@ -122,4 +124,31 @@ cf() {
     if [[ ! -z "${d}" ]]; then
         cd "${d}"
     fi
+}
+
+fzf-source() {
+    for cmd in fzf yq ; do
+        if ! command -v "${cmd}" > /dev/null ; then
+            echo "Error: ${cmd} not found" >&2
+            return 1
+        fi
+    done
+
+    if [[ "${#}" -lt 1 ]]; then
+        echo "Error: pass a config file" >&2
+        echo "Usage: fzf-source YAML_FILE" >&2
+        return 1
+    fi
+
+    config="${1}"
+
+    selection="$(yq -r -e 'keys[]' "${config}" | fzf +m --layout=reverse-list)"
+
+    if [[ -z "${selection}" ]] ; then
+        return 1
+    fi
+
+    s="$(yq -r -e ".${selection}" "${config}")"
+
+    source <(echo "${s}")
 }
