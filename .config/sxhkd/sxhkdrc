@@ -45,8 +45,8 @@ super + Tab
 super + shift + e; {m,N,t,r,l,s}
     st muxcmd.sh -c {neomutt,newsboat,stig,rtv,lf,senpai-irc}
 
-super +e; {n}
-    bspc rule -a \* -o state=floating && st -g 180x50 muxcmd.sh -c {ncmpcpp}
+super +e; n
+    bspc rule -a \* -o state=floating && st -g 180x50 muxcmd.sh -c ncmpcppaa.sh -n ncmpcpp
 
 # Launch a floating terminal with app
 super + e; {m,N,t,r,l,s,n}
