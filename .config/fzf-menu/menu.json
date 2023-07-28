@@ -33,12 +33,6 @@
   },
   " wifi": "fzf-wifi.sh",
   " passwords": "fzf-pass.sh; bspc node -g hidden; sleep 45",
-  " home": {
-      " talk": "hass_talk.sh",
-      " office light": "hass_switch.py switch.office_light_switch",
-      " office temperature": "read -p 'temperature: ' temperature; hass_set_temp.py office ${temperature}",
-      " office diffuser": "hass_switch.py switch.office_diffuser"
-  },
   " systemd": "sysz",
   " bookmarks": "fzf-bookmarks.sh",
   " config": {
