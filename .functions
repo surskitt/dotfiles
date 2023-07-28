@@ -116,3 +116,10 @@ fmv() {
 
     mv "${1}" "$(find "${2}" -type d | fzf +m)"
 }
+
+cf() {
+    d="$(fd . -t d | fzf +m)"
+    if [[ ! -z "${d}" ]]; then
+        cd "${d}"
+    fi
+}
