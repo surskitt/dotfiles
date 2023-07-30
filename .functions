@@ -120,7 +120,7 @@ fmv() {
 }
 
 cf() {
-    d="$(fd . -t d | fzf +m)"
+    d="$(fd . -t d | fzf +m --layout=reverse-list)"
     if [[ ! -z "${d}" ]]; then
         cd "${d}"
     fi
