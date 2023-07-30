@@ -1,5 +1,5 @@
 alias c=clear
-alias b=buku --np
+alias b="buku --np"
 alias e="exa --icons --group"
 alias k=kubectl
 alias p=gopass
