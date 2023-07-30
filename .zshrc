@@ -1,6 +1,6 @@
-[ -f ~/.profile ] && source ~/.profile
-[ -f ~/.aliases ] && source ~/.aliases
-[ -f ~/.functions ] && source ~/.functions
+ source ~/.profile
+ source ~/.aliases
+ source ~/.functions
 
 source ~/.zshrc.d/profile.zshrc
 source ~/.zshrc.d/autoload.zshrc
