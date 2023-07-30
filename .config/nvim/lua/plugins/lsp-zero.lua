@@ -16,8 +16,16 @@ return {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
-            { 'L3MON4D3/LuaSnip' },
-            { 'hrsh7th/cmp-path' },
+            'L3MON4D3/LuaSnip',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-cmdline',
+
+            'hrsh7th/cmp-nvim-lua',
+            -- snippets with LuaSnip
+            'rafamadriz/friendly-snippets',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
         },
         config = function()
             -- Here is where you configure the autocompletion settings.
@@ -29,9 +37,10 @@ return {
             -- And you can configure cmp even more, if you want to.
             local cmp = require('cmp')
             local cmp_action = require('lsp-zero.cmp').action()
+            local luasnip = require('luasnip')
 
             -- initialize global var to false -> nvim-cmp turned off per default
-            vim.g.cmptoggle = false
+            vim.g.cmptoggle = true
 
             cmp.setup({
                 enabled = function()
@@ -40,19 +49,62 @@ return {
                 mapping = {
                     ['<CR>'] = cmp.mapping.confirm({ select = false }),
                     ['<Tab>'] = cmp_action.tab_complete(),
-                    ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
                     ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select_opts),
                     ['<C-j>'] = cmp.mapping.select_next_item(cmp_select_opts),
 
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-f>'] = cmp_action.luasnip_jump_forward(),
                     ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+                            -- they way you will only jump inside the snippet region
+                        elseif luasnip.expand_or_locally_jumpable() then
+                            luasnip.expand_or_jump()
+                        elseif has_words_before() then
+                            cmp.complete()
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
                 },
                 preselect = 'item',
                 completion = {
                     -- autocomplete = false,
-                    completeopt = 'menu,menuone,noinsert'
-                }
+                    completeopt = 'menu, menuone, noinsert'
+                },
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end
+                },
+                sources = cmp.config.sources({
+                    { name = "nvim_lsp" },
+                    {
+                        name = "luasnip",
+                        keyword_length = 3
+                    },
+                    { name = "nvim_lua" },
+                    { name = 'nvim_lsp_document_symbol' },
+                    { name = 'nvim_lsp_signature_help' },
+                    { name = "path" },
+                    {
+                        name = "buffer",
+                        keyword_length = 7
+                    },
+                }),
             })
 
             vim.keymap.set("n", "<leader>tc", "<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>",
@@ -102,6 +154,7 @@ return {
                 "rust_analyzer",
                 "terraformls",
                 "tflint",
+                "yamlls",
             })
 
             lsp.format_on_save({
