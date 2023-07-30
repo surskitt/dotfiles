@@ -33,6 +33,15 @@ y() {
 
 }
 
+yw() {
+  if [ "$#" -eq 0 ]; then
+    yadm --yadm-dir "${HOME}/.config/yadm-w" --yadm-data "${HOME}/.local/share/yadm-w" st
+  else
+    yadm --yadm-dir "${HOME}/.config/yadm-w" --yadm-data "${HOME}/.local/share/yadm-w" $*
+  fi
+
+}
+
 wp() {
     [ "${#}" -eq 0 ] && return
 
