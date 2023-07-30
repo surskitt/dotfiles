@@ -6,7 +6,6 @@ g() {
   else
     git $*
   fi
-
 }
 
 ali() {
@@ -80,10 +79,6 @@ rcpn() {
     notify-send "${1} -> ${2} done"
 }
 
-tp() {
-    tmuxp ls|fzf --layout=reverse-list|xargs -r tmuxp load -y
-}
-
 pc() {
     python -c "print(${1})"
 }
@@ -116,48 +111,6 @@ klo() {
     fi
 }
 
-fmv() {
-    if [[ "${#}" -lt 2 ]]; then
-        return
-    fi
-
-    if [[ ! -d "${2}" ]]; then
-        return
-    fi
-
-    mv "${1}" "$(find "${2}" -type d | fzf +m)"
-}
-
-cf() {
-    d="$(fd . -t d | fzf +m --layout=reverse-list)"
-    if [[ ! -z "${d}" ]]; then
-        cd "${d}"
-    fi
-}
-
-fzf-source() {
-    for cmd in fzf yq ; do
-        if ! command -v "${cmd}" > /dev/null ; then
-            echo "Error: ${cmd} not found" >&2
-            return 1
-        fi
-    done
-
-    if [[ "${#}" -lt 1 ]]; then
-        echo "Error: pass a config file" >&2
-        echo "Usage: fzf-source YAML_FILE" >&2
-        return 1
-    fi
-
-    config="${1}"
-
-    selection="$(yq -r -e 'keys[]' "${config}" | fzf +m --layout=reverse-list)"
-
-    if [[ -z "${selection}" ]] ; then
-        return 1
-    fi
-
-    s="$(yq -r -e ".${selection}" "${config}")"
-
-    source <(echo "${s}")
-}
+for f in ~/.functions.d/* ; do
+    source "${f}"
+done
