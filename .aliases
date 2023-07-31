@@ -1,3 +1,5 @@
+# vim: set filetype=sh :
+
 alias c=clear
 alias b="buku --np"
 alias e="exa --icons --group"
