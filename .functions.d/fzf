@@ -5,6 +5,13 @@ cf() {
     fi
 }
 
+cr() {
+    d="$(fd -u '^.git$' ~/code -t d --prune -x dirname | fzf +m --layout=reverse-list)"
+    if [[ ! -z "${d}" ]]; then
+        cd "${d}"
+    fi
+}
+
 fzf-source() {
     for cmd in fzf yq ; do
         if ! command -v "${cmd}" > /dev/null ; then
