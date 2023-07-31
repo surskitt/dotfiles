@@ -14,6 +14,7 @@ alias wee=weechat
 alias v=nvim
 alias cdd='cd $_'
 alias cdg='cd $(git rev-parse --show-toplevel)'
+alias cg='cd $(git rev-parse --show-toplevel)'
 
 alias sops='summon -f ~/.config/summon/sops.yaml sops'
 
