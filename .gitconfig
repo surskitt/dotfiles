@@ -25,3 +25,5 @@
 	tool = vimdiff
 [protocol "file"]
 	allow = always
+[include]
+    path=.gitconfig.extra

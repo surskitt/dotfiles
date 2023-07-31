@@ -32,7 +32,6 @@ $python\
 $ruby\
 $rust\
 $swift\
-$terraform\
 $zig\
 $nix_shell\
 $conda\
@@ -107,6 +106,8 @@ style = "cyan bg:black"
 [hostname]
 style = "green bg:black"
 format = "[ $hostname]($style) "
+trim_at = ''
+ssh_only = false
 
 [jobs]
 symbol = ""
@@ -134,3 +135,4 @@ style = "purple bg:black"
 [username]
 style_user = "yellow bg:black"
 format = "[ $user]($style) "
+disabled = true
