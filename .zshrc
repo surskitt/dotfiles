@@ -10,12 +10,10 @@ source ~/.zshrc.d/opts.zshrc
 source ~/.zshrc.d/zstyle.zshrc
 source ~/.zshrc.d/zmodload.zshrc
 
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
-
 source ~/.zshrc.d/bindings.zshrc
 
-bindkey -M viins jj vi-cmd-mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 autoload -U +X bashcompinit && bashcompinit
 

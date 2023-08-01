@@ -1,15 +1,4 @@
-if ! zgen saved; then
-    zgen load sharat87/zsh-vim-mode
-    zgen load zsh-users/zsh-autosuggestions
-    zgen load zuxfoucault/colored-man-pages_mod
-    zgen load zsh-users/zsh-history-substring-search
-    zgen load zdharma/fast-syntax-highlighting
-    # zgen load hlissner/zsh-autopair
-    zgen load ninrod/pass-zsh-completion
-    zgen load 'wfxr/forgit'
-
-    zgen save
-    zcompile "${HOME}/.zgen/init.zsh"
-else
-    source "${HOME}/.zgen/init.zsh"
-fi
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh # yay -S zsh-vi-mode
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh # yay -S zsh-autosuggestions
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh # yay -S zsh-fast-syntax-highlighting
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh # yay -S zsh-history-substring-search
