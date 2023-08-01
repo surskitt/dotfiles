@@ -9,7 +9,8 @@ return {
             options = {
                 style_preset = bufferline.style_preset.no_italic,
                 always_show_bufferline = true,
-                separator_style = {'', ''},
+                separator_style = { '', '' },
+                buffer_close_icon = '',
             }
         })
     end,

@@ -6,7 +6,7 @@ cf() {
 }
 
 cr() {
-    d="$(fd -u '^.git$' ~/code -t d --prune -x dirname | fzf +m --layout=reverse-list)"
+    d="$(fd -u '^.git$' ~/code -t d --prune -x dirname | grep -v '\.terraform' | fzf +m --layout=reverse-list)"
     if [[ ! -z "${d}" ]]; then
         cd "${d}"
     fi
