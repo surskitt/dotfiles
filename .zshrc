@@ -1,6 +1,6 @@
- source ~/.profile
- source ~/.aliases
- source ~/.functions
+source ~/.profile
+source ~/.aliases
+source ~/.functions
 
 source ~/.zshrc.d/profile.zshrc
 source ~/.zshrc.d/autoload.zshrc
@@ -12,10 +12,8 @@ source ~/.zshrc.d/zmodload.zshrc
 
 source ~/.zshrc.d/bindings.zshrc
 
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
 autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
 
 eval "$(starship init zsh)"
 export RPROMPT=""
