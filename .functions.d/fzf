@@ -28,13 +28,13 @@ fzf-source() {
 
     config="${1}"
 
-    selection="$(yq -r -e 'keys[]' "${config}" | fzf +m --layout=reverse-list)"
+    selection="$(yq -r 'keys|.[]' "${config}" | fzf +m --layout=reverse-list)"
 
     if [[ -z "${selection}" ]] ; then
         return 1
     fi
 
-    s="$(yq -r -e ".${selection}" "${config}")"
+    s="$(yq -r ".${selection}" "${config}")"
 
     source <(echo "${s}")
 }
