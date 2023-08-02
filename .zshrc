@@ -15,5 +15,7 @@ source ~/.zshrc.d/bindings.zshrc
 autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
+compdef _files bat
+
 eval "$(starship init zsh)"
 export RPROMPT=""
