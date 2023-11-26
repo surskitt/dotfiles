@@ -19,4 +19,8 @@ if [[ "${selected}" = *[[:space:]]* ]]; then
     selected="$(cut -d ' ' -f 2 <<< "${selected}")"
 fi
 
+if [[ -z "${selected}" ]] ; then
+    exit 1
+fi
+
 xdg-open "${selected}"
