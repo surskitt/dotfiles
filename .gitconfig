@@ -1,6 +1,6 @@
 [user]
-	email = shane@isda.best
-	name = shanedabes
+	name = surskitt
+	email = surskitt@users.noreply.github.com
 [alias]
     st = status -b --short
     stf = ls-files -dmo
@@ -27,3 +27,5 @@
 	allow = always
 [include]
     path=.gitconfig.extra
+[push]
+	autoSetupRemote = true
