@@ -30,7 +30,8 @@ super + b
 
 # Launch rofi application selector
 super + q
-    dmenu.sh
+    floater.sh st -g 150x28 fzf-applications.sh
+    # dmenu.sh
     # rofi -show drun -monitor -4
 
 # Launch rofi window selector
@@ -154,6 +155,9 @@ super + g; d
 
 # cycle between nodes on current desktop
 super + {_,shift + }o
+    bspc node -f '{next,prev}.local.!hidden.window'
+
+super + {_,shift + }z
     bspc node -f '{next,prev}.local.!hidden.window'
 
 # move current desktop to next monitor
