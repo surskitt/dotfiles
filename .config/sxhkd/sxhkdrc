@@ -250,3 +250,13 @@ super + t; m
 # Show a notification using polybar notification script
 super + n; {y,p,t,d,u,b,D}
     {ytsp_status.sh,pacman_count.sh,tsp_status.sh,date,uptime,battery_status.sh,disk_usage.sh}|poly_notify.sh
+
+# quick access to daapd functions
+super + d; {q,r,o}
+    floater.sh st -g 150x28 { fzf-daapd.sh, fzf-daapd-random.sh, fzf-daapd-outputs.sh }
+
+super + d ; {c}
+    { sxiv-daapd.sh }
+
+super + shift + w
+    floater.sh st -g 150x28 fzf-wifi.sh
