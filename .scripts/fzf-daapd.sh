@@ -10,7 +10,11 @@ albums_json="$(curl -s http://mallard.lan:3689/api/library/albums)"
 
 # echo "${albums_json}"
 
-album_list="$(jq -r '.items[]|"\(.artist) - \(.name)	\(.uri)	\(.time_added)"' <<< "${albums_json}" | sort -t '	' -k 3 -r )"
+album_list="$(
+    jq -r '.items[]|"\(.artist) - \(.name)	\(.uri)	\(.time_added)"' <<< "${albums_json}" |
+        sort -t '	' -k 3 -r |
+        grep -v -e 'Various Artists' -e '^ - '
+)"
 
 selected="$(fzf -m -d '	' --with-nth=1 --layout=reverse-list <<< "${album_list}"|cut -d '	' -f 2)"
 
