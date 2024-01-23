@@ -44,6 +44,7 @@
     }
   },
   " images": "fd . ~/Dropbox/Pictures -t d|fzf +m --layout=reverse-list|xargs -d '\n' -r sxiv -ftra",
+  " roms": "fzf-roms.sh -d ~/emu/roms",
   " colour schemes": "fzf-wal && pkill -USR1 xst && qutebrowser_reload.py && killall dunst",
   "缾open windows": "fzf-wmctrl.sh",
   " nerdfonts": "fzf-nerdfonts.sh",
