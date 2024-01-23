@@ -57,8 +57,11 @@ super + e; {m,N,t,r,l,s,n}
 super + e; p
     cmd_control.sh -i 999 floater.sh -b sxiv -a -b -g 500x500-10+10 ~/.cache/preview_img
 
-super +s; y
+super+s; y
     ff-youtube-dl.sh
+
+super+s; g
+    ff-gallery-dl.sh
 
 #
 # bspwm
