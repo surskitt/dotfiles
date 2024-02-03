@@ -149,6 +149,7 @@ return {
                 "bashls",
                 "golangci_lint_ls",
                 "gopls",
+                "jsonls",
                 "lua_ls",
                 "ruff_lsp",
                 "rust_analyzer",
@@ -170,6 +171,7 @@ return {
                     ['python'] = { 'ruff_lsp' },
                     ['rust_analyzer'] = { 'rust' },
                     ['terraformls'] = { 'terraform' },
+                    ['jsonls'] = { 'json' },
                 }
             })
 
