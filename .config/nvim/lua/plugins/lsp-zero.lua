@@ -47,7 +47,7 @@ return {
                     return vim.g.cmptoggle
                 end,
                 mapping = {
-                    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+                    ['<C-l>'] = cmp.mapping.confirm({ select = false }),
                     ['<Tab>'] = cmp_action.tab_complete(),
                     ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select_opts),
                     ['<C-j>'] = cmp.mapping.select_next_item(cmp_select_opts),
