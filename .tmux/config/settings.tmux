@@ -25,3 +25,8 @@ set -s copy-command 'xsel -i'
 set -g @copy_mode_yank 'Enter'
 set -g @paste_key 'p'
 set -g @yank_selection_mouse 'clipboard'
+
+set -g allow-passthrough on
+
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM

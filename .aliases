@@ -18,6 +18,8 @@ alias cdd='cd $_'
 alias cdg='cd $(git rev-parse --show-toplevel)'
 alias cg='cd $(git rev-parse --show-toplevel)'
 
+alias sops='SOPS_AGE_KEY=$(gopass sops-age-key) sops'
+
 alias ls=lsd
 alias l=lsd
 

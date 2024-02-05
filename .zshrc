@@ -16,6 +16,7 @@ autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
 compdef _files bat
+compdef _files sops
 
 eval "$(starship init zsh)"
 export RPROMPT=""

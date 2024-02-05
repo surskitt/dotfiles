@@ -1,4 +1,5 @@
 {
+  "󰀻 applications": "fzf-applications.sh",
   " youtube subscriptions": "fzf-menu.sh ~/.config/fzf-menu/youtube.json",
   " spotify": "false && cat /tmp/spu|fzfp.sh -I curlout.sh -- --layout=reverse-list +m --with-nth={3..}|cut -d ' ' -f 2|xargs playerctl -p spotify open",
   " mpd": {
@@ -14,6 +15,7 @@
       " update": "curl -X PUT http://mallard.lan:3689/api/update",
       " rescan": "curl -X PUT http://mallard.lan:3689/api/rescan",
       " outputs": "fzf-daapd-outputs.sh",
+      " reset outputs": "daapd_output_reset.sh",
       " restart shairport-sync": "systemctl --user restart shairport-sync"
   },
   " weechat buffers": "fzf-weechat.sh",
@@ -42,6 +44,7 @@
     }
   },
   " images": "fd . ~/Dropbox/Pictures -t d|fzf +m --layout=reverse-list|xargs -d '\n' -r sxiv -ftra",
+  " roms": "fzf-roms.sh -d ~/emu/roms",
   " colour schemes": "fzf-wal && pkill -USR1 xst && qutebrowser_reload.py && killall dunst",
   "缾open windows": "fzf-wmctrl.sh",
   " nerdfonts": "fzf-nerdfonts.sh",

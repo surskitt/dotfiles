@@ -23,9 +23,19 @@ return {
 
             'hrsh7th/cmp-nvim-lua',
             -- snippets with LuaSnip
-            'rafamadriz/friendly-snippets',
-            'L3MON4D3/LuaSnip',
+            {
+                'L3MON4D3/LuaSnip',
+                config = function()
+                    require("luasnip").config.setup {
+                        updateevents = "TextChanged,TextChangedI",
+                    }
+                    require("snippets")
+                end,
+            },
             'saadparwaiz1/cmp_luasnip',
+            'rafamadriz/friendly-snippets',
+
+            'onsails/lspkind.nvim',
         },
         config = function()
             -- Here is where you configure the autocompletion settings.
@@ -39,6 +49,8 @@ return {
             local cmp_action = require('lsp-zero.cmp').action()
             local luasnip = require('luasnip')
 
+            require("luasnip.loaders.from_vscode").lazy_load()
+
             -- initialize global var to false -> nvim-cmp turned off per default
             vim.g.cmptoggle = true
 
@@ -47,8 +59,8 @@ return {
                     return vim.g.cmptoggle
                 end,
                 mapping = {
-                    ['<CR>'] = cmp.mapping.confirm({ select = false }),
-                    ['<Tab>'] = cmp_action.tab_complete(),
+                    ['<C-l>'] = cmp.mapping.confirm({ select = false }),
+                    -- ['<Tab>'] = cmp_action.tab_complete(),
                     ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select_opts),
                     ['<C-j>'] = cmp.mapping.select_next_item(cmp_select_opts),
 
@@ -56,29 +68,32 @@ return {
                     ['<C-f>'] = cmp_action.luasnip_jump_forward(),
                     ['<C-b>'] = cmp_action.luasnip_jump_backward(),
 
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-                            -- they way you will only jump inside the snippet region
-                        elseif luasnip.expand_or_locally_jumpable() then
-                            luasnip.expand_or_jump()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
+                    ['<Tab>'] = cmp_action.luasnip_supertab(),
+                    ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
+                    -- ["<Tab>"] = cmp.mapping(function(fallback)
+                    --     if cmp.visible() then
+                    --         cmp.select_next_item()
+                    --         -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+                    --         -- they way you will only jump inside the snippet region
+                    --     elseif luasnip.expand_or_locally_jumpable() then
+                    --         luasnip.expand_or_jump()
+                    --         -- elseif has_words_before() then
+                    --         --     cmp.complete()
+                    --     else
+                    --         fallback()
+                    --     end
+                    -- end, { "i", "s" }),
+                    --
+                    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    --     if cmp.visible() then
+                    --         cmp.select_prev_item()
+                    --     elseif luasnip.jumpable(-1) then
+                    --         luasnip.jump(-1)
+                    --     else
+                    --         fallback()
+                    --     end
+                    -- end, { "i", "s" }),
                 },
                 preselect = 'item',
                 completion = {
@@ -94,10 +109,10 @@ return {
                     { name = "nvim_lsp" },
                     {
                         name = "luasnip",
-                        keyword_length = 3
+                        -- keyword_length = 3
                     },
-                    { name = "nvim_lua" },
-                    { name = 'nvim_lsp_document_symbol' },
+                    -- { name = "nvim_lua" },
+                    -- { name = 'nvim_lsp_document_symbol' },
                     { name = 'nvim_lsp_signature_help' },
                     { name = "path" },
                     {
@@ -105,6 +120,14 @@ return {
                         keyword_length = 7
                     },
                 }),
+                formatting = {
+                    fields = { 'abbr', 'kind', 'menu' },
+                    format = require('lspkind').cmp_format({
+                        mode = 'symbol_text',
+                        maxwidth = 50,
+                        ellipsis_char = '...',
+                    })
+                }
             })
 
             vim.keymap.set("n", "<leader>tc", "<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>",
@@ -134,8 +157,6 @@ return {
             end)
 
             local lspconfig = require('lspconfig')
-            -- (Optional) Configure lua language server for neovim
-            lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
             lsp.set_sign_icons({
                 error = '✘',
@@ -149,6 +170,7 @@ return {
                 "bashls",
                 "golangci_lint_ls",
                 "gopls",
+                "jsonls",
                 "lua_ls",
                 "ruff_lsp",
                 "rust_analyzer",
@@ -170,7 +192,19 @@ return {
                     ['python'] = { 'ruff_lsp' },
                     ['rust_analyzer'] = { 'rust' },
                     ['terraformls'] = { 'terraform' },
+                    ['jsonls'] = { 'json' },
                 }
+            })
+
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+            lspconfig.lua_ls.setup({
+                lsp.nvim_lua_ls(),
+                capabilities = capabilities
+            })
+
+            lspconfig.terraformls.setup({
+                capabilities = capabilities
             })
 
             lsp.setup()

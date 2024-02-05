@@ -30,7 +30,8 @@ super + b
 
 # Launch rofi application selector
 super + q
-    dmenu.sh
+    floater.sh st -g 150x28 fzf-applications.sh
+    # dmenu.sh
     # rofi -show drun -monitor -4
 
 # Launch rofi window selector
@@ -56,8 +57,11 @@ super + e; {m,N,t,r,l,s,n}
 super + e; p
     cmd_control.sh -i 999 floater.sh -b sxiv -a -b -g 500x500-10+10 ~/.cache/preview_img
 
-super +s; y
+super+s; y
     ff-youtube-dl.sh
+
+super+s; g
+    ff-gallery-dl.sh
 
 #
 # bspwm
@@ -156,6 +160,9 @@ super + g; d
 super + {_,shift + }o
     bspc node -f '{next,prev}.local.!hidden.window'
 
+super + {_,shift + }z
+    bspc node -f '{next,prev}.local.!hidden.window'
+
 # move current desktop to next monitor
 # super + bracket{left,right}
 #     desk=$(bspc query -D -d focused); \
@@ -246,3 +253,13 @@ super + t; m
 # Show a notification using polybar notification script
 super + n; {y,p,t,d,u,b,D}
     {ytsp_status.sh,pacman_count.sh,tsp_status.sh,date,uptime,battery_status.sh,disk_usage.sh}|poly_notify.sh
+
+# quick access to daapd functions
+super + d; {q,r,o}
+    floater.sh st -g 150x28 { fzf-daapd.sh, fzf-daapd-random.sh, fzf-daapd-outputs.sh }
+
+super + d ; {c}
+    { sxiv-daapd.sh }
+
+super + shift + w
+    floater.sh st -g 150x28 fzf-wifi.sh

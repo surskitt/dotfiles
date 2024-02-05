@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/shane/code/go/gowon/pkg/message'
+let g:netrw_dirhist_1='/home/shane/code/go/gowon/demo/module2'
+let g:netrw_dirhist_0='/home/shane/.platformio/penv/bin'
+let g:netrw_dirhist_9='/home/shane/.config/ncmpcpp'
+let g:netrw_dirhist_8='/home/shane/code/kubernetes/paddlepond/kube/infra'
+let g:netrw_dirhist_7='/home/shane/code/kubernetes/paddlepond/kube/sources'
+let g:netrw_dirhist_6='/home/shane/code/misc/hass-config/automations'
+let g:netrw_dirhist_5='/home/shane/.config/ansible/inventory'
+let g:netrw_dirhist_4='/home/shane/code/misc/hass-config/automations'
+let g:netrw_dirhist_3='/home/shane/.config/fzf-menu'

@@ -1,3 +1,4 @@
+.config/fzf-bookmarks/bookmarks.txt filter=git-crypt diff=git-crypt
 .config/gotify-dunst/gotify-dunst.conf filter=git-crypt diff=git-crypt
 .config/qutebrowser/quickmarks filter=git-crypt diff=git-crypt
 .redshiftgrc filter=git-crypt diff=git-crypt
