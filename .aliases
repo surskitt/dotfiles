@@ -11,13 +11,12 @@ alias rr=ranger
 alias s=senpai-irc
 alias task=go-task
 alias tf=terraform
+alias tg=terragrunt
 alias wee=weechat
 alias v=nvim
 alias cdd='cd $_'
 alias cdg='cd $(git rev-parse --show-toplevel)'
 alias cg='cd $(git rev-parse --show-toplevel)'
-
-alias sops='summon -f ~/.config/summon/sops.yaml sops'
 
 alias ls=lsd
 alias l=lsd
@@ -36,6 +35,7 @@ alias tspw='while ps -fp $(tsp -p 2>/dev/null) >/dev/null 2>&1; do tsp -c; sleep
 alias ytspw='while ps -fp $(ytsp -p 2>/dev/null) >/dev/null 2>&1; do ytsp -c; sleep 5;done'
 
 alias bat="bat --paging=never"
+alias by="bat -l yaml"
 alias glow="glow -w $(tput cols)"
 alias telnet="telnet -e p"
 alias watch="watch "
