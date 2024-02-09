@@ -144,6 +144,8 @@ return {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'williamboman/mason-lspconfig.nvim' },
             { 'williamboman/mason.nvim' },
+            { 'nvim-lua/plenary.nvim' },
+            { 'nvimtools/none-ls.nvim' },
         },
         config = function()
             -- This is where all the LSP shenanigans will live
@@ -168,6 +170,7 @@ return {
             lsp.ensure_installed({
                 "ansiblels",
                 "bashls",
+                "goimports",
                 "golangci_lint_ls",
                 "gopls",
                 "jsonls",
@@ -187,7 +190,7 @@ return {
                 servers = {
                     ['ansible'] = { 'ansiblels' },
                     ['bash'] = { 'bashls' },
-                    ['gopls'] = { 'go' },
+                    ['null-ls'] = { 'go' },
                     ['lua_ls'] = { 'lua' },
                     ['python'] = { 'ruff_lsp' },
                     ['rust_analyzer'] = { 'rust' },
@@ -208,6 +211,18 @@ return {
             })
 
             lsp.setup()
+
+            local null_ls = require('null-ls')
+            local null_opts = lsp.build_options('null-ls', {})
+
+            null_ls.setup({
+                on_attach = function(client, bufnr)
+                    null_opts.on_attach(client, bufnr)
+                end,
+                sources = {
+                    null_ls.builtins.formatting.goimports
+                }
+            })
         end
     }
 }
