@@ -63,24 +63,21 @@ done
 column_count="${#top_panes[@]}"
 
 window_width="$(tmux display-message -p '#{window_width}')"
-panes_width="$(( window_width - column_count + 1 ))"
+panes_width="$(( window_width - column_count + 1 ))" # width not including the dividers
 new_column_width="$(( panes_width / column_count ))"
 width_remainder="$(( panes_width % column_count ))"
 
 for i in "${!top_panes[@]}" ; do
     pane="${top_panes[$i]}"
 
-    pane_right="$(tmux display-message -p -t "${pane}" '#{pane_right}')"
-
+    # pad the first columns with the remainder
     if [[ "${i}" -lt "${width_remainder}" ]] ; then
         pad=1
     else
         pad=0
     fi
 
-    if [[ "$(( pane_right + 1 ))" -ne "${window_width}" ]] ; then
-        set_width "${pane}" "$(( new_column_width + pad ))"
-    fi
+    set_width "${pane}" "$(( new_column_width + pad ))"
 done
 
 window_height="$(tmux display-message -p '#{window_height}')"
@@ -97,23 +94,20 @@ for top_pane in "${top_panes[@]}" ; do
     done
 
     row_count="${#column_panes[@]}"
-    panes_height="$(( window_height - row_count + 1 ))"
+    panes_height="$(( window_height - row_count + 1 ))" # height not including the diviers
     new_row_height="$(( panes_height / row_count ))"
     height_remainder="$(( panes_height % row_count ))"
 
     for i in "${!column_panes[@]}" ; do
         pane="${column_panes[$i]}"
 
-        pane_bottom="$(tmux display-message -p -t "${pane}" '#{pane_bottom}')"
-
+        # pad the first rows with the remainder
         if [[ "${i}" -lt "${height_remainder}" ]] ; then
             pad=1
         else
             pad=0
         fi
 
-        if [[ "$(( pane_bottom + 1))" -ne "${window_height}" ]] ; then
-            set_height "${pane}" "$(( new_row_height + pad ))"
-        fi
+        set_height "${pane}" "$(( new_row_height + pad ))"
     done
 done
