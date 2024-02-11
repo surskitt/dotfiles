@@ -32,3 +32,4 @@ bind Escape copy-mode
 unbind p
 bind p paste-buffer
 bind n set -g pane-border-status
+bind b run-shell ~/.scripts/tmux_balance.sh
