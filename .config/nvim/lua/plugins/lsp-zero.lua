@@ -170,7 +170,6 @@ return {
             lsp.ensure_installed({
                 "ansiblels",
                 "bashls",
-                "goimports",
                 "golangci_lint_ls",
                 "gopls",
                 "jsonls",
