@@ -114,3 +114,7 @@ klo() {
 for f in ~/.functions.d/* ; do
     source "${f}"
 done
+
+h() {
+    bat -r :"${2:-20}" "${1}"
+}
