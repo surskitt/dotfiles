@@ -20,8 +20,10 @@ unbind l
 bind l next-window
 bind j switch-client -n
 bind k switch-client -p
-bind - split-window -v
-bind = split-window -h
+# bind - split-window -v
+# bind = split-window -h
+bind - if-shell -F '#{pane_marked_set}' "join-pane -s '{marked}'" "split-window -v"
+bind = if-shell -F '#{pane_marked_set}' "join-pane -s '{marked}' -h" "split-window -h"
 bind @ setw synchronize-panes
 unbind C-a
 bind C-a last-window
