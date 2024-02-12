@@ -5,8 +5,19 @@ cf() {
     fi
 }
 
+crr() {
+    fd -u '^.git$' ~/code -t d --prune -x dirname | grep -v '\.terraform' | sort > ~/.local/share/repos
+}
+
 cr() {
-    d="$(fd -u '^.git$' ~/code -t d --prune -x dirname | grep -v '\.terraform' | fzf +m --layout=reverse-list)"
+    if [[ -f ~/.local/share/repos ]] ; then
+        repos="$(< ~/.local/share/repos)"
+    else
+        repos="$(fd -u '^.git$' ~/code -t d --prune -x dirname | grep -v '\.terraform')"
+    fi
+
+    # d="$(fzf +m --layout=reverse-list < ~/.local/share/repos)"
+    d="$(fzf +m --layout=reverse-list <<< "${repos}")"
     if [[ ! -z "${d}" ]]; then
         cd "${d}"
     fi
