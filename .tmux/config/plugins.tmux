@@ -11,3 +11,6 @@ if-shell 'test -n "$DISPLAY"' {
 }
 
 run -b '~/.tmux/plugins/tpm/tpm'
+
+set -g @plugin 'roosta/tmux-fuzzback'
+set -g @fuzzback-popup 1
