@@ -205,13 +205,13 @@ XF86AudioRaiseVolume
     pamixer -i 5
 
 XF86AudioPlay
-    mpc -h mallard.lan toggle
+    playerctl -p playerctld play-pause
 
 XF86AudioPrev
-    mpc -h mallard.lan prev
+    playerctl -p playerctld previous
 
 XF86AudioNext
-    mpc -h mallard.lan next
+    playerctl -p playerctld next
 
 #
 # Brightness controls
