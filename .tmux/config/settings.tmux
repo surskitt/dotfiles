@@ -30,3 +30,7 @@ set -g allow-passthrough on
 
 set -ga update-environment TERM
 set -ga update-environment TERM_PROGRAM
+
+set-option -g update-environment "SSH_AUTH_SOCK \
+                                  SSH_CONNECTION \
+                                  VAULT_TOKEN"

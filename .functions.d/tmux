@@ -1,0 +1,5 @@
+tmux_refresh_env() {
+    for e in SSH_AUTH_SOCK VAULT_TOKEN ; do
+        export "$(tmux show-environment | grep "^${e}")"
+    done
+}
