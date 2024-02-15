@@ -1,6 +1,3 @@
-[user]
-	name = surskitt
-	email = surskitt@users.noreply.github.com
 [alias]
     st = status -b --short
     stf = ls-files -dmo
@@ -25,7 +22,7 @@
 	tool = vimdiff
 [protocol "file"]
 	allow = always
-[include]
-    path=.gitconfig.extra
 [push]
 	autoSetupRemote = true
+[include]
+    path=.gitconfig.local
