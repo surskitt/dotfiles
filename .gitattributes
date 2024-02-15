@@ -2,3 +2,4 @@
 .config/gotify-dunst/gotify-dunst.conf filter=git-crypt diff=git-crypt
 .config/qutebrowser/quickmarks filter=git-crypt diff=git-crypt
 .redshiftgrc filter=git-crypt diff=git-crypt
+.gitconfig.local##class.work filter=git-crypt diff=git-crypt
