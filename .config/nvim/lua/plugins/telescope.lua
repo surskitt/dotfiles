@@ -41,9 +41,9 @@ return {
             { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>",                 desc = "Grep files" },
             { "<leader>ft", "<cmd>lua require('telescope.builtin').filetypes()<cr>",                 desc = "Pick filetypes" },
             { "<leader>fl", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", desc = "Search current buffer" },
-            { "<leader>fn", "<cmd>lua require('telescope.builtin').treesitter()<cr>",                desc = "Search current buffer" },
-            { "<leader>fu", "<cmd>lua require('telescope').extensions.undo.undo()<cr>",              desc = "Search current buffer" },
-            { "<leader>fs", "<cmd>lua require('telescope').extensions.luasnip.luasnip()<cr>",        desc = "Search current buffer" },
+            { "<leader>fn", "<cmd>lua require('telescope.builtin').treesitter()<cr>",                desc = "Search treesitter" },
+            { "<leader>fu", "<cmd>lua require('telescope').extensions.undo.undo()<cr>",              desc = "Search undotree" },
+            { "<leader>fs", "<cmd>lua require('telescope').extensions.luasnip.luasnip()<cr>",        desc = "Search snippets" },
         }
     },
 }
