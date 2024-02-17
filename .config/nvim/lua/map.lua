@@ -3,7 +3,7 @@ vim.keymap.set("n", "<leader>h", ":bprevious<CR>")
 vim.keymap.set("n", "<leader>l", ":bnext<CR>")
 
 -- close buffer
-vim.keymap.set("n", "<leader>d", ":bd<CR>")
+vim.keymap.set("n", "<leader>dd", ":bd<CR>")
 
 -- clear search
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>")
