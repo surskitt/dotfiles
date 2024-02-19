@@ -3,7 +3,7 @@ return {
     lazy = true,
     event = { "BufReadPre " .. vim.fn.expand "~" .. "/obsidian/**.md" },
     keys = {
-        { "<leader>o", "<cmd>ObsidianQuickSwitch<CR>", desc = "Open an obsidian note using fzf" },
+        { "<leader>fo", "<cmd>ObsidianQuickSwitch<CR>", desc = "Open an obsidian note" },
     },
     dependencies = {
         "nvim-lua/plenary.nvim",
