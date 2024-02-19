@@ -29,7 +29,6 @@ y() {
   else
     yadm $*
   fi
-
 }
 
 yw() {
@@ -117,4 +116,15 @@ done
 
 h() {
     bat -r :"${2:-20}" "${1}"
+}
+
+v() {
+  if [ "$#" -eq 0 ]; then
+      selected="$(fd . -t f | fzf -m --layout=reverse-list)"
+      if [[ -n "${selected}" ]] ; then
+          xargs nvim <<< "${selected}"
+      fi
+  else
+    nvim "$@"
+  fi
 }
