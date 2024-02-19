@@ -38,7 +38,7 @@ vim.api.nvim_create_user_command("W", "w", {})
 vim.api.nvim_create_user_command("Q", "q", {})
 vim.api.nvim_create_user_command("Wq", "wq", {})
 
-vim.keymap.set("n", "<leader>;", "<C-^>", { desc = "switch to last file" })
+vim.keymap.set("n", "<leader><leader>", "<C-^>", { desc = "switch to last file" })
 
 vim.keymap.set("n", "U", "<C-r>", { desc = "redo" })
 
