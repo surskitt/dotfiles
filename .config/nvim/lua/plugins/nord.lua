@@ -8,11 +8,14 @@ return {
         vim.g.nord_bold = false
         vim.g.nord_borders = true
 
-        grpid = vim.api.nvim_create_augroup('custom_highlights_nord', {})
+        local grpid = vim.api.nvim_create_augroup('custom_highlights_nord', {})
         vim.api.nvim_create_autocmd('ColorScheme', {
             group = grpid,
             pattern = 'nord',
-            command = 'highlight FloatBorder guibg=NONE ctermbg=NONE',
+            callback = function()
+                vim.cmd [[highlight FloatBorder guibg=NONE ctermbg=NONE]]
+                vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#4c566a" })
+            end
         })
 
         vim.cmd([[colorscheme nord]])

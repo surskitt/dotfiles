@@ -30,3 +30,5 @@ vim.opt.updatetime = 50
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+vim.opt.cursorline = true

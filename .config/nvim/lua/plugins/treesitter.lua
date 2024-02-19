@@ -1,7 +1,3 @@
---------------------------
--- TREESITTER
---------------------------
-
 return {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -16,15 +12,21 @@ return {
                 "diff",
                 "gitcommit",
                 "go",
+                "gomod",
+                "gosum",
+                "gowork",
                 "hcl",
-                -- "help",
-                "markdown",
                 "json",
                 "json5",
+                "jsonc",
                 "lua",
+                "markdown",
+                "markdown_inline",
                 "python",
+                "ron",
                 "rust",
                 "terraform",
+                "toml",
                 "yaml",
             },
             sync_install = false,

@@ -1,3 +1,5 @@
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+
 return {
     {
         'VonHeikemen/lsp-zero.nvim',
@@ -14,7 +16,7 @@ return {
     -- Autocompletion
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
+        event = { 'InsertEnter', 'CmdlineEnter' },
         dependencies = {
             'L3MON4D3/LuaSnip',
             'hrsh7th/cmp-path',
@@ -36,6 +38,24 @@ return {
             'rafamadriz/friendly-snippets',
 
             'onsails/lspkind.nvim',
+
+            {
+                "Saecki/crates.nvim",
+                event = { "BufRead Cargo.toml" },
+                config = function()
+                    require("crates").setup({
+                        src = {
+                            cmp = {
+                                enabled = true,
+                            },
+                        },
+                        null_ls = {
+                            enabled = true,
+                            name = "crates.nvim",
+                        },
+                    })
+                end
+            },
         },
         config = function()
             -- Here is where you configure the autocompletion settings.
@@ -47,8 +67,14 @@ return {
             -- And you can configure cmp even more, if you want to.
             local cmp = require('cmp')
             local cmp_action = require('lsp-zero.cmp').action()
-            local luasnip = require('luasnip')
+            local lspkind = require('lspkind')
 
+            local luasnip = require('luasnip')
+            luasnip.add_snippets(nil, {
+                go     = require("plugins.luasnip.go"),
+                sh     = require("plugins.luasnip.shell"),
+                python = require("plugins.luasnip.python"),
+            })
             require("luasnip.loaders.from_vscode").lazy_load()
 
             -- initialize global var to false -> nvim-cmp turned off per default
@@ -119,6 +145,7 @@ return {
                         name = "buffer",
                         keyword_length = 7
                     },
+                    { name = "crates" },
                 }),
                 formatting = {
                     fields = { 'abbr', 'kind', 'menu' },
@@ -130,8 +157,142 @@ return {
                 }
             })
 
-            vim.keymap.set("n", "<leader>tc", "<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>",
+            vim.keymap.set("n", "<leader>sc", "<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>",
                 { desc = "toggle nvim-cmp" })
+
+            -- `/` cmdline setup.
+            cmp.setup.cmdline('/', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = 'buffer' }
+                }
+            })
+
+            -- `:` cmdline setup.
+            -- cmp.setup.cmdline(':', {
+            --     mapping = cmp.mapping.preset.cmdline(),
+            --     sources = cmp.config.sources({
+            --         { name = 'path' }
+            --     }, {
+            --         {
+            --             name = 'cmdline',
+            --             option = {
+            --                 ignore_cmds = { 'Man', '!' }
+            --             }
+            --         }
+            --     })
+            -- })
+
+            cmp.setup.cmdline(":", {
+                -- completion = {
+                --     autocomplete = false,
+                -- },
+                mapping = cmp.mapping.preset.cmdline({
+                    ["<C-k>"] = cmp.mapping({
+                        c = function(fallback)
+                            if cmp.visible() then
+                                return cmp.select_prev_item()
+                            end
+                            fallback()
+                        end,
+                    }),
+                    ["<C-j>"] = cmp.mapping({
+                        c = function(fallback)
+                            if cmp.visible() then
+                                return cmp.select_next_item()
+                            end
+                            fallback()
+                        end,
+                    }),
+                    ["<C-l>"] = cmp.mapping({
+                        c = function()
+                            if cmp.visible() then
+                                return cmp.confirm()
+                            end
+                            fallback()
+                        end,
+                    }),
+                }),
+                sources = {
+                    { name = "path" },
+                    {
+                        name = "cmdline",
+                        option = {
+                            ignore_cmds = { "Man", "!" },
+                        },
+                    },
+                },
+                formatting = {
+                    fields = { "abbr", "kind" },
+                    format = lspkind.cmp_format({
+                        mode = "symbol_text", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+                        maxwidth = 50,        -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                        before = function(_, vim_item)
+                            if vim_item.kind == "Variable" then
+                                vim_item.kind = ""
+                                return vim_item
+                            end
+                            -- just show the icon
+                            vim_item.kind = lspkind.symbolic(vim_item.kind) and lspkind.symbolic(vim_item.kind) or
+                                vim_item.kind
+                            return vim_item
+                        end,
+                    }),
+                },
+            })
+
+            cmp.setup.cmdline({ "/", "?" }, {
+                mapping = cmp.mapping.preset.cmdline({
+                    ["<C-k>"] = cmp.mapping({
+                        c = function(fallback)
+                            if cmp.visible() then
+                                return cmp.select_prev_item()
+                            end
+                            fallback()
+                        end,
+                    }),
+                    ["<C-j>"] = cmp.mapping({
+                        c = function(fallback)
+                            if cmp.visible() then
+                                return cmp.select_next_item()
+                            end
+                            fallback()
+                        end,
+                    }),
+                    ["<C-l>"] = cmp.mapping({
+                        c = function(fallback)
+                            if cmp.visible() then
+                                return cmp.confirm({
+                                    behavior = cmp.ConfirmBehavior.Replace, -- e.g. console.log -> console.inlog -> console.info
+                                    select = true,                          -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                                })
+                            else
+                                return fallback()
+                            end
+                        end,
+                    }),
+                }),
+                sources = {
+                    { name = "buffer" },
+                },
+                formatting = {
+                    fields = { "abbr", "kind" },
+                    format = lspkind.cmp_format({
+                        mode = "symbol_text", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+                        maxwidth = 50,        -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                        before = function(_, vim_item)
+                            if vim_item.kind == "Text" then
+                                vim_item.kind = ""
+                                return vim_item
+                            end
+                            -- just show the icon
+                            vim_item.kind = lspkind.symbolic(vim_item.kind) and lspkind.symbolic(vim_item.kind) or
+                                vim_item.kind
+                            return vim_item
+                        end,
+                    }),
+                },
+            })
         end
     },
 
@@ -141,11 +302,16 @@ return {
         cmd = 'LspInfo',
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'williamboman/mason-lspconfig.nvim' },
-            { 'williamboman/mason.nvim' },
-            { 'nvim-lua/plenary.nvim' },
-            { 'nvimtools/none-ls.nvim' },
+            'hrsh7th/cmp-nvim-lsp',
+            'williamboman/mason-lspconfig.nvim',
+            'williamboman/mason.nvim',
+            'nvim-lua/plenary.nvim',
+            'nvimtools/none-ls.nvim',
+            {
+                'b0o/SchemaStore.nvim',
+                version = false
+            },
+            'someone-stole-my-name/yaml-companion.nvim',
         },
         config = function()
             -- This is where all the LSP shenanigans will live
@@ -174,6 +340,7 @@ return {
                 "gopls",
                 "jsonls",
                 "lua_ls",
+                "marksman",
                 "ruff_lsp",
                 "rust_analyzer",
                 "terraformls",
@@ -187,14 +354,14 @@ return {
                     timeout_ms = 10000,
                 },
                 servers = {
-                    ['ansible'] = { 'ansiblels' },
-                    ['bash'] = { 'bashls' },
-                    ['null-ls'] = { 'go' },
+                    ['ansiblels'] = { 'ansible' },
+                    ['bashls'] = { 'bash' },
+                    ['jsonls'] = { 'json', 'json5' },
                     ['lua_ls'] = { 'lua' },
-                    ['python'] = { 'ruff_lsp' },
+                    ['null-ls'] = { 'go', 'markdown' },
+                    ['ruff_lsp'] = { 'python' },
                     ['rust_analyzer'] = { 'rust' },
                     ['terraformls'] = { 'terraform' },
-                    ['jsonls'] = { 'json' },
                 }
             })
 
@@ -202,12 +369,88 @@ return {
 
             lspconfig.lua_ls.setup({
                 lsp.nvim_lua_ls(),
-                capabilities = capabilities
+                capabilities = capabilities,
+                on_init = function(client)
+                    local path = client.workspace_folders[1].name
+                    if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+                        client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+                            Lua = {
+                                runtime = {
+                                    version = 'LuaJIT'
+                                },
+                                workspace = {
+                                    checkThirdParty = false,
+                                    library = {
+                                        vim.env.VIMRUNTIME
+                                    }
+                                }
+                            }
+                        })
+
+                        client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+                    end
+                    return true
+                end
             })
 
             lspconfig.terraformls.setup({
                 capabilities = capabilities
             })
+
+            lspconfig.yamlls.setup(
+                require("yaml-companion").setup({
+                    -- detect k8s schemas based on file content
+                    builtin_matchers = {
+                        kubernetes = { enabled = true }
+                    },
+
+                    schemas = {
+                        {
+                            name = "Kustomization",
+                            uri = "https://json.schemastore.org/kustomization.json"
+                        },
+                        {
+                            name = "GitHub Workflow",
+                            uri = "https://json.schemastore.org/github-workflow.json"
+                        },
+                    },
+
+                    lspconfig = {
+                        settings = {
+                            yaml = {
+                                validate = true,
+                                schemaStore = {
+                                    enable = false,
+                                    url = ""
+                                },
+
+                                schemas = require('schemastore').yaml.schemas {
+                                    select = {
+                                        'kustomization.yaml',
+                                        'GitHub Workflow',
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+            )
+
+            lspconfig.jsonls.setup {
+                capabilities = capabilities,
+                filetypes = { "json", "jsonc", "json5" },
+                settings = {
+                    json = {
+                        schemas = require('schemastore').json.schemas {
+                            select = {
+                                'Renovate',
+                                'GitHub Workflow Template Properties'
+                            }
+                        },
+                        validate = { enable = true },
+                    }
+                }
+            }
 
             lsp.setup()
 
@@ -219,7 +462,10 @@ return {
                     null_opts.on_attach(client, bufnr)
                 end,
                 sources = {
-                    null_ls.builtins.formatting.goimports
+                    null_ls.builtins.formatting.goimports,
+                    null_ls.builtins.diagnostics.markdownlint,
+                    null_ls.builtins.formatting.terraform_fmt,
+                    null_ls.builtins.diagnostics.terraform_validate,
                 }
             })
         end
