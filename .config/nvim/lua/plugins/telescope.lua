@@ -47,6 +47,7 @@ return {
                         },
                         n = {
                             ["<CR>"] = select_one_or_multi,
+                            ["<Space>"] = actions.toggle_selection + actions.move_selection_next,
                         },
                     }
                 },
