@@ -31,7 +31,6 @@ return {
                     require("luasnip").config.setup {
                         updateevents = "TextChanged,TextChangedI",
                     }
-                    require("snippets")
                 end,
             },
             'saadparwaiz1/cmp_luasnip',
