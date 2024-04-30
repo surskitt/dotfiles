@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 import os
-import re
 import sys
 import zlib
+
+import luadata
 
 # makes script work on windows 10 (apparently)
 os.system("")
@@ -186,53 +187,46 @@ CVIOLET2 = fg(13)
 CCYAN2 = fg(14)
 CWHITE2 = fg(15)
 
-CBLACK232 = fg(232)
 CORANGE = fg(172)
-
-STAKE_COLOURS = {
-    "1": CWHITE,  # white
-    "2": CRED,  # red
-    "3": CGREEN,  # green
-    "4": CBLACK232,  # black
-    "5": CBLUE,  # blue
-    "6": CVIOLET,  # purple
-    "7": CORANGE,  # orange
-    "8": CYELLOW2,  # gold
-}
+CBLACK232 = fg(232)
 
 COLOUR_NONE = CGREY  # no sticker
 COLOUR_END = "\033[0m"
 
-input_file = os.path.join(BALATRO_DIR, "1", "profile.jkr")
+STAKE_COLOURS = {
+    0: COLOUR_NONE,  # blank
+    1: CWHITE,  # white
+    2: CRED,  # red
+    3: CGREEN,  # green
+    4: CBLACK232,  # black
+    5: CBLUE,  # blue
+    6: CVIOLET,  # purple
+    7: CORANGE,  # orange
+    8: CYELLOW2,  # gold
+}
+
+input_file = os.path.join(BALATRO_DIR, "1/profile.jkr")
 
 with open(input_file, "rb") as f:
     input_data = zlib.decompress(f.read(), wbits=-15)
 
-JOKER_EXTRACT_REGEX = r"\[\"j_\w+\"\].*?}"
-JOKER_SLUG_REGEX = r"j_\w+"
-STAKE_REGEX = r"\[(\d)\]"
+lua_table = input_data[7:].decode("utf-8")
+data = luadata.unserialize(lua_table)
 
 for slug, name in JOKER_SLUGS.items():
-    JOKER_EXTRACT_REGEX = r"\[\"" + slug + r"\"\].*?}"
-    match = re.search(JOKER_EXTRACT_REGEX, str(input_data))
+    stats = data["joker_usage"].get(slug)
 
-    if not match:
-        if len(sys.argv) == 1 or sys.argv[1] == "0":
-            print(f"{COLOUR_NONE}{name}{COLOUR_END}")
-        continue
+    if not stats:
+        stake_no = 0
+    else:
+        wins = stats.get("wins", [])
 
-    jkr = match.group(0)
-
-    stakes = re.findall(STAKE_REGEX, jkr)
-    if not stakes:
-        if len(sys.argv) == 1 or sys.argv[1] == "0":
-            print(f"{COLOUR_NONE}{name}{COLOUR_END}")
-        continue
-    stake_no = max(stakes)
-
-    if len(sys.argv) > 1 and sys.argv[1] != stake_no:
-        continue
+        if isinstance(wins, list):
+            stake_no = len(wins)
+        else:
+            stake_no = max(wins.keys())
 
     colour = STAKE_COLOURS[stake_no]
 
-    print(f"{colour}{name}{COLOUR_END}")
+    if len(sys.argv) == 1 or int(sys.argv[1]) == stake_no:
+        print(f"{colour}{name}{COLOUR_END}")
