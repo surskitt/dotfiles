@@ -182,6 +182,7 @@ parser.add_argument("--invert", "-i", action="store_true", default=False)
 parser.add_argument("--rarity", "-r", action="append", choices=RARITIES)
 parser.add_argument("--profile", "-p", choices=["1", "2", "3"], default="1")
 parser.add_argument("--name", "-n")
+parser.add_argument("--total", "-t", action="store_true")
 args = parser.parse_args()
 
 
@@ -239,6 +240,8 @@ with open(input_file, "rb") as f:
 lua_table = input_data[7:].decode("utf-8")
 profile = luadata.unserialize(lua_table)
 
+output_total = 0
+
 for slug, data in JOKERS.items():
     name = data["name"]
     rarity = data["rarity"]
@@ -263,5 +266,13 @@ for slug, data in JOKERS.items():
 
     colour = STAKE_COLOURS[stake_no]
 
-    if not args.stake or stake_no in invert(args.stake, args.invert):
-        print(f"{colour}{name}{COLOUR_END}")
+    if args.stake and stake_no not in invert(args.stake, args.invert):
+        continue
+
+    print(f"{colour}{name}{COLOUR_END}")
+
+    output_total += 1
+
+if args.total:
+    print()
+    print("Total:", output_total)
