@@ -49,6 +49,11 @@ bspc rule -a *:floating_window state=floating
 bspc rule -a floating_window:* state=floating
 bspc rule -a Zathura state=tiled
 
+bspc rule -a firefox desktop="internet"
+bspc rule -a Spotify desktop="music"
+bspc rule -a steam desktop="video"
+bspc rule -a discord desktop="files3"
+
 bspc desktop internet -l monocle
 bspc desktop music -l monocle
 bspc desktop video -l monocle
@@ -60,6 +65,7 @@ xrdb ~/.Xresources
 pgrep sxhkd >/dev/null || sxhkd &
 pgrep xbanish >/dev/null || xbanish &
 pgrep light-locker >/dev/null || light-locker &
+pgrep lxpolkit >/dev/null | lxpolkit &
 ~/.config/polybar/launch.sh &
 
 systemctl --user import-environment DISPLAY XAUTHORITY
