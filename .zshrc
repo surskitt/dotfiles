@@ -18,5 +18,10 @@ autoload -Uz compinit && compinit
 compdef _files bat
 compdef _files sops
 
+compdef g=git
+compdef v=nvim
+compdef y=yadm
+compdef yw=yadm
+
 eval "$(starship init zsh)"
 export RPROMPT=""
