@@ -118,17 +118,6 @@ h() {
     bat -r :"${2:-20}" "${1}"
 }
 
-v() {
-  if [ "$#" -eq 0 ]; then
-      selected="$(fd . -t f | fzf -m --layout=reverse-list)"
-      if [[ -n "${selected}" ]] ; then
-          xargs nvim <<< "${selected}"
-      fi
-  else
-    nvim "$@"
-  fi
-}
-
 vu() {
     mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0
 }
