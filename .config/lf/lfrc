@@ -138,21 +138,14 @@ map sn :{{ set sortby natural; set info; set reverse!; }}
 map ss :{{ set sortby size; set info size; set reverse; }}
 map st :{{ set sortby time; set info time; set reverse; }}
 
-# cmd preview ${{
-#     sxiv -s f $(previewer.sh $f)
-# }}
-
-# map P :preview
-
 cmd preview ${{
     bspc rule -a \* -o state=floating focus=off
     p="$(previewer.sh "$f")"
     timeout 1.5 sxiv -a -b -g 500x280-10+10 "$p" &
 }}
-map - preview
 
-# cmd dragon %dragon-drag-and-drop -a -x $fx
-# map D dragon
+cmd dragon %dragon-drop -a -x $fx
+map - dragon
 
 map D :delete
 
