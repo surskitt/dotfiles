@@ -65,7 +65,7 @@ xrdb ~/.Xresources
 pgrep sxhkd >/dev/null || sxhkd &
 pgrep xbanish >/dev/null || xbanish &
 pgrep light-locker >/dev/null || light-locker &
-pgrep lxpolkit >/dev/null | lxpolkit &
+pgrep lxpolkit >/dev/null || lxpolkit &
 ~/.config/polybar/launch.sh &
 
 systemctl --user import-environment DISPLAY XAUTHORITY
@@ -93,3 +93,6 @@ xsetroot -cursor_name left_ptr
 setxkbmap -option caps:backspace
 
 playerctld daemon
+
+# fix feh fullscreen focus issues
+xprop -root -f "_MOTIF_WM_HINTS" 32a -set "_MOTIF_WM_HINTS" 0
