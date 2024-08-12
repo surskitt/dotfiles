@@ -25,4 +25,6 @@ case "${1}" in
         curl -F"file=@${files[0]}" http://0x0.st|xsel --clipboard --input && \
         dunstify -i "${files[0]}" "Image uploaded and saved to clipboard"
         ;;
+    d)
+        dragon-drop "${files[0]}"
 esac
