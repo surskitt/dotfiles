@@ -58,3 +58,4 @@ inode/directory=nemo.desktop
 x-scheme-handler/discord-455712169795780630=discord-455712169795780630.desktop
 video/x-msvideo=mpv.desktop
 video/vnd.avi=mpv.desktop
+image/webp=feh.desktop
