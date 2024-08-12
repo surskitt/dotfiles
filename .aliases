@@ -1,6 +1,6 @@
 # vim: set filetype=sh :
 
-alias c=clear
+alias c="clear -x"
 alias b="buku --np"
 alias e="exa --icons --group"
 alias f=fd
