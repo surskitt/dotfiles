@@ -17,6 +17,7 @@ autoload -Uz compinit && compinit
 
 compdef _files bat
 compdef _files sops
+compdef _files dragon-drag-and-drop
 
 compdef g=git
 compdef v=nvim
