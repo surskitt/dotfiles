@@ -3,3 +3,5 @@
 .config/qutebrowser/quickmarks filter=git-crypt diff=git-crypt
 .redshiftgrc filter=git-crypt diff=git-crypt
 .gitconfig.local##class.work filter=git-crypt diff=git-crypt
+.config/aconfmgr/files/etc/pacman.d/archrepo filter=git-crypt diff=git-crypt
+.config/aconfmgr/files/etc/pacman.d/mirrorlist filter=git-crypt diff=git-crypt
