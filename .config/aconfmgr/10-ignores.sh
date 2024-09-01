@@ -22,16 +22,22 @@ IgnorePath '/etc/os-release'
 IgnorePath '/etc/passwd*'
 IgnorePath '/etc/shadow*'
 IgnorePath '/etc/shells'
+IgnorePath '/etc/ssh/*key'
+IgnorePath '/etc/ssh/*key.pub'
 IgnorePath '/etc/ssl/*'
 IgnorePath '/etc/subgid*'
 IgnorePath '/etc/subuid*'
 IgnorePath '/etc/sudoers.d/*'
 IgnorePath '/etc/systemd/*' # enable systemd services with functions
+IgnorePath '/etc/xml/catalog'
+IgnorePath '/etc/cni/net.d'
 
 IgnorePath '/usr/bin/groupmems'
 
 IgnorePath '/usr/lib/*' # library files
+IgnorePath '/usr/lib32/*'
 IgnorePath '/usr/share/*.cache'
+IgnorePath '/usr/share/fonts'
 IgnorePath '/usr/share/glib-2.0/*'
 IgnorePath '/usr/share/info/*'
 IgnorePath '/usr/share/mime/*'
@@ -47,4 +53,5 @@ IgnorePath '/var/lib/pacman/local/*' # package metadata
 IgnorePath '/var/lib/pacman/sync/*.db' # repos
 IgnorePath '/var/lib/pacman/sync/*.db.sig' # repo sigs
 IgnorePath '/etc/pacman.d/gnupg/*' # pacman gnupg socket files
-IgnorePath '/etc/pacman.d/mirrorlist' # pacman mirrors (automated with reflector)
+
+IgnorePath '/opt/containerd'
