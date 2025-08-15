@@ -1,0 +1,181 @@
+@keyframes blink-warning {
+    70% {
+        color: @light;
+    }
+
+    to {
+        color: @light;
+        background-color: @warning;
+    }
+}
+
+@keyframes blink-critical {
+    70% {
+      color: @light;
+    }
+
+    to {
+        color: @light;
+        background-color: @critical;
+    }
+}
+
+/* polar night - background */
+@define-color nord0 #2E3440;
+@define-color nord1 #3B4252;
+@define-color nord2 #434C5E;
+@define-color nord3 #4C566A;
+
+/* snowstorm -foreground */
+@define-color nord4 #D8DEE9;
+@define-color nord5 #E5E9F0;
+@define-color nord6 #ECEFF4;
+
+/* frost - blue */
+@define-color nord7 #8FBCBB;
+@define-color nord8 #88C0D0;
+@define-color nord9 #81A1C1;
+@define-color nord10 #5E81AC;
+
+/* aurora - colourful */
+@define-color nord11 #BF616A;
+@define-color nord12 #D08770;
+@define-color nord13 #EBCB8B;
+@define-color nord14 #A3BE8C;
+@define-color nord15 #B48EAD;
+
+@define-color fg @nord6;
+@define-color fg_dark @nord2;
+@define-color fg_off @nord4;
+
+@define-color bg @nord1;
+@define-color bg_light @nord4;
+@define-color bg_error @nord11;
+
+@define-color warning @nord13;
+@define-color critical @nord1;
+
+@define-color workspaces @nord1;
+@define-color workspaces_visible @nord3;
+
+
+/* Reset all styles */
+* {
+    border: none;
+    border-radius: 3px;
+    min-height: 0;
+    margin: 0.1em 0.3em 0.1em 0.3em;
+}
+
+/* The whole bar */
+#waybar {
+    background: transparent;
+    color: @fg;
+    font-family: "monospace";
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Each module */
+#backlight,
+#battery,
+#bluetooth,
+#clock,
+#cpuinfo,
+#gamemode,
+#cpu,
+#custom-cpugovernor,
+#custom-updates,
+#custom-weather,
+#disks,
+#idle_inhibitor,
+#load,
+#memory,
+#mpris,
+#network,
+#power,
+#pulseaudio,
+#gpu,
+#systemd-failed-units,
+#workspaces {
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    background: @bg;
+}
+
+/* Each module that should blink */
+#battery,
+#memory,
+#temperature {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Each critical module */
+#battery.critical,
+#cpu.critical,
+#memory.critical,
+#temperature.critical {
+    color: @critical;
+}
+
+/* Each critical that should blink */
+#battery.critical.discharging,
+#memory.critical,
+#temperature.critical {
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+
+/* Each warning */
+#battery.warning,
+#cpu.warning,
+#memory.warning,
+#network.disconnected,
+#temperature.warning {
+    background: @warning;
+    color: @fg_dark;
+}
+
+/* Each warning that should blink */
+#battery.warning.discharging {
+    animation-name: blink-warning;
+    animation-duration: 3s;
+}
+
+#workspaces {
+    margin-right: 10px;
+}
+
+#workspaces button {
+    color: @fg;
+    background: none;
+    padding: 0 0.4em;
+}
+
+#workspaces button.visible {
+    background: @workspaces_visible;
+}
+
+#disk.root,
+#disk.home,
+#custom-gpuclock,
+#temperature.gpu,
+#cpu,
+#temperature.cpu {
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+
+#mpris.paused {
+    color: @fg_off;
+}
+
+#pulseaudio.muted,
+#idle_inhibitor.activated,
+#systemd-failed-units.degraded,
+#gamemode.running {
+    background: @bg_light;
+    color: @fg_dark;
+}
