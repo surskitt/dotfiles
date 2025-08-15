@@ -1,0 +1,55 @@
+{
+    "󰀻 applications": "fzf-applications.sh",
+    " youtube subscriptions": "fzf-menu.sh ~/.config/fzf-menu/youtube.json",
+    " spotify": "false && cat /tmp/spu|fzfp.sh -I curlout.sh -- --layout=reverse-list +m --with-nth={3..}|cut -d ' ' -f 2|xargs playerctl -p spotify open",
+    " mpd": {
+        " add to queue": "fzf-mpc.sh",
+        " ncmpcpp": "ncmpcpp -h localhost"
+    },
+    " owntone": "tofi-menu.sh ~/.config/tofi-menu/owntone.json ",
+    " weechat buffers": "fzf-weechat.sh",
+    " search": {
+        " duckduckgo": "fzf-ddg.sh",
+        " nzb": "read -r -p 'nzb search: ' s; nzb_search.sh ${s}",
+        " gifs": "read -r -p 'search: ' s; source ~/.profile.d/tenor; gif.py $s"
+    },
+    " bluetooth pairing": "tofi-menu.sh ~/.config/tofi-menu/bluetooth.json",
+    " wifi": "fzf-wifi.sh",
+    " passwords": "tofi-pass.sh",
+    " systemd": "sysz",
+    " bookmarks": "tofi-bookmarks.sh",
+    " config": {
+        " st": {
+            " font": "fzf_template -i xst_font.yml && xrdb ~/.Xresources && pkill -USR1 xst",
+            " toggle transparency": "st-toggle-transparency.sh"
+        }
+    },
+    " images": "fd . ~/Dropbox/Pictures -t d|fzf +m --layout=reverse-list|xargs -d '\n' -r sxiv -ftra",
+    " roms": {
+        "favourites": "fzf-emu.sh ~/emu/favs",
+        "all": "fzf-emu.sh",
+        "snes": "fzf-emu.sh ~/emu/roms/snes"
+    },
+    " colour schemes": "fzf-wal && pkill -USR1 xst && qutebrowser_reload.py && killall dunst",
+    " open windows": "fzf-wmctrl.sh",
+    " nerdfonts": "fzf-nerdfonts.sh",
+    " emoji": "fzf-emoji.sh",
+    " lf bookmarks": "d=$(cut -d ':' -f 2 ~/.local/share/lf/marks|sort -u|fzf +m); nohup st -e lf $d >/dev/null 2>&1 & sleep .2 && disown",
+    " books": "fzf-calibre.sh",
+    " screen layouts": "find ~/.screenlayout -type f | sort | fzf +m --layout=reverse-list | xargs basename | xargs randr_handler.sh",
+    " select desktops": "echo {1..3}|xargs -n 1 echo|fzf -m --layout=reverse-list|xargs bspc_monitors.sh; true",
+    " github repos": "fzf-github-repos.sh",
+    " github stars": "fzf-github-stars.sh",
+    " youtube playlists": "v=$(fzf --layout=reverse-list --with-nth=3.. < ~/.local/share/yt_playlists|cut -d ' ' -f 1) ; nohup mpv ${v} >/dev/null 2>&1 & sleep .2 && disown",
+    " hacker news": "hn.py|fzf -m --layout=reverse-list --with-nth=2..|cut -d ' ' -f 1|xargs -I% qutebrowser 'news.ycombinator.com/item?id=%'",
+    " twitch": "fzf-twitch.sh",
+    " rss": "fzf-newsboat.py",
+    " tmux sessions": "t=$(ls ~/.tmuxp/*.yaml|xargs -L 1 basename|cut -d '.' -f 1|fzf); nohup st muxcmd.sh -t $t >/dev/null 2>&1 & sleep .2 && disown",
+    "⏻ power": {
+        "⏻ power off": "sudo systemctl poweroff",
+        " restart": "sudo systemctl reboot",
+        "⏾ hibernate": "sudo systemctl hibernate",
+        "⏾ suspend": "sudo systemctl suspend",
+        " lock": "loginctl lock-session"
+    }
+}

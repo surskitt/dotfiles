@@ -1,0 +1,12 @@
+{
+    " add to queue": "tofi-daapd.sh",
+    " add random": "daapd-random.sh",
+    " ncmpcpp": "ncmpcpp -h mallard.lan",
+    " covers": "sxiv-daapd.sh",
+    " cover search": "read -r -p 'cover search: ' s ; sxiv-daapd.sh search ${s}",
+    " update": "curl -X PUT http://mallard.lan:3689/api/update",
+    " rescan": "curl -X PUT http://mallard.lan:3689/api/rescan",
+    " outputs": "tofi-daapd-outputs.sh",
+    " reset outputs": "daapd_output_reset.sh",
+    " restart shairport-sync": "systemctl --user restart shairport-sync"
+},
