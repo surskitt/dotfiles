@@ -1,6 +1,6 @@
 address chat.sr.ht
 nickname sharktamer
-password-cmd gopass chat.sr.ht
+password-cmd gopass chat.sr.ht_token
 
 pane-widths {
     nicknames 8
