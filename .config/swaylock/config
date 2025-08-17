@@ -2,11 +2,10 @@
 color=2e3440ff
 
 image=DP-1:/home/shane/.local/share/backgrounds/1.jpg
-# image=DP-1:/tmp/DP-1.png
 image=DP-2:/home/shane/.local/share/backgrounds/2.jpg
-# image=DP-2:/tmp/DP-2.png
 image=DP-3:/home/shane/.local/share/backgrounds/3.jpg
-# image=DP-3:/tmp/DP-3.png
+
+image=eDP-1:/home/shane/.local/share/backgrounds/1.jpg
 
 # Enable debugging output
 # debug
