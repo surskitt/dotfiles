@@ -1,0 +1,33 @@
+[options]
+
+background = 202329
+
+overlay_font = "Monospace:12"
+overlay_text_color = ECEFF4
+overlay_background_color = 2E3440
+overlay_background_alpha = FF
+
+[binds]
+
+h = prev
+j = next
+k = prev
+l = next
+
+<Shift+H> = pan -10 0
+<Shift+J> = pan 0 10
+<Shift+K> = pan 0 -10
+<Shift+L> = pan 10 0
+
+z = reset
+<Shift+Z> = reset
+
+<Shift+less> = rotate by 90
+<Shift+greater> = rotate by -90
+
+d = overlay
+
+<minus> = zoom -1
+<Shift+underscore> = zoom -1
+<equal> = zoom 1
+<Shift+plus> = zoom 1
