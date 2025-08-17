@@ -1,0 +1,74 @@
+Config(
+    address: "mallard.lan:6600",
+    clear_query_on_play: false,
+    cycle: false,
+    jump_lines: 24,
+    seek_secs: 5.0,
+    search_fields: SearchFields(
+        file: false,
+        title: true,
+        artist: true,
+        album: true,
+    ),
+    ups: 1.0,
+    layout: Columns([
+        Fixed(1, Textbox(Text(""))),
+        Fixed(40, Rows([
+            Fixed(19, Textbox(Text(""))),
+            Fixed(1, TextboxC(Styled([Fg(Indexed(2))], If(Not(Stopped), If(TitleExist, CurrentTitle, Text("Untitled")))))),
+            Fixed(1, TextboxC(Styled([Fg(Indexed(4))], If(Not(Stopped), If(ArtistExist, CurrentArtist, Text("Unknown Artist")))))),
+            Fixed(1, TextboxC(Styled([Fg(Indexed(5))], If(Not(Stopped), If(AlbumExist, CurrentAlbum, Text("Unknown Album")))))),
+            Fixed(1, TextboxC(Styled([Fg(Indexed(3))], If(Not(Stopped), Parts([ CurrentElapsed, Text("/"), CurrentDuration ]))))),
+            Fixed(1, TextboxC(Styled([Fg(Indexed(1))], If(Not(Playing), Text("« Paused »"))))),
+        ])),
+        Fixed(2, Textbox(Text(""))),
+        Ratio(1, 
+            Rows([
+                Fixed(1, Textbox(Text(""))),
+                Fixed(1, Columns([
+                    Ratio(12, Textbox(Styled([Fg(Indexed(6)), Bold], Text("Title")))),
+                    Ratio(10, Textbox(Styled([Fg(Indexed(6)), Bold], Text("Artist")))),
+                    Ratio(10, Textbox(Styled([Fg(Indexed(6)), Bold], Text("Album")))),
+                    Ratio(2,  Textbox(Styled([Fg(Indexed(6)), Bold], Text("Time")))),
+                ])),
+                Min(0, Queue([
+                    Column(
+                        item: Ratio(12, If(QueueCurrent,
+                            Styled([Fg(White), Bold], If(QueueTitleExist, QueueTitle, QueueFile)),
+                            If(QueueTitleExist, QueueTitle, QueueFile),
+                        )),
+                        style: [Fg(Indexed(2))],
+                        selected_style: [Fg(Black), Bg(Indexed(2)), Bold],
+                    ),
+                    Column(
+                        item: Ratio(10, If(QueueCurrent,
+                            Styled([Fg(White), Bold], QueueArtist),
+                            QueueArtist,
+                        )),
+                        style: [Fg(Indexed(4))],
+                        selected_style: [Fg(Black), Bg(Indexed(4)), Bold],
+                    ),
+                    Column(
+                        item: Ratio(10, If(QueueCurrent,
+                            Styled([Fg(White), Bold], QueueAlbum),
+                            QueueAlbum,
+                        )),
+                        style: [Fg(Indexed(5))],
+                        selected_style: [Fg(Black), Bg(Indexed(5)), Bold],
+                    ),
+                    Column(
+                        item: Ratio(2, If(QueueCurrent,
+                            Styled([Fg(White), Bold], QueueDuration),
+                            QueueDuration,
+                        )),
+                        style: [Fg(Indexed(3))],
+                        selected_style: [Fg(Black), Bg(Indexed(3)), Bold],
+                    ),
+                ])),
+                Fixed(1, Textbox(If(Searching, Parts([Text("Search: "), Query, Text("| ")])))),
+                Fixed(1, Textbox(Text(""))),
+            ])
+        ),
+        Min(2, Textbox(Text(" "))),
+    ])
+)
