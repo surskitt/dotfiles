@@ -1,0 +1,110 @@
+---
+font: monospace 12
+background: "#3b4252d0"
+color: "#d8dee9"
+border: "#eceff4"
+separator: " ➜ "
+border_width: 2
+corner_r: 10
+padding: 15 # Defaults to corner_r
+rows_per_column: 5 # No limit by default
+column_padding: 25 # Defaults to padding
+
+anchor: center # One of center, left, right, top, bottom, bottom-left, top-left, etc.
+# Only relevant when anchor is not center
+margin_right: 0
+margin_bottom: 0
+margin_left: 0
+margin_top: 0
+
+# inhibit_compositor_keyboard_shortcuts: true
+
+menu:
+  - key: e
+    desc: Apps
+    submenu:
+      - key: f
+        desc: Firefox
+        cmd: firefox
+
+      - key: s
+        desc: Spotify
+        cmd: spotify-launcher
+
+      - key: S
+        desc: Spotify tui
+        cmd: true
+
+      - key: d
+        desc: Discord
+        cmd: equibop
+
+      - key: s
+        desc: senpai
+        cmd: true
+
+      - key: n
+        desc: mmtc
+        cmd: kitty -o allow_remote_control=yes --listen-on unix://tmp/kittyncmpcpp -e ncmpcppk.sh
+
+      - key: e
+        desc: ES-DE
+        cmd: true
+
+      - key: b
+        desc: Backgrounds
+        cmd: sx_swww.sh
+
+  - key: s
+    desc: Menus
+    submenu:
+      - key: d
+        desc: owntone
+        cmd: tofi-menu.sh ~/.config/tofi-menu/owntone.json
+
+      - key: o
+        desc: owntone
+        cmd: tofi-menu.sh ~/.config/tofi-menu/owntone.json
+
+      - key: p
+        desc: Passwords
+        cmd: tofi-menu.sh ~/.config/tofi-menu/password.json
+
+      - key: b
+        desc: Bluetooth
+        cmd: tofi-menu.sh ~/.config/tofi-menu/bluetooth.json
+
+      - key: w
+        desc: Wifi
+        cmd: tofi-wifi.sh
+
+  - key: BackSpace
+    desc: Power
+    submenu:
+      - key: x
+        desc: Quit
+        cmd: niri msg action quit -s
+
+      - key: S
+        desc: Power off
+        cmd: systemctl poweroff
+
+      - key: r
+        desc: Restart
+        cmd: systemctl reboot
+
+      - key: s
+        desc: Sleep
+        cmd: systemctl sleep
+
+      - key: h
+        desc: Hibernate
+        cmd: systemctl sleep-then-hibernate
+
+      - key: H
+        desc: Hibernate (now)
+        cmd: systemctl hibernate
+
+      - key: l
+        desc: Lock
+        cmd: swaylock -f
