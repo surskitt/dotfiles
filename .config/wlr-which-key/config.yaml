@@ -33,7 +33,7 @@ menu:
 
       - key: S
         desc: Spotify tui
-        cmd: true
+        cmd: niri-open-sized.sh 0.4 kitty -o allow_remote_control=yes --listen-on unix://tmp/kittyncmpcpp -e spt
 
       - key: d
         desc: Discord
@@ -45,7 +45,7 @@ menu:
 
       - key: n
         desc: mmtc
-        cmd: kitty -o allow_remote_control=yes --listen-on unix://tmp/kittyncmpcpp -e ncmpcppk.sh
+        cmd: niri-open-sized.sh 0.4 kitty -o allow_remote_control=yes --listen-on unix://tmp/kittyncmpcpp -e ~/.scripts/ncmpcppk.sh
 
       - key: e
         desc: ES-DE
@@ -60,11 +60,13 @@ menu:
     submenu:
       - key: d
         desc: owntone
-        cmd: tofi-menu.sh ~/.config/tofi-menu/owntone.json
+        # cmd: tofi-menu.sh ~/.config/tofi-menu/owntone.json
+        cmd: wlr-which-key --initial-keys o
 
       - key: o
         desc: owntone
-        cmd: tofi-menu.sh ~/.config/tofi-menu/owntone.json
+        # cmd: tofi-menu.sh ~/.config/tofi-menu/owntone.json
+        cmd: wlr-which-key --initial-keys o
 
       - key: p
         desc: Passwords
@@ -77,6 +79,25 @@ menu:
       - key: w
         desc: Wifi
         cmd: tofi-wifi.sh
+
+  - key: o
+    desc: owntone
+    submenu:
+      - key: a
+        desc: Add to queue
+        cmd: tofi-daapd.sh
+
+      - key: r
+        desc: Add random
+        cmd: daapd-random.sh
+
+      - key: c
+        desc: Covers
+        cmd: sxiv-daapd.sh
+
+      - key: o
+        desc: Outputs
+        cmd: tofi-daapd-outputs.sh
 
   - key: BackSpace
     desc: Power
@@ -108,3 +129,42 @@ menu:
       - key: l
         desc: Lock
         cmd: swaylock -f
+
+  - key: g
+    desc: WM
+    submenu:
+      - key: c
+        desc: Center column
+        cmd: niri msg action center-column
+
+      - key: '0'
+        desc: Toggle gaps
+        cmd: niri-togglegaps.sh
+
+      - key: '5'
+        desc: Toggle gaps
+        cmd: niri-togglegaps.sh
+
+      - key: p
+        desc: Toggle waybar
+        cmd: killall -SIGUSR1 waybar
+
+      - key: '1'
+        desc: Full width
+        cmd: niri msg action set-column-width '100%'
+
+      - key: '2'
+        desc: Half width
+        cmd: niri msg action set-column-width '50%'
+
+      - key: '3'
+        desc: Third width
+        cmd: niri msg action set-column-width '33%'
+
+      - key: '"'
+        desc: Half height
+        cmd: niri msg action set-window-height '50%'
+
+      - key: '£'
+        desc: Third height
+        cmd: niri msg action set-window-height '33%'
