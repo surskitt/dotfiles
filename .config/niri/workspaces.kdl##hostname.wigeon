@@ -1,0 +1,10 @@
+workspace "internet" { open-on-output "DP-1" ; }
+workspace "coding" { open-on-output "DP-2" ; }
+workspace "chat" { open-on-output "DP-3" ; }
+workspace "music" { open-on-output "DP-2" ; }
+workspace "video" { open-on-output "DP-3" ; }
+workspace "steam" { open-on-output "DP-2" ; }
+workspace "files" { open-on-output "DP-1" ; }
+workspace "files2" { open-on-output "DP-2" ; }
+workspace "files3" { open-on-output "DP-3" ; }
+workspace "windows" { open-on-output "DP-2" ; }

@@ -1,0 +1,200 @@
+environment {
+    SSH_AGENT_PID ""
+    SSH_AUTH_SOCK "/run/user/1000/gnupg/S.gpg-agent.ssh"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    XCURSOR_THEME "Bibata-Modern-Ice"
+    XCURSOR_SIZE "16"
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+input {
+    keyboard { xkb { layout "gb" ; } ; }
+    touchpad { dwt ; }
+    mouse { }
+    trackpoint { }
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Ice"
+    xcursor-size 16
+    hide-when-typing
+    hide-after-inactive-ms 5000
+}
+
+gestures {
+    hot-corners { off ; }
+}
+
+include "outputs.kdl"
+include "workspaces.kdl"
+
+prefer-no-csd
+
+layout {
+    gaps 40
+
+    background-color "transparent"
+
+    always-center-single-column
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
+    }
+
+    default-column-width { proportion 1.0 ; }
+
+    focus-ring { off ; }
+
+    border {
+        width 2.2
+        active-color "#d8dee9"
+        inactive-color "#434c5e"
+        urgent-color "#bf616a"
+    }
+
+    insert-hint { color "#81a1c1" ; }
+}
+
+window-rule {
+    match app-id="firefox$"
+
+    open-maximized true
+}
+
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+
+    open-floating true
+}
+
+window-rule {
+    match app-id="^firefox$" at-startup=true
+
+    open-on-workspace "internet"
+}
+
+window-rule {
+    match app-id="^kitty$" title="^coding" at-startup=true
+
+    open-on-workspace "coding"
+}
+
+window-rule {
+    match app-id="^equibop$" at-startup=true
+    match app-id="^kitty$" title="^chat" at-startup=true
+
+    open-on-workspace "chat"
+}
+
+spawn-at-startup "xrdb" "-merge" "/home/shane/.Xresources"
+spawn-at-startup "firefox"
+
+overview {
+    zoom 0.5
+    workspace-shadow { off ; }
+    backdrop-color "#2e3440"
+}
+
+binds {
+    Mod+RETURN { spawn "kitty" "-e" "niri-tmuxstart.sh" ; }
+    Mod+Shift+RETURN { spawn "~/.scripts/niri-open-sized.sh" "0.5" "kitty" "-e" "niri-tmuxstart.sh" ; }
+
+    Mod+Q { spawn "tofi-drun" "--drun-launch=true" ; }
+    Mod+W { spawn "tofi-menu.sh" ; }
+
+    Mod+Tab repeat=false { toggle-overview ; }
+    Mod+O repeat=false { toggle-overview ; }
+
+    Mod+Shift+E { quit ; }
+
+    Mod+1 { focus-workspace "internet" ; }
+    Mod+2 { focus-workspace "coding" ; }
+    Mod+3 { focus-workspace "chat" ; }
+    Mod+4 { focus-workspace "music" ; }
+    Mod+5 { focus-workspace "video" ; }
+    Mod+6 { focus-workspace "steam" ; }
+    Mod+7 { focus-workspace "files" ; }
+    Mod+8 { focus-workspace "files2" ; }
+    Mod+9 { focus-workspace "files3" ; }
+    Mod+0 { focus-workspace "windows" ; }
+
+    Mod+Shift+1 { move-column-to-workspace "internet" ; }
+    Mod+Shift+2 { move-column-to-workspace "coding" ; }
+    Mod+Shift+3 { move-column-to-workspace "chat" ; }
+    Mod+Shift+4 { move-column-to-workspace "music" ; }
+    Mod+Shift+5 { move-column-to-workspace "video" ; }
+    Mod+Shift+6 { move-column-to-workspace "steam" ; }
+    Mod+Shift+7 { move-column-to-workspace "files" ; }
+    Mod+Shift+8 { move-column-to-workspace "files2" ; }
+    Mod+Shift+9 { move-column-to-workspace "files3" ; }
+    Mod+Shift+0 { move-column-to-workspace "windows" ; }
+
+    Mod+H     { focus-column-left; }
+    Mod+J     { focus-window-or-workspace-down; }
+    Mod+K     { focus-window-or-workspace-up; }
+    Mod+L     { focus-column-right; }
+
+    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+    Mod+Shift+L     { move-column-right; }
+
+    Mod+Slash { move-workspace-to-monitor-right ; }
+    Mod+Shift+Slash { move-workspace-to-monitor-left ; }
+
+    Mod+Comma  { focus-monitor-left ; }
+    Mod+Period { focus-monitor-right ; }
+
+    Mod+Shift+Comma  { move-column-to-workspace-up ; }
+    Mod+Shift+Period { move-column-to-workspace-down ; }
+
+    Mod+BracketLeft  { consume-or-expel-window-left ; }
+    Mod+BracketRight { consume-or-expel-window-right ; }
+    Mod+Shift+BracketLeft  { consume-window-into-column ; }
+    Mod+Shift+BracketRight { expel-window-from-column ; }
+
+    Mod+Z { focus-window-previous ; }
+    Mod+SemiColon { focus-window-previous ; }
+
+    Mod+A { focus-workspace-previous ; }
+
+    Mod+Shift+Q { close-window; }
+
+    Mod+R { switch-preset-column-width ; }
+    Mod+Shift+R { switch-preset-window-height ; }
+    Mod+F { maximize-column ; }
+    Mod+Shift+F { fullscreen-window ; }
+
+    Mod+T { toggle-column-tabbed-display; }
+
+    Mod+Space { center-column ; }
+
+    Mod+b         { spawn "tofi-bookmarks.sh" ; }
+    Mod+e         { spawn "wlr-which-key" "--initial-keys" "e" ; } // apps
+    Mod+s         { spawn "wlr-which-key" "--initial-keys" "s" ; } // menus
+    Mod+BackSpace { spawn "wlr-which-key" "--initial-keys" "BackSpace" ; } // menus
+    Mod+g         { spawn "wlr-which-key" "--initial-keys" "g" ; } // menus
+
+    Mod+y { spawn-sh "echo \"type $(wl-paste)\" | dotool" ; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    
+    XF86MonBrightnessUp         allow-when-locked=true { spawn "brightnessctl" "s" "+5%" ; }
+    XF86MonBrightnessDown       allow-when-locked=true { spawn "brightnessctl" "s" "5%-" ; }
+    Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "s" "+1%" ; }
+    Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "s" "1%-" ; }
+
+    XF86AudioPlay        allow-when-locked=true { spawn "player.sh" "play-pause" ; }
+    XF86AudioPrev        allow-when-locked=true { spawn "player.sh" "previous" ; }
+    XF86AudioNext        allow-when-locked=true { spawn "player.sh" "next" ; }
+    Shift+XF86AudioPlay  allow-when-locked=true { spawn "playerctld" "shift" ; }
+}
