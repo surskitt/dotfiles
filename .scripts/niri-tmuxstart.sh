@@ -6,7 +6,8 @@ get_active() {
     #         echo "${name}"
     #     fi
     # done
-    hyprctl activeworkspace -j | jq -r .name
+    # hyprctl activeworkspace -j | jq -r .name
+    niri msg -j workspaces | jq -r '.[]|select(.is_focused == true).name'
 }
 
 session_count() {
@@ -34,7 +35,6 @@ get_next() {
     fi
 
 }
-
 
 workspace="$(get_active)${1}"
 next="$(get_next "${workspace}")"

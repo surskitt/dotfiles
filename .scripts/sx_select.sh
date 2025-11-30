@@ -31,7 +31,7 @@ fi
 #     done | sxiv -ftio | head -1
 # )"
 
-selected="$(sxiv -afto "${fs[@]}" | head -1)"
+selected="$(sxiv -afto -- "${fs[@]}" | head -1)"
 
 if [[ -z "${selected}" ]] ; then
     echo "No thumb selected"

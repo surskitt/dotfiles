@@ -98,6 +98,7 @@ case "${CMD}" in
         # ffmpeg -v warning -ss "${START}" -to "${END}" -i "${VID}" -vf "$filters,palettegen" -y $palette
 
         ffmpeg -v warning -ss "${START}" -to "${END}" -i "${VID}" -copyts -vf "${filters}" -ss "${START}" -y "${OUTPUT_FILE}"
+        # ffmpeg -v warning -i "${VID}" -copyts -vf "${filters}" -ss "${START}" -y "${OUTPUT_FILE}"
         ;;
     link)
         if [[ "${#}" -lt 3 ]]; then

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-storedir=${PASSWORD_STORE_DIR-~/.password-store}
+# storedir=${PASSWORD_STORE_DIR-~/.password-store}
+storedir="${HOME}/.local/share/gopass/stores/root"
 
 get_entries() {
     while read -r entry; do
@@ -11,4 +12,4 @@ get_entries() {
 selection=$(fzf +m --layout=reverse-list <<< "$(get_entries)")
 [ -z "${selection}" ] && exit 1
 
-pass "${selection}" -c
+gopass -c "${selection}"
