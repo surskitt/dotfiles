@@ -101,6 +101,15 @@ overview {
     backdrop-color "#2e3440"
 }
 
+recent-windows {
+    binds {
+        Mod+Tab         { next-window; }
+        Mod+Shift+Tab   { previous-window; }
+        Mod+grave       { next-window     filter="app-id"; }
+        Mod+Shift+grave { previous-window filter="app-id"; }
+    }
+}
+
 binds {
     Mod+RETURN { spawn "kitty" "-e" "niri-tmuxstart.sh" ; }
     Mod+Shift+RETURN { spawn "~/.scripts/niri-open-sized.sh" "0.5" "kitty" "-e" "niri-tmuxstart.sh" ; }
@@ -108,7 +117,6 @@ binds {
     Mod+Q { spawn "tofi-drun" "--drun-launch=true" ; }
     Mod+W { spawn "tofi-menu.sh" ; }
 
-    Mod+Tab repeat=false { toggle-overview ; }
     Mod+O repeat=false { toggle-overview ; }
 
     Mod+Shift+E { quit ; }
