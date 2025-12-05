@@ -1,0 +1,6 @@
+input {
+    keyboard { xkb { layout "gb" ; } ; }
+    touchpad { dwt ; }
+    mouse { }
+    trackpoint { }
+}

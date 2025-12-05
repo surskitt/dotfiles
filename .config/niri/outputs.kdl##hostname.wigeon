@@ -2,25 +2,31 @@ output "DP-1" {
     mode "3840x2160@60.0"
     transform "90"
     scale 1
-    // position x=485 y=0
-    // ,0x485,1.0
     position x=0 y=100
+
+    layout {
+        default-column-width { proportion 1.0 ; }
+    }
 }
 
 output "DP-2" {
     mode "3840x2160@60.0"
     // transform "90"
     scale 1
-    // position x=485 y=0
-    // ,0x485,1.0
     position x=2160 y=850
+
+    layout {
+        default-column-width { proportion 0.5 ; }
+    }
 }
 
 output "DP-3" {
     mode "3840x2160@60.0"
     transform "270"
     scale 1
-    // position x=485 y=0
-    // ,0x485,1.0
     position x=6000 y=0
+
+    layout {
+        default-column-width { proportion 1.0 ; }
+    }
 }

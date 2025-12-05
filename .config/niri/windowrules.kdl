@@ -1,0 +1,30 @@
+window-rule {
+    match app-id="firefox$"
+
+    open-maximized true
+}
+
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+
+    open-floating true
+}
+
+window-rule {
+    match app-id="^firefox$" at-startup=true
+
+    open-on-workspace "internet"
+}
+
+window-rule {
+    match app-id="^kitty$" title="^coding" at-startup=true
+
+    open-on-workspace "coding"
+}
+
+window-rule {
+    match app-id="^equibop$" at-startup=true
+    match app-id="^kitty$" title="^chat" at-startup=true
+
+    open-on-workspace "chat"
+}

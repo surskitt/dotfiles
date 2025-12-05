@@ -1,0 +1,21 @@
+layout {
+    gaps 40
+
+    background-color "transparent"
+
+    always-center-single-column
+    center-focused-column "never"
+
+    focus-ring { off ; }
+
+    border {
+        on
+
+        width 2.2
+        active-color "#d8dee9"
+        inactive-color "#434c5e"
+        urgent-color "#bf616a"
+    }
+
+    insert-hint { color "#81a1c1" ; }
+}
