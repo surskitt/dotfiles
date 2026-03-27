@@ -36,6 +36,9 @@ binds {
     Mod+K     { focus-window-or-workspace-up; }
     Mod+L     { focus-column-or-monitor-right; }
 
+    Mod+numbersign { focus-column-right ; }
+    Mod+apostrophe { focus-column-left ; }
+
     Mod+Shift+H     { move-column-left; }
     Mod+Shift+J     { move-window-down-or-to-workspace-down; }
     Mod+Shift+K     { move-window-up-or-to-workspace-up; }
@@ -79,10 +82,12 @@ binds {
 
     Mod+y { spawn-sh "echo \"type $(wl-paste)\" | dotool" ; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioRaiseVolume       allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume       allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%+"; }
+    Shift+XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%-"; }
+    XF86AudioMute              allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute           allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     
     XF86MonBrightnessUp         allow-when-locked=true { spawn "brightnessctl" "s" "+5%" ; }
     XF86MonBrightnessDown       allow-when-locked=true { spawn "brightnessctl" "s" "5%-" ; }
@@ -93,4 +98,7 @@ binds {
     XF86AudioPrev        allow-when-locked=true { spawn "player.sh" "previous" ; }
     XF86AudioNext        allow-when-locked=true { spawn "player.sh" "next" ; }
     Shift+XF86AudioPlay  allow-when-locked=true { spawn "playerctld" "shift" ; }
+
+    MouseForward { toggle-overview ; }
+    MouseBack { focus-column-right-or-first ; }
 }
