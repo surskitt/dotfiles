@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser(prog="qb_add", description="add torrent files t
 
 parser.add_argument("-q", "--quiet", action="store_true")
 parser.add_argument("-c", "--category")
+parser.add_argument("-t", "--tag")
 parser.add_argument("query")
 
 args = parser.parse_args()
@@ -19,7 +20,7 @@ qb_host = f"https://qb.{mallard_domain}"
 
 client = qbittorrentapi.Client(host=qb_host)
 
-torrents = client.torrents_info(category=args.category)
+torrents = client.torrents_info(category=args.category, tag=args.tag)
 
 searched_torrents = [t for t in torrents if args.query.lower() in t.name.lower()]
 

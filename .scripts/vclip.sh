@@ -87,7 +87,7 @@ case "${CMD}" in
         # fi
 
         if [[ -n "${SUBS}" ]]; then
-            filters="${filters},subtitles=${VID}"
+            filters="${filters},subtitles=${SUBS}"
         fi
 
         # if [[ -n "${NOAUDIO}" ]]; then

@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 playpause() {
-    case "${1}" in
+    player="${1}"
+    case "${player}" in
         ShairportSync)
             mpc -h mallard.lan toggle
             ;;
-        spotify)
-            playerctl -p spotify play-pause
+        spotify|Feishin|mpd|firefox*)
+            playerctl -p "${player}" play-pause
             ;;
         *)
             echo "Error: player ${1} not handled" >&2
@@ -15,12 +16,13 @@ playpause() {
 }
 
 previous() {
-    case "${1}" in
+    player="${1}"
+    case "${player}" in
         ShairportSync)
             mpc -h mallard.lan prev
             ;;
-        spotify)
-            playerctl -p spotify previous
+        spotify|Feishin|mpd)
+            playerctl -p "${player}" previous
             ;;
         *)
             echo "Error: player ${1} not handled" >&2
@@ -29,12 +31,13 @@ previous() {
 }
 
 next() {
-    case "${1}" in
+    player="${1}"
+    case "${player1}" in
         ShairportSync)
             mpc -h mallard.lan next
             ;;
-        spotify)
-            playerctl -p spotify next
+        spotify|Feishin|mpd)
+            playerctl -p "${player}" next
             ;;
         *)
             echo "Error: player ${1} not handled" >&2

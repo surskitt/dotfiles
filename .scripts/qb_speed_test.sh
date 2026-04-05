@@ -14,4 +14,4 @@ esac
 
 pod_name="$(kubectl -n media get po -l app.kubernetes.io/name=qbittorrent -o name)"
 
-kubectl -n media exec -it "${pod_name}" -c app -- ./speedtest -B
+kubectl -n media exec -it "${pod_name}" -c app -- ./speedtest -B -I wg0

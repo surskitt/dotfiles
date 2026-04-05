@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
-first_flac="$(ls ./*flac | head -1)"
+if [[ "${#}" -ge 1 ]] ; then
+    flac="${1}"
+else
+    flac="$(ls ./*flac | head -1)"
+fi
 
-if [[ -z "${first_flac}" ]] ; then
+if [[ -z "${flac}" ]] ; then
     echo "Error: no flacs found" >&2
     exit 1
 fi
 
-mediainfo_json="$(mediainfo --Output=JSON -- "${first_flac}")"
+mediainfo_json="$(mediainfo --Output=JSON -- "${flac}")"
 
 bit_depth="$(jq -r '.media.track[1].BitDepth' <<< "${mediainfo_json}")"
 sampling_rate="$(jq -r '.media.track[1].SamplingRate' <<< "${mediainfo_json}")"

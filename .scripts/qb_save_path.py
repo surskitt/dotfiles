@@ -10,4 +10,4 @@ qb_host = f"https://qb.{mallard_domain}"
 
 client = qbittorrentapi.Client(host=qb_host)
 
-client.torrents_pause(torrent_hashes=sys.argv[2:])
+client.torrents_set_save_path(save_path=sys.argv[1], torrent_hashes=sys.argv[2:])
