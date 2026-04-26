@@ -6,6 +6,7 @@ import mutagen.flac
 
 argparser = argparse.ArgumentParser(prog="flac_replace_tag_value", description="Replace specific value of given tag")
 
+argparser.add_argument("--partial", "-p", action="store_true")
 argparser.add_argument("tag")
 argparser.add_argument("old")
 argparser.add_argument("new")
@@ -13,7 +14,10 @@ argparser.add_argument("flacs", nargs="+")
 
 args = argparser.parse_args()
 
-def replace_value(value, old, new):
+def replace_value(value, old, new, partial):
+    if partial:
+        return value.replace(old, new)
+
     if value == old:
         return new
 
@@ -27,7 +31,7 @@ for f in args.flacs:
     if old_values is None:
         continue
 
-    new_values = [replace_value(i, args.old, args.new) for i in old_values]
+    new_values = [replace_value(i, args.old, args.new, args.partial) for i in old_values]
 
     flac.tags[args.tag] = new_values
     flac.save()
