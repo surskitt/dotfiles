@@ -202,7 +202,7 @@ def main():
     tracks_table = rich.table.Table("FILENAME", "TRACKNUMBER", "ARTIST", "TITLE", "TRACKTOTAL", "DISCNUMBER", "DISCTOTAL", title="Track tags", **TABLE_STYLE)
 
     for fn, f in flacs.items():
-        disc_number = int(f.tags.get("DISCNUMBER", ["1"])[0])
+        disc_number = int(f.tags.get("DISCNUMBER", ["1"])[0].split("/")[0])
         track_number = int(f.tags.get("TRACKNUMBER", ["0"])[0].split("/")[0])
         album_track = tracks.get((disc_number, track_number))
 
