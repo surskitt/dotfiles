@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+case "${PWD##*/}" in
+    -*|+*|=*)
+        echo "Error: directory begins with symbol" >&2
+        exit 1
+        ;;
+    *)
+        ;;
+esac
+
 album_summary.py
 
 propolis \
@@ -8,6 +17,8 @@ propolis \
     --no-specs \
     --only-problems \
     .
+
+salmon check integrity .
 
 # url="$(metaflac --show-tag=URL *.flac | cut -d = -f 2 | sort -u)"
 #
