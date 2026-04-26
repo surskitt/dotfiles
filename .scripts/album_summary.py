@@ -9,6 +9,7 @@ import pathlib
 import mutagen.flac
 import mutagen.oggopus
 import rich
+import rich.markup
 import rich.console
 import rich.table
 import humanize
@@ -91,7 +92,7 @@ for tag in album_tag_ordering:
     if not (val := album_tags.get(tag)):
         continue
 
-    album_table.add_row(tag.upper(), "\n".join(val))
+    album_table.add_row(tag.upper(), rich.markup.escape("\n".join(val)))
 
 console.print(album_table)
 
@@ -104,7 +105,7 @@ track_tag_ordering = [i.upper() for i in track_tag_ordering]
 track_table = rich.table.Table(*track_tag_ordering, title="Track tags", **TABLE_STYLE)
 
 for audio in audios:
-    columns = ["\n".join(audio.get(tag, ["-"])) for tag in track_tag_ordering]
+    columns = [rich.markup.escape("\n".join(audio.get(tag, ["-"]))) for tag in track_tag_ordering]
     track_table.add_row(*columns)
 
 console.print(track_table)
@@ -112,7 +113,7 @@ console.print(track_table)
 stream_table = rich.table.Table("Filename", "Length", "Bit Depth", "Sample Rate", title="Stream Info", **TABLE_STYLE)
 
 for audio in audio_fns:
-    fn = audio[0]
+    fn = rich.markup.escape(audio[0])
 
     streaminfo = audio[1].info
 
