@@ -21,7 +21,7 @@ for f in args.flacs:
     if old_val is None:
         continue
 
-    new_val = [i.strip() for s in old_val for i in s.split(args.field)]
+    new_val = list({i.strip() for s in old_val for i in s.split(args.field)})
 
     flac.tags[args.tag] = new_val
     flac.save()
