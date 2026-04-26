@@ -98,7 +98,7 @@ for (f, flac) in flacs:
                 continue
 
             for v in val:
-                for j in ["Asiatische Musik", "Aziatische Muziek", "Asian Music", "Self-Released", "Film Scores", "Filme", "Filmmusik", "Films/Games", "Videospiele", "Klassik"]:
+                for j in ["Asiatische Musik", "Aziatische Muziek", "Asian Music", "Self-Released", "Film Scores", "Filme", "Filmmusik", "Films/Games", "Videospiele", "Klassik", "Records DK"]:
                     if j in v:
                         print(f"{f} has bad value in {i} tag ({j})")
                         return_code = 1
