@@ -4,6 +4,23 @@ printclear() {
     echo -e "\e[1A\e[K${1}"
 }
 
+UPLOAD=false
+
+while getopts 'uh' opt ; do
+    case "${opt}" in
+        u)
+            UPLOAD=true
+            shift 1
+            ;;
+        h)
+            exit
+            ;;
+        ?)
+            exit 1
+            ;;
+    esac
+done
+
 TEMPDIR="$(mktemp -d)"
 trap 'rm -rf -- "${TEMPDIR}"' EXIT
 
@@ -49,3 +66,20 @@ for i in "${@}" ; do
 done
 
 imv "${TEMPDIR}"
+
+if "${UPLOAD}" ; then
+    read -p "Upload specs: " spec_indexes
+
+    if [[ -n "${spec_indexes}" ]] ; then
+        catbox_user_hash="$(gopass catbox_user_hash)"
+
+        for n in ${spec_indexes} ; do
+            n="$(printf '%02d' "${n}")"
+
+            for f in "${TEMPDIR}"/"${n}"*.png ; do
+                catbox upload -u "${catbox_user_hash}" "${f}"
+            done
+        done | tr '\n' ' '
+        echo
+    fi
+fi
