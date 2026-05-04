@@ -8,13 +8,14 @@ for i in "${SOURCE_DIR}"/*.flac ; do
     album="$(metaflac --show-tag=ALBUM "${i}" | cut -d = -f 2)"
     trackno="$(metaflac --show-tag=TRACKNUMBER "${i}" | cut -d = -f 2)"
     title="$(metaflac --show-tag=TITLE "${i}" | cut -d = -f 2)"
+    year="$(metaflac --show-tag=DATE "${i}" | cut -d = -f 2 | cut -d "-" -f 1)"
 
     title="${title//\//_}"
 
     trackno="${trackno%/*}"
     printf -v trackno "%02d" "${trackno}"
 
-    dest_subdir="+${artist}_${album}"
+    dest_subdir="+${artist}_${album}_${year}"
     dest_subdir="${dest_subdir// /_}"
     dest_subdir="${dest_subdir//\//_}"
 
