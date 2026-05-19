@@ -77,6 +77,7 @@ ALBUM_TAG_IGNORE = [
     "DISCTOTAL",
     "METADATA_BLOCK_PICTURE",
     "TXXX:TOTALDISCS",
+    "LYRICS",
 ]
 
 TRACK_TAG_IGNORE = [
@@ -155,6 +156,8 @@ def process_tag_values(v):
             vv = "/".join(str(i) for i in vv)
         if type(vv) == mutagen.mp4.MP4FreeForm:
             vv = vv.decode("utf-8")
+        if type(vv) == int:
+            vv = str(vv)
         return vv
 
     return [p(vv) for vv in v]
