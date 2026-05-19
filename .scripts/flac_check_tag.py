@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 
-import sys
 import argparse
+import sys
 
 import mutagen.flac
-
+import mutagen.oggopus
 
 return_code = 0
 
-argparser = argparse.ArgumentParser(prog="flac_tagger", description="Simple flac tagger")
+argparser = argparse.ArgumentParser(
+    prog="flac_tagger", description="Simple flac tag checker"
+)
 
 argparser.add_argument("-m", "--missing", action="store_true")
 argparser.add_argument("-s", "--unsplit", action="store_true")
@@ -28,19 +30,33 @@ unique = args.unique
 bad = args.bad
 
 if all(not i for i in [missing, unsplit, latin, empty, unique, bad]):
-    missing, unsplit, latin, empty, unique, bad = [True]*6
+    missing, unsplit, latin, empty, unique, bad = [True] * 6
 
-flacs = [(f, mutagen.flac.FLAC(f)) for f in args.flacs]
+flacs = [(f, mutagen.flac.FLAC(f)) for f in args.flacs if f.endswith(".flac")]
+flacs += [(f, mutagen.oggopus.OggOpus(f)) for f in args.flacs if f.endswith(".opus")]
 
-for (f, flac) in flacs:
+for f, flac in flacs:
     if missing:
-        for i in ["TITLE", "ARTIST", "ALBUMARTIST", "ALBUM", "GENRE", "DATE", "RELEASEDATE", "YEAR", "LABEL", "UPC", "TRACKNUMBER", "URL"]:
+        for i in [
+            "TITLE",
+            "ARTIST",
+            "ALBUMARTIST",
+            "ALBUM",
+            "GENRE",
+            "DATE",
+            "RELEASEDATE",
+            "YEAR",
+            "LABEL",
+            "UPC",
+            "TRACKNUMBER",
+            "URL",
+        ]:
             val = flac.tags.get(i)
             if (val is None) or any(j == "" for j in val):
                 print(f"{f} is missing {i} tag")
                 return_code = 1
 
-        if len(flac.pictures) == 0:
+        if f.endswith(".flac") and len(flac.pictures) == 0:
             print(f"{f} is missing album art")
             return_code = 1
 
@@ -71,13 +87,36 @@ for (f, flac) in flacs:
                     print(f"{f} may have embedded featured artists in {i} tag ({v})")
                     return_code = 1
 
-
     if latin:
         for tag, val in flac.tags:
             if tag.upper() in ["LYRICS"]:
                 continue
 
-            for i in ["℗", "©", "è", "’", "ä", "ó", "í", "☆", "♡", "Ÿ", "ú", "ū", "×", "～", "ù", "Ω", "ñ", "Σ", "ö", "÷", "ü", "é", "É"]:
+            for i in [
+                "℗",
+                "©",
+                "è",
+                "’",
+                "ä",
+                "ó",
+                "í",
+                "☆",
+                "♡",
+                "Ÿ",
+                "ú",
+                "ū",
+                "×",
+                "～",
+                "ù",
+                "Ω",
+                "ñ",
+                "Σ",
+                "ö",
+                "÷",
+                "ü",
+                "é",
+                "É",
+            ]:
                 val = val.replace(i, "")
 
             if not val.isascii():
@@ -93,12 +132,24 @@ for (f, flac) in flacs:
     if bad:
         for i in ["GENRE", "LABEL"]:
             val = flac.tags.get(i)
-            
+
             if val is None:
                 continue
 
             for v in val:
-                for j in ["Asiatische Musik", "Aziatische Muziek", "Asian Music", "Self-Released", "Film Scores", "Filme", "Filmmusik", "Films/Games", "Videospiele", "Klassik", "Records DK"]:
+                for j in [
+                    "Asiatische Musik",
+                    "Aziatische Muziek",
+                    "Asian Music",
+                    "Self-Released",
+                    "Film Scores",
+                    "Filme",
+                    "Filmmusik",
+                    "Films/Games",
+                    "Videospiele",
+                    "Klassik",
+                    "Records DK",
+                ]:
                     if j in v:
                         print(f"{f} has bad value in {i} tag ({j})")
                         return_code = 1
@@ -110,9 +161,27 @@ for (f, flac) in flacs:
             if "  " in val:
                 print(f"{f} has double spaces in {tag.upper()} tag ({val})")
 
-        for tag in ["MAIN_ARTIST", "LENGTH", "COMPATIBLE_BRANDS", "MAJOR_BRAND", "MINOR_VERSION", "PUBLISHER", "RELEASETIME", "SORT_ALBUM", "SORT_ALBUM_ARTIST", "SORT_ARTIST", "SORT_COMPOSER", "SORT_NAME"]:
+        for tag in [
+            "MAIN_ARTIST",
+            "LENGTH",
+            "COMPATIBLE_BRANDS",
+            "MAJOR_BRAND",
+            "MINOR_VERSION",
+            "PUBLISHER",
+            "RELEASETIME",
+            "SORT_ALBUM",
+            "SORT_ALBUM_ARTIST",
+            "SORT_ARTIST",
+            "SORT_COMPOSER",
+            "SORT_NAME",
+        ]:
             if tag in flac.tags:
-                print(f"{f} has unwanted {tag} tag ")
+                print(f"{f} has unwanted {tag} tag")
+                return_code = 1
+
+        for a in ["- EP", "- Single"]:
+            if flac.tags.get("ALBUM")[0].endswith(a):
+                print(f'{f} has unwanted "{a}" ending in ALBUM tag')
                 return_code = 1
 
 
