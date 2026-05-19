@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-if [[ "${#}" -lt 1 ]]; then
-    echo "Error: missing cover art file name" >&2
+art_file="${1:-cover.jpg}"
+
+if [[ ! -f "${art_file}" ]] ; then
+    echo "Error: ${art_file} does not exist" >&2
     exit 1
 fi
-
-art_file="${1}"
 
 magick "${art_file}" -resize '1000x1000>' aa.jpg
 jpegoptim -m 85 aa.jpg
