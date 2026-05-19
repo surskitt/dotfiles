@@ -10,6 +10,8 @@ import itertools
 import mutagen.flac
 import requests
 import rich
+import rich.box
+import rich.table
 import rich.console
 
 TABLE_STYLE = {
