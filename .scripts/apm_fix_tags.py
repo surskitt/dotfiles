@@ -5,7 +5,9 @@ import os
 
 import mutagen.flac
 
-argparser = argparse.ArgumentParser(prog="apm_auto_tag", description="Autotag apple music flacs")
+argparser = argparse.ArgumentParser(
+    prog="apm_auto_tag", description="Autotag apple music flacs"
+)
 argparser.add_argument("flacs", nargs="+")
 args = argparser.parse_args()
 
@@ -15,7 +17,7 @@ disc_count = len({i.tags["DISCNUMBER"][0] for _, i in flacs})
 
 for name, flac in flacs:
     disc_number = flac.tags["DISCNUMBER"][0].split("/")[0]
-    track_number = flac.tags["TRACKNUMBER"][0].split("/")[0] # .zfill(2)
+    track_number = flac.tags["TRACKNUMBER"][0].split("/")[0]  # .zfill(2)
     title = flac.tags["TITLE"][0].replace("/", "_")
 
     flac.tags["DISCNUMBER"] = disc_number
@@ -24,11 +26,25 @@ for name, flac in flacs:
     flac.tags["RELEASEDATE"] = flac.tags["DATE"]
     flac.tags["YEAR"] = flac.tags["DATE"][0].split("-")[0]
 
-    for tag in ["COMPATIBLE_BRANDS", "MAJOR_BRAND", "MINOR_VERSION", "RELEASETIME", "SORT_ALBUM", "SORT_ALBUM_ARTIST", "SORT_ARTIST", "SORT_COMPOSER", "SORT_NAME", "PUBLISHER", "COMPOSERLYRICIST", "CREATION_TIME"]:
+    for tag in [
+        "COMPATIBLE_BRANDS",
+        "MAJOR_BRAND",
+        "MINOR_VERSION",
+        "RELEASETIME",
+        "SORT_ALBUM",
+        "SORT_ALBUM_ARTIST",
+        "SORT_ARTIST",
+        "SORT_COMPOSER",
+        "SORT_NAME",
+        "PUBLISHER",
+        "COMPOSERLYRICIST",
+        "CREATION_TIME",
+    ]:
         if tag in flac.tags:
             flac.pop(tag)
 
-    label = " ".join(flac.tags["COPYRIGHT"][0].split()[2:])
+    # label = " ".join(flac.tags["COPYRIGHT"][0].split()[2:])
+    label = flac.tags["COPYRIGHT"][0].removeprefix("℗ ")
     flac.tags["LABEL"] = label
 
     flac.save()
