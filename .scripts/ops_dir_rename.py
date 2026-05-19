@@ -51,6 +51,8 @@ year = years.pop()
 label = labels.pop()
 upc = upcs.pop()
 
+album = album.replace("/", "_")
+
 bit_depth = min(f.info.bits_per_sample for _, f in flacs)
 sample_rate = str(
     round(min(f.info.sample_rate for _, f in flacs) / 1000, 1)
