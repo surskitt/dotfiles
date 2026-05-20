@@ -184,6 +184,12 @@ for f, flac in flacs:
                 print(f'{f} has unwanted "{a}" ending in ALBUM tag')
                 return_code = 1
 
+        for tag in flac.tags.keys():
+            val = flac.tags[tag]
+            if len(val) != len(set(val)):
+                print(f"{f} has duplicate values in {tag.upper()} tag")
+                return_code = 1
+
 
 if unique:
     for tag in ["URL", "VERSION"]:
