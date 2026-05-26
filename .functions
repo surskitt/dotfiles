@@ -59,7 +59,7 @@ wp() {
 }
 
 up() {
-    curl -s -F"file=@${1}" https://0x0.st|tee /dev/tty|pbcopy
+    curl -s -F"file=@${1}" https://0x0.st|tee /dev/tty|wl-copy
 }
 
 rcp() {
@@ -83,7 +83,7 @@ pc() {
 }
 
 mountall() {
-    tr -s ' ' < /etc/fstab|cut -d ' ' -f 2|grep '^/mnt/nfs'|sudo xargs -n 1 mount
+    tr -s ' ' < /etc/fstab|cut -d ' ' -f 2|grep -E '^/mnt/nfs|^/mnt/mergerfs'|sudo xargs -n 1 mount
 }
 
 umountall() {
@@ -120,4 +120,47 @@ h() {
 
 vu() {
     mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0
+}
+
+portcheck() {
+    if [[ "${#}" -lt 2 ]] ; then
+        echo "Error: host and port needed"
+        return 1
+    fi
+
+    while ! nc -vz "${1}" "${2}" ; do sleep 1 ; done
+}
+
+flipdir() {
+    orig="${1}"
+
+    if [[ "$(wc -w <<< "${orig}")" -ne 2 ]] ; then
+        echo "Error: function only works with two words" >&2
+        return 1
+    fi
+
+    read -r a b <<< "${orig}"
+    new="${b} ${a}"
+
+    mkdir -p "${new}"/.thumbs
+    mv "${orig}"/.thumbs/* "${new}"/.thumbs/
+    mv "${orig}"/* "${new}"/
+
+    rmdir "${orig}"/.thumbs
+    rmdir "${orig}"
+}
+
+uzd() { unzip -d "${1%.zip}" "${1}" ; }
+
+cb() {
+    if [[ "${#}" -gt 0 ]] ; then
+        dir="$(grep "^${1}:" ~/.local/share/lf/marks)"
+    else
+        dir="$(grep -E "^[a-zA-Z0-9]:" ~/.local/share/lf/marks | fzf +m --layout=reverse-list)"
+    fi
+
+    if [[ -n "${dir}" ]] ; then
+        dir="$(cut -d : -f 2 <<< "${dir}")"
+        cd "${dir}"
+    fi
 }
