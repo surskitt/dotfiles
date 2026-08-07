@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import string
 
 import mutagen.flac
 
@@ -43,9 +44,11 @@ for name, flac in flacs:
         if tag in flac.tags:
             flac.pop(tag)
 
-    # label = " ".join(flac.tags["COPYRIGHT"][0].split()[2:])
-    label = flac.tags["COPYRIGHT"][0].removeprefix("℗ ")
-    flac.tags["LABEL"] = label
+    if not flac.tags.get("LABEL"):
+        label = (
+            flac.tags["COPYRIGHT"][0].removeprefix("℗ ").lstrip(string.digits).strip()
+        )
+        flac.tags["LABEL"] = label
 
     flac.save()
 
