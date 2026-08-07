@@ -31,7 +31,7 @@ for fn in args.fns:
 
         flac.tags[tag] = new_val
 
-    for tag in ["COMPOSER", "LYRICIST"]:
+    for tag in ["COMPOSER", "LYRICIST", "PERFORMER"]:
         val = flac.tags.get(tag)
 
         if not val:
