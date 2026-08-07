@@ -38,6 +38,14 @@ flacs += [(f, mutagen.oggopus.OggOpus(f)) for f in args.flacs if f.endswith(".op
 for f, flac in flacs:
     if missing:
         for i in [
+            ["UPC", "CATALOGNUMBER", "BARCODE"],
+        ]:
+            if not any(flac.tags.get(j) for j in i):
+                tj = ", ".join(i)
+                print(f"{f} is missing any of the following tags: {tj}")
+                return_code = 1
+
+        for i in [
             "TITLE",
             "ARTIST",
             "ALBUMARTIST",
@@ -47,7 +55,6 @@ for f, flac in flacs:
             "RELEASEDATE",
             "YEAR",
             "LABEL",
-            "UPC",
             "TRACKNUMBER",
             "URL",
         ]:
@@ -89,7 +96,7 @@ for f, flac in flacs:
 
     if latin:
         for tag, val in flac.tags:
-            if tag.upper() in ["LYRICS"]:
+            if tag.upper() in ["LYRICS", "UNSYNCEDLYRICS"]:
                 continue
 
             for i in [
@@ -116,6 +123,10 @@ for f, flac in flacs:
                 "ü",
                 "é",
                 "É",
+                "“",
+                "”",
+                "…",
+                "‘",
             ]:
                 val = val.replace(i, "")
 
@@ -149,13 +160,15 @@ for f, flac in flacs:
                     "Videospiele",
                     "Klassik",
                     "Records DK",
+                    "Films",
+                    "Games",
                 ]:
                     if j in v:
                         print(f"{f} has bad value in {i} tag ({j})")
                         return_code = 1
 
         for tag, val in flac.tags:
-            if tag.upper() in ["LYRICS"]:
+            if tag.upper() in ["LYRICS", "UNSYNCEDLYRICS"]:
                 continue
 
             if "  " in val:
@@ -192,8 +205,9 @@ for f, flac in flacs:
 
 
 if unique:
-    for tag in ["URL", "VERSION"]:
-        values = {s for (f, i) in flacs for s in i.tags.get(tag, [])}
+    for tag in ["URL", "VERSION", "DATE", "RELEASEDATE", "GENRE", "UPC"]:
+        # values = {s for (f, i) in flacs for s in i.tags.get(tag, [])}
+        values = {" ".join(i.tags.get(tag, [])) for (f, i) in flacs}
 
         if len(values) > 1:
             print(f"flacs have unique values in {tag} tag")
