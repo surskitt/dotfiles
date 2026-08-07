@@ -151,6 +151,9 @@ tag_names = {
 
 
 def process_tag_values(v):
+    if type(v) == bool:
+        return [v]
+
     def p(vv):
         if type(vv) == tuple:
             vv = "/".join(str(i) for i in vv)
