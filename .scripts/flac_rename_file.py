@@ -35,23 +35,31 @@ for fn, flac in flacs:
         print("Error: TITLE tag is missing", file=sys.stderr)
         sys.exit(1)
 
-    title = title[0].replace("/", "_")
-
-    output = f"{track_number} - {title}"
+    title = title[0]
 
     if disc_count > 1:
         disc_number = flac.tags.get("DISCNUMBER")[0]
 
-        output = f"{disc_number}.{output}"
+        track_number = f"{disc_number}.{track_number}"
 
-    if len(flac.tags.get("ARTIST")) > len(flac.tags.get("ALBUMARTIST")):
-        album_artist = flac.tags.get("ALBUMARTIST")
-        artist = flac.tags.get("ARTIST")
-        featured = ", ".join(i for i in artist if i not in album_artist)
+    album_artists = flac.tags.get("ALBUMARTIST")
+    artists = flac.tags.get("ARTIST")
 
-        output = f"{output} (feat. {featured})"
+    if all(i not in album_artists for i in artists):
+        a = ", ".join(artists)
+        title = f"{a} - {title}"
+    else:
+        if featured := [i for i in artists if i not in album_artists]:
+            ft = ", ".join(featured)
+            title = f"{title} (feat. {ft})"
 
-    output = f"{output}.flac"
+    output = f"{track_number} - {title}.flac"
+
+    for i in ["?", "/", '"', "*", "|"]:
+        output = output.replace(i, "_")
+
+    for i in [":"]:
+        output = output.replace(i, "-")
 
     if fn == output:
         continue
