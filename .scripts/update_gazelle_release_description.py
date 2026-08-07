@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
 import argparse
+import base64
 import itertools
 import json
 import operator
 import os
 import pathlib
+import re
 import subprocess
 import sys
 import tempfile
@@ -18,9 +20,23 @@ SOURCE_ICONS = {
     "https://ptpimg.me/m265v2.png": "https://files.catbox.moe/2gwqip.png",  # deezer
     "https://ptpimg.me/e4d045.png": "https://files.catbox.moe/yts9t7.png",  # qobuz
     "https://ptpimg.me/0z2x90.png": "https://files.catbox.moe/nz7dhh.png",  # itunes
-    "https://ptpimg.me/13y32k.png": "https://files.catbox.moe/wyblpz.png",  # discogs
+    "https://ptpimg.me/13y32k.png": "https://files.catbox.moe/l28j3z.png",  # discogs
+    "https://ptpimg.me/mt4ql3.png": "https://files.catbox.moe/l28j3z.png",  # discogs
     "https://ptpimg.me/5vxo23.png": "https://files.catbox.moe/1zzxzr.png",  # tidal
     "https://ptpimg.me/pu93q2.png": "https://files.catbox.moe/7a59ce.png",  # flac 16 bit
+    "https://ptpimg.me/67vp4c.png": "https://files.catbox.moe/7a59ce.png",  # flac 16 bit
+    "https://ptpimg.me/56plwd.png": "https://files.catbox.moe/q1wjj7.png",  # musicbrainz
+}
+
+URL_REPLACEMENTS = {
+    "https://vgmdb.net": {
+        "name": "vgmdb",
+        "icon": "https://files.catbox.moe/czu0mx.png",
+    },
+    "https://vocadb.net": {
+        "name": "vocadb",
+        "icon": "https://files.catbox.moe/gobyy0.png",
+    },
 }
 
 
@@ -31,6 +47,7 @@ def parse_args():
     )
 
     argparser.add_argument("-k", "--api-key", required=True)
+    argparser.add_argument("-i", "--img-api-key", required=True)
     argparser.add_argument(
         "-d", "--directory", default=os.getenv("PWD"), type=pathlib.Path
     )
@@ -392,7 +409,7 @@ def generate_spectral(fn, temp_dir):
     return (full_path, zoom_path)
 
 
-def catbox_upload(fn):
+def catbox_upload(fn, img_api_key):
     data = {"reqtype": "fileupload"}
     with open(fn, "rb") as f:
         files = {"fileToUpload": f}
@@ -405,7 +422,25 @@ def catbox_upload(fn):
     sys.exit(1)
 
 
-def generate_spectrals_block(directory):
+def imgbb_upload(fn, img_api_key):
+    with open(fn, "rb") as f:
+        data = {"key": img_api_key, "image": base64.b64encode(f.read())}
+        r = requests.post("https://api.imgbb.com/1/upload", data=data)
+
+    if r.status_code == 200:
+        rj = r.json()
+        return rj["data"]["url"].strip()
+
+    print("Error: unable to upload file to imgbb")
+    sys.exit(1)
+
+
+def img_upload(fn, img_api_key):
+    # return catbox_upload(fn, img_api_key)
+    return imgbb_upload(fn, img_api_key)
+
+
+def generate_spectrals_block(directory, img_api_key):
     out = "[hide=Spectrals]"
 
     flac_fns = sorted(directory.glob("**/*.flac"))
@@ -415,8 +450,8 @@ def generate_spectrals_block(directory):
             out += f"[b]{fn.name} Full [/b]\n"
 
             full_spec, zoom_spec = generate_spectral(fn, td)
-            full_spec_url = catbox_upload(full_spec)
-            zoom_spec_url = catbox_upload(zoom_spec)
+            full_spec_url = img_upload(full_spec, img_api_key)
+            zoom_spec_url = img_upload(zoom_spec, img_api_key)
 
             out += f"[img={full_spec_url}]\n"
             out += f"[hide=Zoomed][img={zoom_spec_url}][/hide]\n\n"
@@ -426,9 +461,35 @@ def generate_spectrals_block(directory):
     return out
 
 
-def replace_icon_urls(text):
-    for k, v in SOURCE_ICONS.items():
+# def replace_icon_urls(text):
+#     for k, v in SOURCE_ICONS.items():
+#         text = text.replace(k, v)
+#
+#     return text
+
+
+def replace_text(text, replacements):
+    for k, v in replacements.items():
         text = text.replace(k, v)
+
+    return text
+
+
+def replace_urls(text):
+    for k, v in URL_REPLACEMENTS.items():
+        name = v["name"]
+        icon = v["icon"]
+
+        urls = re.findall(rf"\[url={k}.*?\].*\[/url\]", text)
+
+        if not urls:
+            continue
+
+        for url in urls:
+            url_repl = re.sub(r" .*?\[/url\]", f" {name}[/url]", url)
+            url_repl = re.sub(r"\[img\].*?\[/img\]", f"[img]{icon}[/img]", url_repl)
+
+            text = text.replace(url, url_repl)
 
     return text
 
@@ -458,6 +519,7 @@ def main():
     flac_info = extract_flac_info_line(current_description)
     release_date = extract_release_date_line(current_description)
     release_url = extract_release_url_line(current_description)
+    scans_block = extract_flat_block(current_description, "Scans")
     downconv_section = extract_downconv_section(current_description)
     tags_block = extract_flat_block(current_description, "Tags")
     propolis_block = extract_flat_block(current_description, "Propolis Report")
@@ -469,7 +531,7 @@ def main():
 
     if not spectral_block or ("https://ptpimg.me" in spectral_block) or args.spectrals:
         print("Generating spectrals block")
-        spectral_block = generate_spectrals_block(release_dir)
+        spectral_block = generate_spectrals_block(release_dir, args.img_api_key)
 
     if not flac_info or args.force:
         print("Generating flac info line")
@@ -495,13 +557,16 @@ def main():
         propolis_block = generate_propolis_block(args.directory)
         print(propolis_block.splitlines()[-1].split("[")[0])
 
-    tools = " | ".join(
-        [
-            "[url=https://github.com/smokin-salmon/smoked-salmon]smoked-salmon[/url]",
-            "[url=https://gitlab.com/passelecasque/propolis]propolis[/url]",
-        ]
-    )
-    tools_block = f"[b]Tools:[/b] {tools}"
+    tools = [
+        "[url=https://github.com/smokin-salmon/smoked-salmon]smoked-salmon[/url]",
+        "[url=https://gitlab.com/passelecasque/propolis]propolis[/url]",
+    ]
+
+    if downconv_section:
+        tools += "[url=https://gitlab.com/beep_street/downsampler-threaded]downsampler-threaded[/url]",
+
+    tools_joined = " | ".join(tools)
+    tools_block = f"[b]Tools:[/b] {tools_joined}"
 
     sections = [
         redcurry_block,
@@ -509,6 +574,7 @@ def main():
         flac_info,
         release_date,
         release_url,
+        scans_block,
         downconv_section,
         "",
         tags_block,
@@ -519,7 +585,8 @@ def main():
 
     new_description = "\n".join(i for i in sections if i is not None)
 
-    new_description = replace_icon_urls(new_description)
+    new_description = replace_text(new_description, SOURCE_ICONS)
+    new_description = replace_urls(new_description)
 
     if current_description != new_description:
         print("Updating release description")
